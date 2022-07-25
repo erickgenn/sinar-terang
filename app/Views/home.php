@@ -36,6 +36,20 @@
 
         <?php include(APPPATH . "Views/layout/aside.php"); ?>
 
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <?php if (session()->getFlashdata('login_successful')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Welcome Back <?php echo $_SESSION['name']; ?>!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php endif; ?>
+
         <div class="content-wrapper">
 
             <div class="content-header">
