@@ -41,9 +41,12 @@ $routes->get('home', 'Home::index');
 
 //Login and Registration
 $routes->get('login/admin', 'AuthController::admin');
+$routes->get('register/admin', 'AuthController::registerAdmin');
 $routes->post('login/admin/auth', 'AuthController::loginAdmin');
 
 $routes->get('login/customer', 'AuthController::customer');
+$routes->get('register/customer', 'AuthController::registerCustomer');
+
 
 
 /*

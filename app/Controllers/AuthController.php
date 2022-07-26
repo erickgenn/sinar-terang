@@ -11,9 +11,18 @@ class AuthController extends BaseController
         return view('auth/login_admin');
     }
 
+    public function registerAdmin()
+    {
+        return view('auth/register_admin');
+    }
+
     public function customer()
     {
         return view('auth/login_customer');
+    }
+    public function registerCustomer()
+    {
+        return view('auth/register_customer');
     }
 
     public function loginAdmin()

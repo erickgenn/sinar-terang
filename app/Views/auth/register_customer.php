@@ -18,8 +18,8 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/login/vendor/select2/select2.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/login/css/util.css">
-	<link rel="stylesheet" type="text/css" href="/login/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/register/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/register/css/main.css">
 	<!--===============================================================================================-->
 </head>
 
@@ -36,8 +36,25 @@
 				<form action="<?php echo base_url("/login/admin/auth") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
 
 					<span class="login100-form-title">
-						Welcome Back!
+						Register Your Account
 					</span>
+
+					<div class="wrap-input100 validate-input" data-validate="Fullname is required">
+						<input class="input100" type="text" name="full_name" placeholder="Fullname">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-users" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Phone number is required">
+						<input class="input100" type="text" name="phone" placeholder="Phone Number">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-phone" aria-hidden="true"></i>
+						</span>
+					</div>
+
 					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.com">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
@@ -54,35 +71,23 @@
 						</span>
 					</div>
 
+					<div class="wrap-input100 validate-input" data-validate="Password Confirmation is required">
+						<input class="input100" type="password" name="confirm_password" placeholder=" Confirm Your Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
-							Login
+							Register
 						</button>
 					</div>
 
-					<div class="text-center p-t-12">
-						<span class="txt1">
-							Forgot your password?
-						</span>
-						<a class="txt2" href="#">
-							Click Here
-						</a>
-					</div>
-
-					<div class="text-center p-t-12">
-						<span class="txt1">
-							Are you an admin?
-						</span>
-						<a class="txt2" href="<?php echo base_url("login/admin"); ?>">
-							Click Here
-						</a>
-					</div>
 
 					<div class="text-center p-t-136">
-						<a class="txt2" href="<?php echo base_url("register/customer"); ?>">
-							Create your Account
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
+
 					</div>
 				</form>
 			</div>

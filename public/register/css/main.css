@@ -1,6 +1,4 @@
-/* input[type="password"] {
-  color: transparent;
-} */
+
 
 
 
@@ -13,18 +11,18 @@
 }
 
 @font-face {
-  font-family: Poppins-Medium;
-  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
-}
-
-@font-face {
   font-family: Poppins-Bold;
   src: url('../fonts/poppins/Poppins-Bold.ttf'); 
 }
 
 @font-face {
-  font-family: Poppins-SemiBold;
-  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+  font-family: Poppins-Medium;
+  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -88,17 +86,6 @@ input {
 	border: none;
 }
 
-input[type="number"] {
-    -moz-appearance: textfield;
-    appearance: none;
-    -webkit-appearance: none;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
 textarea {
   outline: none;
   border: none;
@@ -118,20 +105,15 @@ textarea:focus:-moz-placeholder { color:transparent; }
 textarea:focus::-moz-placeholder { color:transparent; }
 textarea:focus:-ms-input-placeholder { color:transparent; }
 
-input::-webkit-input-placeholder {color: #999999;}
-input:-moz-placeholder {color: #999999;}
-input::-moz-placeholder {color: #999999;}
-input:-ms-input-placeholder {color: #999999;}
+input::-webkit-input-placeholder { color: #999999; }
+input:-moz-placeholder { color: #999999; }
+input::-moz-placeholder { color: #999999; }
+input:-ms-input-placeholder { color: #999999; }
 
-textarea::-webkit-input-placeholder {color: #999999;}
-textarea:-moz-placeholder {color: #999999;}
-textarea::-moz-placeholder {color: #999999;}
-textarea:-ms-input-placeholder {color: #999999;}
-
-label {
-  display: block;
-  margin: 0;
-}
+textarea::-webkit-input-placeholder { color: #999999; }
+textarea:-moz-placeholder { color: #999999; }
+textarea::-moz-placeholder { color: #999999; }
+textarea:-ms-input-placeholder { color: #999999; }
 
 /*---------------------------------------------*/
 button {
@@ -154,9 +136,17 @@ iframe {
 .txt1 {
   font-family: Poppins-Regular;
   font-size: 13px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: #999999;
 }
+
+.txt2 {
+  font-family: Poppins-Regular;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #666666;
+}
+
 
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
@@ -178,67 +168,16 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #ebeeef;
+  background: #0d152d;
+  
 }
 
-
 .wrap-login100 {
-  width: 670px;
+  width: 960px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
-  position: relative;
-}
 
-/*==================================================================
-[ Title form ]*/
-.login100-form-title {
-  width: 100%;
-  position: relative;
-  z-index: 1;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: center;
-
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-
-  padding: 70px 15px 74px 15px;
-}
-
-.login100-form-title-1 {
-  font-family: Poppins-Bold;
-  font-size: 30px;
-  color: #fff;
-  text-transform: uppercase;
-  line-height: 1.2;
-  text-align: center;
-}
-
-.login100-form-title::before {
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(54,84,99,0.7);
-}
-
-
-/*==================================================================
-[ Form ]*/
-
-.login100-form {
-  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -246,137 +185,124 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 43px 88px 93px 190px;
+  padding: 100px 130px 33px 93px;
+}
+
+/*------------------------------------------------------------------
+[  ]*/
+.login100-pic {
+  width: 316px;
+}
+
+.login100-pic img {
+  max-width: 100%;
 }
 
 
 /*------------------------------------------------------------------
-[ Input ]*/
-
-.wrap-input100 {
-  width: 100%;
-  position: relative;
-  border-bottom: 1px solid #b2b2b2;
+[  ]*/
+.login100-form {
+  width: 290px;
 }
 
-.label-input100 {
-  font-family: Poppins-Regular;
-  font-size: 15px;
-  color: #808080;
+.login100-form-title {
+  font-family: Poppins-Bold;
+  font-size: 24px;
+  color: #333333;
   line-height: 1.2;
-  text-align: right;
+  text-align: center;
 
-  position: absolute;
-  top: 14px;
-  left: -105px;
-  width: 80px;
-
+  width: 100%;
+  display: block;
+  padding-bottom: 54px;
 }
+
 
 /*---------------------------------------------*/
+.wrap-input100 {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  margin-bottom: 10px;
+}
+
 .input100 {
-  font-family: Poppins-Regular;
+  font-family: Poppins-Medium;
   font-size: 15px;
-  color: #555555;
-  line-height: 1.2;
+  line-height: 1.5;
+  color: #666666;
 
   display: block;
   width: 100%;
-  background: transparent;
-  padding: 0 5px;
+  background: #e6e6e6;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 30px 0 68px;
 }
 
+
+/*------------------------------------------------------------------
+[ Focus ]*/
 .focus-input100 {
-  position: absolute;
   display: block;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
+  box-shadow: 0px 0px 0px 0px;
+  color: rgba(87,184,70, 0.8);
 }
 
-.focus-input100::before {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 0;
-  height: 1px;
-
-  -webkit-transition: all 0.6s;
-  -o-transition: all 0.6s;
-  -moz-transition: all 0.6s;
-  transition: all 0.6s;
-
-  background: #57b846;
+.input100:focus + .focus-input100 {
+  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
+  animation: anim-shadow 0.5s ease-in-out forwards;
 }
 
-
-/*---------------------------------------------*/
-input.input100 {
-  height: 45px;
+@-webkit-keyframes anim-shadow {
+  to {
+    box-shadow: 0px 0px 70px 25px;
+    opacity: 0;
+  }
 }
 
-
-.input100:focus + .focus-input100::before {
-  width: 100%;
+@keyframes anim-shadow {
+  to {
+    box-shadow: 0px 0px 70px 25px;
+    opacity: 0;
+  }
 }
 
-.has-val.input100 + .focus-input100::before {
-  width: 100%;
-}
-
-/*==================================================================
-[ Restyle Checkbox ]*/
-
-.input-checkbox100 {
-  display: none;
-}
-
-.label-checkbox100 {
-  font-family: Poppins-Regular;
-  font-size: 13px;
-  color: #999999;
-  line-height: 1.4;
-
-  display: block;
-  position: relative;
-  padding-left: 26px;
-  cursor: pointer;
-}
-
-.label-checkbox100::before {
-  content: "\f00c";
-  font-family: FontAwesome;
-  font-size: 13px;
-  color: transparent;
+.symbol-input100 {
+  font-size: 15px;
 
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  justify-content: center;
   align-items: center;
   position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 2px;
-  background: #fff;
-  border: 1px solid #e6e6e6;
+  border-radius: 25px;
+  bottom: 0;
   left: 0;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
+  padding-left: 35px;
+  pointer-events: none;
+  color: #666666;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
 }
 
-.input-checkbox100:checked + .label-checkbox100::before {
+.input100:focus + .focus-input100 + .symbol-input100 {
   color: #57b846;
+  padding-left: 28px;
 }
 
 /*------------------------------------------------------------------
@@ -389,10 +315,21 @@ input.input100 {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-
+  justify-content: center;
+  padding-top: 20px;
 }
 
 .login100-form-btn {
+  font-family: Montserrat-Bold;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  text-transform: uppercase;
+
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  background: #57b846;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -400,17 +337,7 @@ input.input100 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 20px;
-  margin-left: 10px;
-  min-width: 160px;
-  height: 50px;
-  background-color: #57b846;
-  border-radius: 25px;
-
-  font-family: Poppins-Regular;
-  font-size: 16px;
-  color: #fff;
-  line-height: 1.2;
+  padding: 0 25px;
 
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -419,31 +346,47 @@ input.input100 {
 }
 
 .login100-form-btn:hover {
-  background-color: #333333;
+  background: #333333;
 }
+
 
 
 /*------------------------------------------------------------------
 [ Responsive ]*/
 
-@media (max-width: 576px) {
+
+
+@media (max-width: 992px) {
+  .wrap-login100 {
+    padding: 177px 90px 33px 85px;
+  }
+
+  .login100-pic {
+    width: 35%;
+  }
+
   .login100-form {
-    padding: 43px 15px 57px 117px;
+    width: 50%;
   }
 }
 
-@media (max-width: 480px) {
-  .login100-form {
-    padding: 43px 15px 57px 15px;
+@media (max-width: 768px) {
+  .wrap-login100 {
+    padding: 100px 80px 33px 80px;
   }
 
-  .label-input100 {
-    text-align: left;
-    position: unset;
-    top: unset;
-    left: unset;
+  .login100-pic {
+    display: none;
+  }
+
+  .login100-form {
     width: 100%;
-    padding: 0 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  .wrap-login100 {
+    padding: 100px 15px 33px 15px;
   }
 }
 
@@ -459,9 +402,9 @@ input.input100 {
   content: attr(data-validate);
   position: absolute;
   max-width: 70%;
-  background-color: #fff;
+  background-color: white;
   border: 1px solid #c80000;
-  border-radius: 2px;
+  border-radius: 13px;
   padding: 4px 25px 4px 10px;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -469,7 +412,7 @@ input.input100 {
   -ms-transform: translateY(-50%);
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
-  right: 2px;
+  right: 8px;
   pointer-events: none;
 
   font-family: Poppins-Medium;
@@ -500,7 +443,7 @@ input.input100 {
   -ms-transform: translateY(-50%);
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
-  right: 8px;
+  right: 13px;
 }
 
 .alert-validate:hover:before {
@@ -514,5 +457,3 @@ input.input100 {
     opacity: 1;
   }
 }
-
-
