@@ -40,6 +40,11 @@ class Filters extends BaseConfig
                 [
                     'login/admin',
                     'login/admin/auth',
+                    'register/admin',
+                    'login/customer',
+                    'register/customer',
+                    'login/auth',
+                    'logout' //erase later
                 ],
             ],
             // 'honeypot',

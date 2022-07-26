@@ -12,7 +12,7 @@ class AuthGuard implements FilterInterface
     {
         if (!session()->get('isLoggedIn')) {
             return redirect()
-                ->route('login/admin');
+                ->route('login/customer');
         }
     }
 

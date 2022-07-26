@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Sinar Terang | Admin Login</title>
+	<title>Sinar Terang | Admin Registration</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -70,34 +70,19 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="flex-sb-m w-full p-b-10">
-						<div>
-							<p class="txt1">
-								Forgot your password?
-								<a href="#" class="txt1">
-									Click Here
-								</a>
-							</p>
-						</div>
-					</div>
-					<div class="flex-sb-m w-full p-b-30">
-						<div>
-							<p class="txt2">
-								Are you a lost customer?
-								<a href="<?php echo base_url("/login/customer"); ?>" class="txt2">
-									Login Here
-								</a>
-							</p>
-						</div>
+					<div class="wrap-input100 validate-input m-b-18" data-validate="Confirm Password is required">
+						<span class="label-input100">Confirm Password</span>
+						<input class="input100" type="password" name="confirm_password" placeholder="Confirm your password">
+						<span class="focus-input100"></span>
 					</div>
 
+					<div class="flex-sb-m w-full p-b-30">
+
+					</div>
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
-							Login
-						</button>
-						<a href="#" class="login100-form-btn">
 							Register
-						</a>
+						</button>
 					</div>
 				</form>
 			</div>

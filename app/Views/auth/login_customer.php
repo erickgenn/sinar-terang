@@ -26,6 +26,19 @@
 <body>
 
 	<div class="limiter">
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+		<?php if (session()->getFlashdata('login_failed')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'error',
+					title: 'Email or Password is Incorrect!',
+					showConfirmButton: false,
+					timer: 1500
+				});
+			</script>
+		<?php endif; ?>
 
 		<div class="container-login100">
 			<div style="background-color: #D5CFA3;" class="wrap-login100">
@@ -33,7 +46,7 @@
 					<img src="/login/images/logos-02.png" alt="IMG">
 				</div>
 
-				<form action="<?php echo base_url("/login/admin/auth") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
+				<form action="<?php echo base_url("/login/auth") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
 
 					<span class="login100-form-title">
 						Welcome Back!
