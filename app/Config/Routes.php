@@ -47,6 +47,7 @@ $routes->post('login/admin/auth', 'AuthController::loginAdmin');
 $routes->get('login/customer', 'AuthController::customer');
 $routes->post('login/auth', 'AuthController::loginCustomer');
 $routes->get('register/customer', 'AuthController::registerCustomer');
+$routes->post('register/customer/auth', 'AuthController::registerCustomerAuth');
 
 $routes->get('logout', 'AuthController::logout');
 

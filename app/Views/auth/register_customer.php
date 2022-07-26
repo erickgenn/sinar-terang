@@ -27,13 +27,39 @@
 
 	<div class="limiter">
 
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+		<?php if (session()->getFlashdata('password_different')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'error',
+					title: "Password Doesn't Match!",
+					showConfirmButton: false,
+					timer: 1900
+				});
+			</script>
+		<?php endif; ?>
+
+		<?php if (session()->getFlashdata('email_used')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'error',
+					title: "Email is Used, Please Use Another Email",
+					showConfirmButton: false,
+					timer: 1900
+				});
+			</script>
+		<?php endif; ?>
+
 		<div class="container-login100">
 			<div style="background-color: #D5CFA3;" class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="/login/images/logos-02.png" alt="IMG">
 				</div>
 
-				<form action="<?php echo base_url("/login/admin/auth") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
+				<form action="<?php echo base_url("/register/customer/auth") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
 
 					<span class="login100-form-title">
 						Register Your Account
@@ -48,7 +74,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Phone number is required">
-						<input class="input100" type="text" name="phone" placeholder="Phone Number">
+						<input class="input100" type="number" name="phone" placeholder="Phone Number">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-phone" aria-hidden="true"></i>
@@ -64,7 +90,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password" placeholder="Password">
+						<input class="input100" type="password" name="password" placeholder="Password" minlength="5" maxlength="25">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -72,7 +98,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password Confirmation is required">
-						<input class="input100" type="password" name="confirm_password" placeholder=" Confirm Your Password">
+						<input class="input100" type="password" name="confirm_password" placeholder="Confirm Your Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>

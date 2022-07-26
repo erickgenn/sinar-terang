@@ -35,7 +35,19 @@
 					icon: 'error',
 					title: 'Email or Password is Incorrect!',
 					showConfirmButton: false,
-					timer: 1500
+					timer: 1600
+				});
+			</script>
+		<?php endif; ?>
+
+		<?php if (session()->getFlashdata('registration_successful')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Registration Successful!',
+					showConfirmButton: false,
+					timer: 1800
 				});
 			</script>
 		<?php endif; ?>
