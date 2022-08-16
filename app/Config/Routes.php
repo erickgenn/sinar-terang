@@ -17,7 +17,7 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('AuthController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -35,7 +35,27 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'AuthController::customer');
+
+
+//Admin Pages
+$routes->get('admin/dashboard', 'AdminController::index');
+$routes->get('admin/customer', 'AdminController::customer');
+$routes->get('admin/customer/search', 'CustomerController::search');
+
+//Login and Registration
+$routes->get('login/admin', 'AuthController::admin');
+$routes->get('register/admin', 'AuthController::registerAdmin');
+$routes->post('login/admin/auth', 'AuthController::loginAdmin');
+
+$routes->get('login/customer', 'AuthController::customer');
+$routes->post('login/auth', 'AuthController::loginCustomer');
+$routes->get('register/customer', 'AuthController::registerCustomer');
+$routes->post('register/customer/auth', 'AuthController::registerCustomerAuth');
+
+$routes->get('logout', 'AuthController::logout');
+
+
 
 /*
  * --------------------------------------------------------------------

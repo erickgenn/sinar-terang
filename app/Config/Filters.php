@@ -23,6 +23,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'authGuard'     => \App\Filters\AuthGuard::class,
+
     ];
 
     /**
@@ -33,6 +35,20 @@ class Filters extends BaseConfig
      */
     public $globals = [
         'before' => [
+            'authGuard' => [
+                'except' =>
+                [
+                    'login/admin',
+                    'login/admin/auth',
+                    'register/admin',
+                    'login/customer',
+                    'register/customer',
+                    'login/auth',
+                    'logout', //erase later
+                    'register/customer/auth',
+
+                ],
+            ],
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
