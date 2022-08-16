@@ -17,7 +17,7 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('AuthController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -37,7 +37,11 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'AuthController::customer');
 
-$routes->get('home', 'Home::index');
+
+//Admin Pages
+$routes->get('admin/dashboard', 'AdminController::index');
+$routes->get('admin/customer', 'AdminController::customer');
+$routes->get('admin/customer/search', 'CustomerController::search');
 
 //Login and Registration
 $routes->get('login/admin', 'AuthController::admin');
