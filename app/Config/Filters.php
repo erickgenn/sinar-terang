@@ -38,6 +38,7 @@ class Filters extends BaseConfig
             'authGuard' => [
                 'except' =>
                 [
+                    '/',
                     'login/admin',
                     'login/admin/auth',
                     'register/admin',
