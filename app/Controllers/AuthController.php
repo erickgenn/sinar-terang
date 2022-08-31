@@ -7,6 +7,8 @@ use App\Models\UserModel;
 
 class AuthController extends BaseController
 {
+
+
     public function admin()
     {
         return view('auth/login_admin');

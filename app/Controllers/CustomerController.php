@@ -6,6 +6,11 @@ use App\Models\UserModel;
 
 class CustomerController extends BaseController
 {
+    public function index()
+    {
+        return view('customer/index');
+    }
+
     public function search()
     {
         $customerModel = new \App\Models\CustomerModel();
