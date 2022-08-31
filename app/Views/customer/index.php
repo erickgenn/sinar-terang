@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Balay Template</title>
+	<title>Sinar Terang</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
@@ -55,36 +55,26 @@
 	<div id="colorlib-page">
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
-			<h1 id="colorlib-logo"><a href="index.html">Balay</a></h1>
+			<h1 id="colorlib-logo"><a href="index.php">Sinar Terang</a></h1>
 			<nav id="colorlib-main-menu" role="navigation">
 				<ul>
-					<li class="colorlib-active"><a href="index.html">Home</a></li>
-					<li><a href="work.html">Project</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="services.html">Services</a></li>
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="contact.html">Contact</a></li>
+					<li class="colorlib-active"><a href="index.php">Home</a></li>
+					<li><a href="work.php">Project</a></li>
+					<li><a href="about.php">About</a></li>
+					<li><a href="services.php">Services</a></li>
+					<li><a href="blog.php">Blog</a></li>
+					<li><a href="contact.php">Contact</a></li>
 				</ul>
 			</nav>
 
 			<div class="colorlib-footer">
-				<p><small>&copy;
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;<script>
-							document.write(new Date().getFullYear());
-						</script> Made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> Distributed by: <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </span> <span>Demo Images: <a href="http://nothingtochance.co/" target="_blank">nothingtochance.co</a></span>
-					</small></p>
 				<ul>
 					<li><a href="#"><i class="icon-facebook2"></i></a></li>
 					<li><a href="#"><i class="icon-twitter2"></i></a></li>
 					<li><a href="#"><i class="icon-instagram"></i></a></li>
-					<li><a href="#"><i class="icon-linkedin2"></i></a></li>
 				</ul>
 			</div>
-
 		</aside>
-
 		<div id="colorlib-main">
 			<aside id="colorlib-hero" class="js-fullheight">
 				<div class="flexslider js-fullheight">
@@ -237,19 +227,19 @@
 						<div class="col-md-6">
 							<div class="row">
 								<div class="col-md-6">
-									<a href="services.html" class="services-wrap animate-box" data-animate-effect="fadeInRight">
+									<a href="services.php" class="services-wrap animate-box" data-animate-effect="fadeInRight">
 										<div class="services-img" style="background-image: url(/customer_page/images/services-1.jpg)"></div>
 										<div class="desc">
 											<h3>Design &amp; Build</h3>
 										</div>
 									</a>
-									<a href="services.html" class="services-wrap animate-box" data-animate-effect="fadeInRight">
+									<a href="services.php" class="services-wrap animate-box" data-animate-effect="fadeInRight">
 										<div class="services-img" style="background-image: url(/customer_page/images/services-2.jpg)"></div>
 										<div class="desc">
 											<h3>House Remodeling</h3>
 										</div>
 									</a>
-									<a href="services.html" class="services-wrap animate-box" data-animate-effect="fadeInRight">
+									<a href="services.php" class="services-wrap animate-box" data-animate-effect="fadeInRight">
 										<div class="services-img" style="background-image: url(/customer_page/images/services-3.jpg)"></div>
 										<div class="desc">
 											<h3>Construction Management</h3>
@@ -257,13 +247,13 @@
 									</a>
 								</div>
 								<div class="col-md-6 move-bottom">
-									<a href="services.html" class="services-wrap animate-box" data-animate-effect="fadeInRight">
+									<a href="services.php" class="services-wrap animate-box" data-animate-effect="fadeInRight">
 										<div class="services-img" style="background-image: url(/customer_page/images/services-4.jpg)"></div>
 										<div class="desc">
 											<h3>Painting &amp; Tiling</h3>
 										</div>
 									</a>
-									<a href="services.html" class="services-wrap animate-box" data-animate-effect="fadeInRight">
+									<a href="services.php" class="services-wrap animate-box" data-animate-effect="fadeInRight">
 										<div class="services-img" style="background-image: url(/customer_page/images/services-5.jpg)"></div>
 										<div class="desc">
 											<h3>Kitchen Remodeling</h3>
@@ -319,7 +309,7 @@
 							<div class="project" style="background-image: url(/customer_page/images/img-1.jpg);">
 								<div class="desc">
 									<div class="con">
-										<h3><a href="work.html">Work 01</a></h3>
+										<h3><a href="work.php">Work 01</a></h3>
 										<span>Building</span>
 										<p class="icon">
 											<span><a href="#"><i class="icon-share3"></i></a></span>
@@ -334,7 +324,7 @@
 							<div class="project" style="background-image: url(/customer_page/images/img-2.jpg);">
 								<div class="desc">
 									<div class="con">
-										<h3><a href="work.html">Work 02</a></h3>
+										<h3><a href="work.php">Work 02</a></h3>
 										<span>House, Apartment</span>
 										<p class="icon">
 											<span><a href="#"><i class="icon-share3"></i></a></span>
@@ -349,7 +339,7 @@
 							<div class="project" style="background-image: url(/customer_page/images/img-3.jpg);">
 								<div class="desc">
 									<div class="con">
-										<h3><a href="work.html">Work 03</a></h3>
+										<h3><a href="work.php">Work 03</a></h3>
 										<span>Dining Room</span>
 										<p class="icon">
 											<span><a href="#"><i class="icon-share3"></i></a></span>
@@ -364,7 +354,7 @@
 							<div class="project" style="background-image: url(/customer_page/images/img-4.jpg);">
 								<div class="desc">
 									<div class="con">
-										<h3><a href="work.html">Work 04</a></h3>
+										<h3><a href="work.php">Work 04</a></h3>
 										<span>House, Building</span>
 										<p class="icon">
 											<span><a href="#"><i class="icon-share3"></i></a></span>
@@ -379,7 +369,7 @@
 							<div class="project" style="background-image: url(/customer_page/images/img-5.jpg);">
 								<div class="desc">
 									<div class="con">
-										<h3><a href="work.html">Work 05</a></h3>
+										<h3><a href="work.php">Work 05</a></h3>
 										<span>Condo, Pad</span>
 										<p class="icon">
 											<span><a href="#"><i class="icon-share3"></i></a></span>
@@ -394,7 +384,7 @@
 							<div class="project" style="background-image: url(/customer_page/images/img-6.jpg);">
 								<div class="desc">
 									<div class="con">
-										<h3><a href="work.html">Work 06</a></h3>
+										<h3><a href="work.php">Work 06</a></h3>
 										<span>Table, Chairs</span>
 										<p class="icon">
 											<span><a href="#"><i class="icon-share3"></i></a></span>
@@ -420,30 +410,30 @@
 					<div class="row">
 						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="images/blog-1.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
+								<a href="blog.php" class="blog-img"><img src="images/blog-1.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
 								<div class="desc">
 									<span><small>April 14, 2018 </small> | <small> Web Design </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
-									<h3><a href="blog.html">Renovating National Gallery</a></h3>
+									<h3><a href="blog.php">Renovating National Gallery</a></h3>
 									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="/customer_page/images/blog-2.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
+								<a href="blog.php" class="blog-img"><img src="/customer_page/images/blog-2.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
 								<div class="desc">
 									<span><small>April 14, 2018 </small> | <small> Web Design </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
-									<h3><a href="blog.html">Wordpress for a Beginner</a></h3>
+									<h3><a href="blog.php">Wordpress for a Beginner</a></h3>
 									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="/customer_page/images/blog-3.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
+								<a href="blog.php" class="blog-img"><img src="/customer_page/images/blog-3.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
 								<div class="desc">
 									<span><small>April 14, 2018 </small> | <small> Inspiration </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
-									<h3><a href="blog.html">Make website from scratch</a></h3>
+									<h3><a href="blog.php">Make website from scratch</a></h3>
 									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
 								</div>
 							</div>
