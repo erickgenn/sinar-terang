@@ -11,6 +11,31 @@ class CustomerController extends BaseController
         return view('customer/index');
     }
 
+    public function about()
+    {
+        return view('customer/about');
+    }
+
+    public function blog()
+    {
+        return view('customer/blog');
+    }
+
+    public function contact()
+    {
+        return view('customer/contact');
+    }
+
+    public function services()
+    {
+        return view('customer/services');
+    }
+
+    public function work()
+    {
+        return view('customer/work');
+    }
+
     public function search()
     {
         $customerModel = new \App\Models\CustomerModel();
