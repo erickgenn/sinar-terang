@@ -37,6 +37,13 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'CustomerController::index');
 
+// Customer Pages
+$routes->get('/about', 'CustomerController::about');
+$routes->get('/blog', 'CustomerController::blog');
+$routes->get('/contact', 'CustomerController::contact');
+$routes->get('/services', 'CustomerController::services');
+$routes->get('/work', 'CustomerController::work');
+
 
 //Admin Pages
 $routes->get('admin/dashboard', 'AdminController::index');

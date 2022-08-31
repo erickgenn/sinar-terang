@@ -39,6 +39,11 @@ class Filters extends BaseConfig
                 'except' =>
                 [
                     '/',
+                    '/contact',
+                    '/services',
+                    '/blog',
+                    '/work',
+                    '/about',
                     'login/admin',
                     'login/admin/auth',
                     'register/admin',
