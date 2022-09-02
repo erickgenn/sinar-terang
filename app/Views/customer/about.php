@@ -44,6 +44,9 @@
 
 	<!-- Modernizr JS -->
 	<script src="/customer_page/js/modernizr-2.6.2.min.js"></script>
+
+	<script src="https://kit.fontawesome.com/6938e8f442.js" crossorigin="anonymous"></script>
+
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -59,7 +62,7 @@
 			<nav id="colorlib-main-menu" role="navigation">
 				<ul>
 					<li><a href="<?php echo base_url("/"); ?>">Home</a></li>
-					<li><a href="<?php echo base_url("/work"); ?>">Project</a></li>
+					<li><a href="<?php echo base_url("/product"); ?>">Products</a></li>
 					<li class=" colorlib-active"><a href="<?php echo base_url("/about"); ?>">About</a></li>
 					<li><a href="<?php echo base_url("/services"); ?>">Services</a></li>
 					<li><a href="<?php echo base_url("/blog"); ?>">Blog</a></li>
@@ -89,27 +92,27 @@
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="about-desc">
 								<span class="heading-meta">Welcome</span>
-								<h2 class="colorlib-heading">Who we are</h2>
-								<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country.</p>
-								<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+								<h2 class="colorlib-heading">Who are we?</h2>
+								<p>Sinar Terang was established in the early 2006.</p>
+								<p>Sinar Terang only sell high quality home products. We are delighted to bring exquisite home products to your home with reasonable prices.</p>
 							</div>
 							<div class="row padding">
 								<div class="col-md-4 no-gutters animate-box" data-animate-effect="fadeInLeft">
-									<a href="#" class="steps active">
+									<a class="steps active">
 										<p class="icon"><span><i class="icon-check"></i></span></p>
-										<h3>We are <br>pasionate</h3>
+										<h3>Good <br>Products</h3>
 									</a>
 								</div>
 								<div class="col-md-4 no-gutters animate-box" data-animate-effect="fadeInLeft">
-									<a href="#" class="steps">
+									<a class="steps active">
 										<p class="icon"><span><i class="icon-check"></i></span></p>
-										<h3>Honest <br>Dependable</h3>
+										<h3>Affordable</h3>
 									</a>
 								</div>
 								<div class="col-md-4 no-gutters animate-box" data-animate-effect="fadeInLeft">
-									<a href="#" class="steps">
+									<a class="steps active">
 										<p class="icon"><span><i class="icon-check"></i></span></p>
-										<h3>Always <br>Improving</h3>
+										<h3>Always <br>Reliable</h3>
 									</a>
 								</div>
 							</div>
@@ -117,8 +120,8 @@
 					</div>
 					<div class="row">
 						<div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
-							<h2 class="colorlib-heading">History</h2>
-							<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country.</p>
+							<h2 class="colorlib-heading">FAQ</h2>
+							<p>Frequently Asked Questions.</p>
 						</div>
 						<div class="col-md-8 animate-box" data-animate-effect="fadeInRight">
 							<div class="fancy-collapse-panel">
@@ -126,50 +129,41 @@
 									<div class="panel panel-default">
 										<div class="panel-heading" role="tab" id="headingOne">
 											<h4 class="panel-title">
-												<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Why choose me?
+												<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">What payment methods do we accept?
 												</a>
 											</h4>
 										</div>
 										<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 											<div class="panel-body">
-												<div class="row">
-													<div class="col-md-6">
-														<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-													</div>
-													<div class="col-md-6">
-														<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-													</div>
-												</div>
+												<p>We accept the following methods of payment: Credit Card (Visa and MasterCard), Debit Card, and Cash. All payments are charged in Indonesian Rupiah.</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default">
 										<div class="panel-heading" role="tab" id="headingTwo">
 											<h4 class="panel-title">
-												<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">What I do?
+												<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Do our products come assembled?
 												</a>
 											</h4>
 										</div>
 										<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 											<div class="panel-body">
-												<p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-												<ul>
-													<li>Separated they live in Bookmarksgrove right</li>
-													<li>Separated they live in Bookmarksgrove right</li>
-												</ul>
+												<p>Some of our products come readily assembled and others require assembly. To find out,
+													please ask the store admin. For those that do not come pre-assembled, a step by step guide will be provided to make assembly easy and hassle-free.
+												</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default">
 										<div class="panel-heading" role="tab" id="headingThree">
 											<h4 class="panel-title">
-												<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">My Specialties
+												<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Do we sell products online?
 												</a>
 											</h4>
 										</div>
 										<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 											<div class="panel-body">
-												<p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+												<p>Unfortunately, we do not sell products online at the moment. Sorry about that!</p>
 											</div>
 										</div>
 									</div>
@@ -188,9 +182,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-3 text-center animate-box">
-							<span class="icon"><i class="flaticon-skyline"></i></span>
+							<span class="icon"><i class="fa-solid fa-couch"></i></span>
 							<span class="colorlib-counter js-counter" data-from="0" data-to="1539" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="colorlib-counter-label">Projects</span>
+							<span class="colorlib-counter-label">Products</span>
 						</div>
 						<div class="col-md-3 text-center animate-box">
 							<span class="icon"><i class="flaticon-engineer"></i></span>
@@ -198,12 +192,12 @@
 							<span class="colorlib-counter-label">Employees</span>
 						</div>
 						<div class="col-md-3 text-center animate-box">
-							<span class="icon"><i class="flaticon-architect-with-helmet"></i></span>
+							<span class="icon"><i class="fa-solid fa-shop"></i></span>
 							<span class="colorlib-counter js-counter" data-from="0" data-to="5987" data-speed="5000" data-refresh-interval="50"></span>
-							<span class="colorlib-counter-label">Constructor</span>
+							<span class="colorlib-counter-label">Stores</span>
 						</div>
 						<div class="col-md-3 text-center animate-box">
-							<span class="icon"><i class="flaticon-worker"></i></span>
+							<span class="icon"><i class="fa-solid fa-user-group"></i></span>
 							<span class="colorlib-counter js-counter" data-from="0" data-to="3999" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="colorlib-counter-label">Partners</span>
 						</div>
@@ -229,6 +223,7 @@
 			</div>
 		</div>
 	</div>
+
 
 	<!-- jQuery -->
 	<script src="/customer_page/js/jquery.min.js"></script>

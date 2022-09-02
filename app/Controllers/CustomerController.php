@@ -31,9 +31,9 @@ class CustomerController extends BaseController
         return view('customer/services');
     }
 
-    public function work()
+    public function product()
     {
-        return view('customer/work');
+        return view('customer/product');
     }
 
     public function search()

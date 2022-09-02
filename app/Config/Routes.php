@@ -42,7 +42,7 @@ $routes->get('/about', 'CustomerController::about');
 $routes->get('/blog', 'CustomerController::blog');
 $routes->get('/contact', 'CustomerController::contact');
 $routes->get('/services', 'CustomerController::services');
-$routes->get('/work', 'CustomerController::work');
+$routes->get('/product', 'CustomerController::product');
 
 
 //Admin Pages

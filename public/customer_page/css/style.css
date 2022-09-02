@@ -82,7 +82,7 @@ figure {
   bottom: 0;
   top: 0;
   left: 0;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   z-index: 1001;
   background: #2C2C2C;
   -webkit-transition: 0.5s;

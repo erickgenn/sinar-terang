@@ -42,7 +42,7 @@ class Filters extends BaseConfig
                     '/contact',
                     '/services',
                     '/blog',
-                    '/work',
+                    '/product',
                     '/about',
                     'login/admin',
                     'login/admin/auth',
