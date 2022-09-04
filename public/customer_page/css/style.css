@@ -84,7 +84,7 @@ figure {
   left: 0;
   /* overflow-y: scroll; */
   z-index: 1001;
-  background: #2C2C2C;
+  background: #0d152d;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s; }
