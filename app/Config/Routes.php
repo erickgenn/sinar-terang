@@ -17,7 +17,7 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('AuthController');
+$routes->setDefaultController('CustomerController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -35,6 +35,8 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+$routes->get('/', 'CustomerController::index');
+
 $routes->get('/home', 'CustomerController::index');
 
 // Customer Pages
@@ -47,8 +49,12 @@ $routes->get('/product', 'CustomerController::product');
 
 //Admin Pages
 $routes->get('admin/dashboard', 'AdminController::index');
+
 $routes->get('admin/customer', 'AdminController::customer');
 $routes->get('admin/customer/search', 'CustomerController::search');
+
+$routes->get('admin/product', 'ProductController::index');
+$routes->get('admin/product/search', 'ProductController::search');
 
 //Login and Registration
 $routes->get('login/admin', 'AuthController::admin');

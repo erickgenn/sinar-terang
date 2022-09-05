@@ -27,21 +27,27 @@
         let current = window.location.href;
         if (current.includes('/home')) {
             document.getElementById("home").className = "colorlib-active";
-        }
+        } else
         if (current.includes('/product')) {
             document.getElementById("product").className = "colorlib-active";
-        }
+        } else
         if (current.includes('/about')) {
             document.getElementById("about").className = "colorlib-active";
-        }
+        } else
         if (current.includes('/services')) {
             document.getElementById("services").className = "colorlib-active";
-        }
+        } else
         if (current.includes('/blog')) {
             document.getElementById("blog").className = "colorlib-active";
-        }
+        } else
         if (current.includes('/contact')) {
             document.getElementById("contact").className = "colorlib-active";
+        }
+
+        //keep "/" the last
+        else
+        if (current.includes('/')) {
+            document.getElementById("home").className = "colorlib-active";
         }
     });
 </script>

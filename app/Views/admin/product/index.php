@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sinar Terang | Customer</title>
+    <title>Sinar Terang | Product</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -36,32 +36,18 @@
 
         <?php include(APPPATH . "Views/layout/aside.php"); ?>
 
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-        <?php if (session()->getFlashdata('login_successful')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Welcome Back <?php echo $_SESSION['name']; ?>!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
         <div class="content-wrapper">
 
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Customers</h1>
+                            <h1 class="m-0">Products</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Customers</li>
+                                <li class="breadcrumb-item active">Products</li>
                             </ol>
                         </div>
                     </div>
@@ -79,10 +65,10 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Telephone</th>
-                                        <th>Joined Since</th>
+                                        <th>Product Name</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Product Picture</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -123,7 +109,7 @@
         $(document).ready(function() {
             $('#customer-table').DataTable({
                 "ajax": {
-                    "url": "<?php echo base_url('admin/customer/search'); ?>",
+                    "url": "<?php echo base_url('admin/product/search'); ?>",
                     "dataSrc": ""
                 },
                 "columns": [{
@@ -139,13 +125,13 @@
                         "data": "name"
                     },
                     {
-                        "data": "email"
+                        "data": "price"
                     },
                     {
-                        "data": "phone"
+                        "data": "quantity"
                     },
                     {
-                        "data": "created_at"
+                        "data": "picture"
                     },
                     {
                         data: null,

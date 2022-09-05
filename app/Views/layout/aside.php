@@ -150,6 +150,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="<?php echo base_url("/admin/product"); ?>" id="product" class="nav-link">
+                            <i class="nav-icon fa-solid fa-chair"></i>
+                            <p>
+                                Products
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="pages/widgets.html" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
@@ -768,8 +776,8 @@
             if (current.includes('/admin/customer')) {
                 document.getElementById("customer").className = "nav-link active";
             }
-            if (current.includes('/order/index')) {
-                document.getElementById("order").className = "nav-link active";
+            if (current.includes('/admin/product')) {
+                document.getElementById("product").className = "nav-link active";
             }
             if (current.includes('/product/index')) {
                 document.getElementById("product").className = "nav-link active";

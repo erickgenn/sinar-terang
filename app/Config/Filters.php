@@ -38,6 +38,7 @@ class Filters extends BaseConfig
             'authGuard' => [
                 'except' =>
                 [
+                    '/',
                     '/home',
                     '/contact',
                     '/services',
