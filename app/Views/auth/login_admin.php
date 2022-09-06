@@ -95,9 +95,6 @@
 						<button type="submit" class="login100-form-btn">
 							Login
 						</button>
-						<a href="<?php echo base_url("register/admin"); ?>" class="login100-form-btn">
-							Register
-						</a>
 					</div>
 				</form>
 			</div>

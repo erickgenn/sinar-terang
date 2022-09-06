@@ -71,7 +71,6 @@
 
             <section class="content">
                 <div class="container-fluid">
-
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body table-responsive" style="align-content:flex-end">
@@ -82,6 +81,7 @@
                                         <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Telephone</th>
+                                        <th>Points</th>
                                         <th>Joined Since</th>
                                         <th>Status</th>
                                     </tr>
@@ -130,26 +130,36 @@
                         searchable: false,
                         sortable: false,
                         data: null,
+                        "className": "dt-center",
                         name: null,
                         render: function(data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
                     {
-                        "data": "name"
+                        "data": "name",
+                        "className": "dt-center",
                     },
                     {
-                        "data": "email"
+                        "data": "email",
+                        "className": "dt-center",
                     },
                     {
-                        "data": "phone"
+                        "data": "phone",
+                        "className": "dt-center",
                     },
                     {
-                        "data": "created_at"
+                        "data": "point",
+                        "className": "dt-center",
+                    },
+                    {
+                        "data": "created_at",
+                        "className": "dt-center",
                     },
                     {
                         data: null,
                         name: null,
+                        "className": "dt-center",
                         sortable: false,
                         render: function(data, type, row, meta) {
                             switch (row.is_active) {

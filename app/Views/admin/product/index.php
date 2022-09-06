@@ -8,33 +8,70 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/fontawesome-free/css/all.min.css">
 
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-    <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 
-    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
-    <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/jqvmap/jqvmap.min.css">
 
-    <link rel="stylesheet" href="../dist/css/adminlte.min.css?v=3.2.0">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/dist/css/adminlte.min.css?v=3.2.0">
 
-    <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 
-    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/daterangepicker/daterangepicker.css">
 
-    <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/summernote/summernote-bs4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="../login/images/logos-02.png" alt="AdminLTELogo" height="260" width="260">
+            <img class="animation__shake" src="<?php echo base_url(); ?>/login/images/logos-02.png" alt="AdminLTELogo" height="260" width="260">
         </div>
 
         <?php include(APPPATH . "Views/layout/aside.php"); ?>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <?php if (session()->getFlashdata('insertSuccessful')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Product Added Successfuly!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('activateProduct')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Product Is Now Available!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('deactivateProduct')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Product Is Now Not Available!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php endif; ?>
 
         <div class="content-wrapper">
 
@@ -59,17 +96,26 @@
                 <div class="container-fluid">
 
                     <div class="card">
+                        <div class="card-header">
+                            <div class="float-right">
+                                <a href="<?php echo base_url('/admin/add_product/'); ?>">
+                                    <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Add a Product</button>
+                                </a>
+                            </div>
+                        </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive" style="align-content:flex-end">
-                            <table id="customer-table" class="table table-striped table-bordered table-sm" style="width:100%">
+                            <table id="product-table" class="table table-striped table-bordered table-sm" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
                                         <th>Product Name</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
+                                        <th>Outlet</th>
                                         <th>Product Picture</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -98,8 +144,8 @@
     </div>
     <link rel="stylesheet" href="<?php echo base_url('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 
-    <script src="../plugins/jquery/jquery.min.js"></script>
-    <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="<?php echo base_url('/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
     <script src="<?php echo base_url('/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
@@ -107,7 +153,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#customer-table').DataTable({
+            $('#product-table').DataTable({
                 "ajax": {
                     "url": "<?php echo base_url('admin/product/search'); ?>",
                     "dataSrc": ""
@@ -117,38 +163,69 @@
                         sortable: false,
                         data: null,
                         name: null,
+                        "className": "dt-center",
                         render: function(data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
                     {
-                        "data": "name"
+                        "data": "name",
+                        "className": "dt-center"
                     },
                     {
-                        "data": "price"
+                        "data": "price",
+                        "className": "dt-body-right dt-head-center"
+
                     },
                     {
-                        "data": "quantity"
+                        "data": "quantity",
+                        "className": "dt-center"
                     },
                     {
-                        "data": "picture"
+                        "data": "outlet_name",
+                        "className": "dt-center"
                     },
                     {
                         data: null,
+                        name: null,
+                        "className": "dt-center",
+                        sortable: false,
+                        render: function(data, type, row, meta) {
+                            return '<img src="<?php echo base_url('uploads/product') ?>/' + row.picture + '" alt="' + data + '"height="180" width="180"/>';
+
+                        }
+                    },
+                    {
+                        data: null,
+                        "className": "dt-center",
                         name: null,
                         sortable: false,
                         render: function(data, type, row, meta) {
                             switch (row.is_active) {
                                 case "1":
-                                    return `<button type="button" class="btn btn-block btn-success">Active</button>`;
+                                    return `<a type="button" href="<?php echo base_url('admin/product/deactivate') ?>/` + row.id + `" class="btn btn-block btn-success">Active</a>`;
                                     break;
                                 case "0":
-                                    return `<button type="button" class="btn btn-block btn-danger">Inactive</button>`;
+                                    return `<a type="button" href="<?php echo base_url('admin/product/activate') ?>/` + row.id + `" class="btn btn-block btn-danger">Inactive</a>`;
                                     break;
                                 default:
                                     return `-`;
                                     break;
                             }
+                        }
+                    },
+                    {
+                        data: null,
+                        "className": "dt-center",
+                        "width": "12%",
+                        name: null,
+                        sortable: false,
+                        render: function(data, type, row, meta) {
+                            return `<a href="<?php echo base_url('admin/product/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <form method='POST' action='<?php echo base_url('admin/product/delete') ?>/${row.id}' style='display: unset;'>
+                                            <button type='submit' class='btn btn-danger' onclick="return confirm('Are You Sure You Want To Delete This Product?')"><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                        `;
                         }
                     },
                 ]
@@ -161,29 +238,29 @@
         $.widget.bridge('uibutton', $.ui.button)
     </script>
 
-    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script src="../plugins/chart.js/Chart.min.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/chart.js/Chart.min.js"></script>
 
-    <script src="../plugins/sparklines/sparkline.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/sparklines/sparkline.js"></script>
 
-    <script src="../plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="../plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
 
-    <script src="../plugins/jquery-knob/jquery.knob.min.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/jquery-knob/jquery.knob.min.js"></script>
 
-    <script src="../plugins/moment/moment.min.js"></script>
-    <script src="../plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/moment/moment.min.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/daterangepicker/daterangepicker.js"></script>
 
-    <script src="../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <script src="../plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/summernote/summernote-bs4.min.js"></script>
 
-    <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="<?php echo base_url(); ?>/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
-    <script src="../dist/js/adminlte.js?v=3.2.0"></script>
+    <script src="<?php echo base_url(); ?>/dist/js/adminlte.js?v=3.2.0"></script>
 
-    <script src="../dist/js/pages/dashboard.js"></script>
+    <script src="<?php echo base_url(); ?>/dist/js/pages/dashboard.js"></script>
 </body>
 
 </html>

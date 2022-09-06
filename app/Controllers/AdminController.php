@@ -13,6 +13,12 @@ class AdminController extends BaseController
 
     public function customer()
     {
-        return view('admin/customer');
+        return view('admin/customer/index');
+    }
+
+    public static function money_format_rupiah($num)
+    {
+        $result = "Rp " . number_format($num, 2, ',', '.');
+        return $result;
     }
 }

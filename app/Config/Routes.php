@@ -55,10 +55,16 @@ $routes->get('admin/customer/search', 'CustomerController::search');
 
 $routes->get('admin/product', 'ProductController::index');
 $routes->get('admin/product/search', 'ProductController::search');
+$routes->get('admin/add_product', 'ProductController::add');
+$routes->post('admin/add_product', 'ProductController::store');
+$routes->get('admin/product/deactivate/(:num)', 'ProductController::deactivate/$1');
+$routes->get('admin/product/activate/(:num)', 'ProductController::activate/$1');
+$routes->get('admin/product/view/(:num)', 'ProductController::view/$1');
+
+
 
 //Login and Registration
 $routes->get('login/admin', 'AuthController::admin');
-$routes->get('register/admin', 'AuthController::registerAdmin');
 $routes->post('login/admin/auth', 'AuthController::loginAdmin');
 
 $routes->get('login/customer', 'AuthController::customer');
