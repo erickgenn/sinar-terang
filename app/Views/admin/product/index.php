@@ -73,6 +73,18 @@
             </script>
         <?php endif; ?>
 
+        <?php if (session()->getFlashdata('deleteProduct')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Product Is Successfuly Deleted!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php endif; ?>
+
         <div class="content-wrapper">
 
             <div class="content-header">
@@ -154,6 +166,7 @@
     <script>
         $(document).ready(function() {
             $('#product-table').DataTable({
+                scrollX: true,
                 "ajax": {
                     "url": "<?php echo base_url('admin/product/search'); ?>",
                     "dataSrc": ""
@@ -191,7 +204,7 @@
                         "className": "dt-center",
                         sortable: false,
                         render: function(data, type, row, meta) {
-                            return '<img src="<?php echo base_url('uploads/product') ?>/' + row.picture + '" alt="' + data + '"height="180" width="180"/>';
+                            return '<img src="<?php echo base_url('uploads/product') ?>/' + row.picture + '" alt="' + data + '"height="100%" width="100%"/>';
 
                         }
                     },

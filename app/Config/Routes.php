@@ -52,6 +52,9 @@ $routes->get('admin/dashboard', 'AdminController::index');
 
 $routes->get('admin/customer', 'AdminController::customer');
 $routes->get('admin/customer/search', 'CustomerController::search');
+$routes->get('admin/customer/activate/(:num)', 'CustomerController::activate/$1');
+$routes->get('admin/customer/deactivate/(:num)', 'CustomerController::deactivate/$1');
+
 
 $routes->get('admin/product', 'ProductController::index');
 $routes->get('admin/product/search', 'ProductController::search');
@@ -60,6 +63,8 @@ $routes->post('admin/add_product', 'ProductController::store');
 $routes->get('admin/product/deactivate/(:num)', 'ProductController::deactivate/$1');
 $routes->get('admin/product/activate/(:num)', 'ProductController::activate/$1');
 $routes->get('admin/product/view/(:num)', 'ProductController::view/$1');
+$routes->post('admin/product/delete/(:num)', 'ProductController::delete/$1');
+$routes->post('admin/edit_product/(:num)', 'ProductController::update/$1');
 
 
 

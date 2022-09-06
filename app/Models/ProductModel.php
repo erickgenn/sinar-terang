@@ -15,5 +15,6 @@ class ProductModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
+    protected $useSoftDeletes = true;
     // protected $useSoftDeletes = true;
 }
