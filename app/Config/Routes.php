@@ -76,7 +76,10 @@ $routes->get('admin/outlet/deactivate/(:num)', 'OutletController::deactivate/$1'
 $routes->get('admin/outlet/activate/(:num)', 'OutletController::activate/$1');
 $routes->post('admin/outlet/delete/(:num)', 'OutletController::delete/$1');
 
-
+$routes->get('admin/customer_pages/contact_us', 'CustomerPagesController::contactUs');
+$routes->get('admin/customer_pages/contact_us/search', 'CustomerPagesController::contactUsSearch');
+$routes->get('admin/customer_pages/contact_us/view/(:num)', 'CustomerPagesController::view/$1');
+$routes->post('admin/customer_pages/edit_contact_us/(:num)', 'CustomerPagesController::update/$1');
 
 
 

@@ -150,14 +150,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo base_url("/admin/product"); ?>" id="product" class="nav-link">
-                            <i class="nav-icon fa-solid fa-chair"></i>
-                            <p>
-                                Products
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="<?php echo base_url("/admin/outlet"); ?>" id="outlet" class="nav-link">
                             <i class="nav-icon fa-solid fa-store"></i>
                             <p>
@@ -166,70 +158,32 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/widgets.html" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
+                        <a href="<?php echo base_url("/admin/product"); ?>" id="product" class="nav-link">
+                            <i class="nav-icon fa-solid fa-chair"></i>
                             <p>
-                                Widgets
-                                <span class="right badge badge-danger">New</span>
+                                Products
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-copy"></i>
+                    <li id="nav_customer_pages" class="nav-item">
+                        <a href="#" id="customer_pages" class="nav-link">
+                            <i class="nav-icon fa-regular fa-file-lines"></i>
                             <p>
-                                Layout Options
+                                Customer Pages
                                 <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right">6</span>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/layout/top-nav.html" class="nav-link">
+                                <a id="contact_us" href="<?php echo base_url("admin/customer_pages/contact_us"); ?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Top Navigation</p>
+                                    <p>Contact Us Page</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Top Navigation + Sidebar</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/layout/boxed.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Boxed</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Fixed Sidebar</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Fixed Navbar</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/layout/fixed-footer.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Fixed Footer</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Collapsed Sidebar</p>
+                                    <p>FAQ Page</p>
                                 </a>
                             </li>
                         </ul>
@@ -802,7 +756,11 @@
             if (current.includes('/admin/edit_outlet')) {
                 document.getElementById("outlet").className = "nav-link active";
             }
-
+            if (current.includes('/admin/customer_pages/contact_us')) {
+                document.getElementById("customer_pages").className = "nav-link active";
+                document.getElementById("contact_us").className = "nav-link active";
+                document.getElementById("nav_customer_pages").className = "nav-item menu-open";
+            }
         });
     </script>
 <?php endif; ?>
