@@ -158,6 +158,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="<?php echo base_url("/admin/outlet"); ?>" id="outlet" class="nav-link">
+                            <i class="nav-icon fa-solid fa-store"></i>
+                            <p>
+                                Outlets
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="pages/widgets.html" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
@@ -781,6 +789,18 @@
             }
             if (current.includes('/admin/add_product')) {
                 document.getElementById("product").className = "nav-link active";
+            }
+            if (current.includes('/admin/product/view')) {
+                document.getElementById("product").className = "nav-link active";
+            }
+            if (current.includes('/admin/outlet')) {
+                document.getElementById("outlet").className = "nav-link active";
+            }
+            if (current.includes('/admin/add_outlet')) {
+                document.getElementById("outlet").className = "nav-link active";
+            }
+            if (current.includes('/admin/edit_outlet')) {
+                document.getElementById("outlet").className = "nav-link active";
             }
 
         });

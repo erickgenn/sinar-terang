@@ -66,6 +66,18 @@ $routes->get('admin/product/view/(:num)', 'ProductController::view/$1');
 $routes->post('admin/product/delete/(:num)', 'ProductController::delete/$1');
 $routes->post('admin/edit_product/(:num)', 'ProductController::update/$1');
 
+$routes->get('admin/outlet', 'OutletController::index');
+$routes->get('admin/outlet/search', 'OutletController::search');
+$routes->get('admin/add_outlet', 'OutletController::add');
+$routes->post('admin/add_outlet', 'OutletController::store');
+$routes->get('admin/outlet/view/(:num)', 'OutletController::view/$1');
+$routes->post('admin/edit_outlet/(:num)', 'OutletController::update/$1');
+$routes->get('admin/outlet/deactivate/(:num)', 'OutletController::deactivate/$1');
+$routes->get('admin/outlet/activate/(:num)', 'OutletController::activate/$1');
+$routes->post('admin/outlet/delete/(:num)', 'OutletController::delete/$1');
+
+
+
 
 
 //Login and Registration

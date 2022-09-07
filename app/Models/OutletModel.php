@@ -9,11 +9,13 @@ class OutletModel extends Model
     protected $table      = 'mstr_outlet';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name', 'is_active', 'location'];
+    protected $allowedFields = ['name', 'is_active', 'location', 'picture'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    protected $useSoftDeletes = true;
 
     // protected $useSoftDeletes = true;
 }

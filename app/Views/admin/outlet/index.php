@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sinar Terang | Product</title>
+    <title>Sinar Terang | Outlets</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -42,43 +42,43 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Product Added Successfuly!',
+                    title: 'Outlet Added Successfuly!',
                     showConfirmButton: false,
                     timer: 1500
                 });
             </script>
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('activateProduct')) : ?>
+        <?php if (session()->getFlashdata('activateOutlet')) : ?>
             <script>
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: '<?php echo $product['name']; ?> Is Now Available!',
+                    title: '<?php echo $outlet['name']; ?> Is Now Open!',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1700
                 });
             </script>
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('deactivateProduct')) : ?>
+        <?php if (session()->getFlashdata('deactivateOutlet')) : ?>
             <script>
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: '<?php echo $product['name']; ?> Is Now Not Available!',
+                    title: '<?php echo $outlet['name']; ?> Is Now Closed!',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1700
                 });
             </script>
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('deleteProduct')) : ?>
+        <?php if (session()->getFlashdata('deleteOutlet')) : ?>
             <script>
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: '<?php echo $product['name']; ?> Is Successfuly Deleted!',
+                    title: '<?php echo $outlet['name']; ?> Is Successfuly Deleted!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -90,7 +90,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Product Updated Successfuly!',
+                    title: 'Outlet Updated Successfuly!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -103,12 +103,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Products</h1>
+                            <h1 class="m-0">Outlets</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Products</li>
+                                <li class="breadcrumb-item active">Outlets</li>
                             </ol>
                         </div>
                     </div>
@@ -122,22 +122,20 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-right">
-                                <a href="<?php echo base_url('/admin/add_product/'); ?>">
-                                    <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Add a Product</button>
+                                <a href="<?php echo base_url('/admin/add_outlet/'); ?>">
+                                    <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Add an Outlet</button>
                                 </a>
                             </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive" style="align-content:flex-end">
-                            <table id="product-table" class="table table-striped table-bordered table-sm" style="width:100%">
+                            <table id="outlet-table" class="table table-striped table-bordered table-sm" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Product Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Outlet</th>
-                                        <th>Product Picture</th>
+                                        <th>Outlet Name</th>
+                                        <th>Location</th>
+                                        <th>Picture</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -177,16 +175,17 @@
 
     <script>
         $(document).ready(function() {
-            $('#product-table').DataTable({
+            $('#outlet-table').DataTable({
                 scrollX: true,
                 "ajax": {
-                    "url": "<?php echo base_url('admin/product/search'); ?>",
+                    "url": "<?php echo base_url('admin/outlet/search'); ?>",
                     "dataSrc": ""
                 },
                 "columns": [{
                         searchable: false,
                         sortable: false,
                         data: null,
+                        "width": "60",
                         name: null,
                         "className": "dt-center",
                         render: function(data, type, row, meta) {
@@ -195,30 +194,22 @@
                     },
                     {
                         "data": "name",
-                        "className": "dt-center"
-                    },
-                    {
-                        "data": "price",
-                        "className": "dt-body-right dt-head-center"
-
-                    },
-                    {
-                        "data": "quantity",
                         "className": "dt-center",
-                        "width": "90",
+                        "width": "190"
                     },
                     {
-                        "data": "outlet_name",
-                        "className": "dt-center"
+                        "data": "location",
+                        "className": "dt-head-center",
+                        "width": "200"
                     },
                     {
                         data: null,
                         name: null,
                         "className": "dt-center",
-                        "width": "370",
+                        "width": "350",
                         sortable: false,
                         render: function(data, type, row, meta) {
-                            return '<img src="<?php echo base_url('uploads/product') ?>/' + row.picture + '" alt="' + data + '"height="200" width=auto />';
+                            return '<img src="<?php echo base_url('uploads/outlet') ?>/' + row.picture + '" alt="' + data + '" height="170" width=auto/>';
                         }
                     },
                     {
@@ -229,10 +220,10 @@
                         render: function(data, type, row, meta) {
                             switch (row.is_active) {
                                 case "1":
-                                    return `<a type="button" href="<?php echo base_url('admin/product/deactivate') ?>/` + row.id + `" class="btn btn-block btn-success">Active</a>`;
+                                    return `<a type="button" href="<?php echo base_url('admin/outlet/deactivate') ?>/` + row.id + `" class="btn btn-block btn-success">Open</a>`;
                                     break;
                                 case "0":
-                                    return `<a type="button" href="<?php echo base_url('admin/product/activate') ?>/` + row.id + `" class="btn btn-block btn-danger">Inactive</a>`;
+                                    return `<a type="button" href="<?php echo base_url('admin/outlet/activate') ?>/` + row.id + `" class="btn btn-block btn-danger">Closed</a>`;
                                     break;
                                 default:
                                     return `-`;
@@ -247,9 +238,9 @@
                         name: null,
                         sortable: false,
                         render: function(data, type, row, meta) {
-                            return `<a href="<?php echo base_url('admin/product/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <form method='POST' action='<?php echo base_url('admin/product/delete') ?>/${row.id}' style='display: unset;'>
-                                            <button type='submit' class='btn btn-danger' onclick="return confirm('Are You Sure You Want To Delete This Product?')"><i class="fa-solid fa-trash"></i></button>
+                            return `<a href="<?php echo base_url('admin/outlet/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <form method='POST' action='<?php echo base_url('admin/outlet/delete') ?>/${row.id}' style='display: unset;'>
+                                            <button type='submit' class='btn btn-danger' onclick="return confirm('Are You Sure You Want To Delete This Outlet?')"><i class="fa-solid fa-trash"></i></button>
                                         </form>
                                         `;
                         }

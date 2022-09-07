@@ -6,62 +6,53 @@ use App\Models\OutletModel;
 use App\Models\ProductModel;
 use Exception;
 
-class ProductController extends BaseController
+class OutletController extends BaseController
 {
     public function index()
     {
-        return view('admin/product/index');
+        return view('admin/outlet/index');
     }
 
     public function add()
     {
-        $outletModel = new OutletModel();
-        $outlet = $outletModel->where('is_active', 1)->findAll();
-        return view('admin/product/add_product', compact('outlet'));
+        return view('admin/outlet/add_outlet');
     }
 
     public function view($id)
     {
         $outletModel = new OutletModel();
-        $outlet = $outletModel->where('is_active', 1)->findAll();
-        $productModel = new ProductModel();
-        $product = $productModel->where('id', $id)->first();
+        $outlet = $outletModel->where('id', $id)->first();
 
-        $arr_id = explode(",", $product['outlet_id']);
-
-        return view('admin/product/edit_product', compact('outlet', 'product', 'arr_id', 'id'));
+        return view('admin/outlet/edit_outlet', compact('outlet', 'id'));
     }
 
     public function update($id)
     {
         $session = session();
-        $productModel = new ProductModel();
+        $outletModel = new OutletModel();
         try {
             $data = $this->request->getPost();
             // upload image
-            if ($_FILES['product_picture']['name'] == '') {
+            if ($_FILES['outlet_picture']['name'] == '') {
                 try {
                     $data_update = [
-                        'name' => $data['product_name'],
-                        'quantity' => $data['product_quantity'],
-                        'price'    => $data['product_price'],
-                        'picture'  => $data['product_picture_default'],
-                        'description' => $data['product_description'],
-                        'outlet_id' => $data['product_outlet_id']
+                        'name' => $data['outlet_name'],
+                        'location' => $data['outlet_location'],
+                        'picture'  => $data['outlet_picture_default'],
                     ];
 
-                    $productModel->update($id, $data_update);
+                    $outletModel->update($id, $data_update);
 
                     $session->setFlashdata('updateSuccessful', 'abc');
-                    return redirect()->to(base_url('admin/product'));
+                    return redirect()->to(base_url('admin/outlet'));
                 } catch (Exception $er) {
                     $session->setFlashdata('updateFailed', 'Update Failed, Please Try Again');
-                    return redirect()->to(base_url('admin/product/view') . '/' . $id);
+                    return redirect()->to(base_url('admin/outlet/view') . '/' . $id);
                 }
             } else {
-                $file = $this->request->getFile('product_picture');
+                $file = $this->request->getFile('outlet_picture');
 
-                $target_dir = "uploads/product";
+                $target_dir = "uploads/outlet";
                 $target_file = $target_dir . '/' . basename($file->getName());
                 $uploadOk = 1;
                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -95,41 +86,38 @@ class ProductController extends BaseController
                     if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
                         // upload to db
                         $data_update = [
-                            'name' => $data['product_name'],
-                            'quantity' => $data['product_quantity'],
-                            'price'    => $data['product_price'],
+                            'name' => $data['outlet_name'],
+                            'location' => $data['outlet_location'],
                             'picture'    => $file->getName(),
-                            'description' => $data['product_description'],
-                            'outlet_id' => $data['product_outlet_id']
                         ];
 
-                        $productModel->update($id, $data_update);
+                        $outletModel->update($id, $data_update);
 
                         $session->setFlashdata('updateSuccessful', 'abc');
-                        return redirect()->to(base_url('admin/product'));
+                        return redirect()->to(base_url('admin/outlet'));
                     } else {
                         $session->setFlashdata('updateFailed', 'Upload Failed, Please Try Again');
-                        return redirect()->to(base_url('admin/product/view') . '/' . $id);
+                        return redirect()->to(base_url('admin/outlet/view') . '/' . $id);
                     }
                 }
             }
         } catch (Exception $e) {
             $session->setFlashdata('updateFailed', 'Update Failed, Please Try Again');
-            return redirect()->to(base_url('admin/product/view') . '/' . $id);
+            return redirect()->to(base_url('admin/outlet/view') . '/' . $id);
         }
-        return redirect()->to(base_url('admin/product/view') . '/' . $id);
+        return redirect()->to(base_url('admin/outlet/view') . '/' . $id);
     }
 
     public function store()
     {
         $session = session();
-        $productModel = new ProductModel();
+        $outletModel = new OutletModel();
         try {
             $data = $this->request->getPost();
             // upload image
-            $file = $this->request->getFile('product_picture');
+            $file = $this->request->getFile('outlet_picture');
 
-            $target_dir = "uploads/product";
+            $target_dir = "uploads/outlet";
             $target_file = $target_dir . '/' . basename($file->getName());
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -163,111 +151,86 @@ class ProductController extends BaseController
                 if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
                     // upload to db
                     $data_insert = [
-                        'name' => $data['product_name'],
-                        'quantity' => $data['product_quantity'],
-                        'price'    => $data['product_price'],
+                        'name' => $data['outlet_name'],
+                        'location' => $data['outlet_location'],
                         'picture'    => $file->getName(),
-                        'description' => $data['product_description'],
-                        'outlet_id' => $data['product_outlet_id']
                     ];
 
-                    $productModel->insert($data_insert);
+                    $outletModel->insert($data_insert);
 
                     $session->setFlashdata('insertSuccessful', 'abc');
-                    return redirect()->to(base_url('admin/product'));
+                    return redirect()->to(base_url('admin/outlet'));
                 } else {
                     $session->setFlashdata('insertFailed', 'Upload Failed, Please Try Again');
-                    return redirect()->to(base_url('admin/add_product'));
+                    return redirect()->to(base_url('admin/add_outlet'));
                 }
             }
         } catch (Exception $e) {
             $session->setFlashdata('insertFailed', 'Upload Failed, Please Try Again');
-            return redirect()->to(base_url('admin/add_product'));
+            return redirect()->to(base_url('admin/add_outlet'));
         }
-        return redirect()->to(base_url('admin/add_product'));
+        return redirect()->to(base_url('admin/add_outlet'));
     }
 
     public function search()
     {
-        $productModel = new ProductModel();
-
-        $product = $productModel->where('deleted_at', NULL)
-            ->findAll();
-
         $outletModel = new OutletModel();
 
-        $arr_outlet_id = [];
+        $outlet = $outletModel->where('deleted_at', NULL)
+            ->findAll();
 
-        for ($i = 0; $i < count($product); $i++) {
-            $product[$i]['created_at'] = date("d F Y", strtotime($product[$i]['created_at']));
-            $product[$i]['price'] = AdminController::money_format_rupiah($product[$i]['price']);
-
-            if (strpos($product[$i]['outlet_id'], ",") !== false) {
-                $arr_outlet_id = explode(",", $product[$i]['outlet_id']);
-                $outlet = $outletModel->whereIn('id', $arr_outlet_id)->findAll();
-            } else {
-                $outlet = $outletModel->where('id', $product[$i]['outlet_id'])->findAll();
-            }
-
-            for ($j = 0; $j < count($outlet); $j++) {
-                $product[$i]['outlet_name'] = $outlet[$j]['name'];
-            }
-        }
-
-
-
-        return json_encode($product);
+        return json_encode($outlet);
     }
 
     public function delete($id)
     {
         $session = session();
-        $productModel = new ProductModel();
+        $outletModel = new OutletModel();
 
         $data = [
             'is_active' => 0
         ];
 
-        $productModel->update($id, $data);
-        $product = $productModel->where('id', $id)->first();
+        $outletModel->update($id, $data);
+        $outlet = $outletModel->where('id', $id)->first();
 
-        $productModel->where('id', $id)->delete();
+        $outletModel->where('id', $id)->delete();
 
-        $session->setFlashdata('deleteProduct', '.');
+        $session->setFlashdata('deleteOutlet', '.');
 
-        return view('admin/product/index', compact('product'));
+        return view('admin/outlet/index', compact('outlet'));
     }
 
     public function activate($id)
     {
         $session = session();
-        $productModel = new ProductModel();
+        $outletModel = new OutletModel();
         $data = [
             'is_active' => 1,
         ];
 
-        $productModel->update($id, $data);
+        $outletModel->update($id, $data);
 
-        $product = $productModel->where('id', $id)->first();
+        $outlet = $outletModel->where('id', $id)->first();
 
-        $session->setFlashdata('activateProduct', '.');
+        $session->setFlashdata('activateOutlet', '.');
 
-        return view('admin/product/index', compact('product'));
+        return view('admin/outlet/index', compact('outlet'));
     }
 
     public function deactivate($id)
     {
         $session = session();
-        $productModel = new ProductModel();
+        $outletModel = new OutletModel();
         $data = [
             'is_active' => 0,
         ];
-        $productModel->update($id, $data);
+        $outletModel->update($id, $data);
 
-        $product = $productModel->where('id', $id)->first();
+        $outlet = $outletModel->where('id', $id)->first();
 
-        $session->setFlashdata('deactivateProduct', '.');
+        $session->setFlashdata('deactivateOutlet', '.');
 
-        return view('admin/product/index', compact('product'));
+        return view('admin/outlet/index', compact('outlet'));
     }
 }
