@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sinar Terang | Edit Contact Us Page</title>
+    <title>Sinar Terang | Add a User</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -37,50 +37,55 @@
         <?php include(APPPATH . "Views/layout/aside.php"); ?>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-        <?php if (session()->getFlashdata('updateFailed')) : ?>
+        <?php if (session()->getFlashdata('insertFailed')) : ?>
             <script>
                 swal({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Failed to Update, Please Try Again!',
+                    title: 'Failed to Add FAQ, Please Try Again!',
                     showConfirmButton: false,
                     timer: 1500
                 });
             </script>
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('updateSuccessful')) : ?>
+        <?php if (session()->getFlashdata('insertEmpty')) : ?>
             <script>
                 swal({
                     position: 'top-end',
-                    icon: 'success',
-                    title: 'Update Successful!',
+                    icon: 'error',
+                    title: "Field(s) Can't Be Empty!",
                     showConfirmButton: false,
                     timer: 1500
                 });
             </script>
         <?php endif; ?>
+
         <div class="content-wrapper">
+
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Edit Contact Us Page</h1>
+                            <h1 class="m-0">Users Management</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Contact Us Page</li>
-                                <li class="breadcrumb-item active">Edit Contact Us Page</li>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/user"); ?>">Users Management</a></li>
+                                <li class="breadcrumb-item active">Add a User</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
+
+
             <section class="content">
                 <div class="container-fluid">
+
                     <section class="content">
-                        <form method="POST" action="<?php echo base_url('admin/customer_pages/edit_contact_us') . '/' . $id ?>">
+                        <form method="POST" action="<?php echo base_url('admin/add_user'); ?>" name="faq_form">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card card-primary">
@@ -88,12 +93,29 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="inputPhone">Phone</label>
-                                                <input type="text" id="inputPhone" name="contact_us_phone" class="form-control" value="<?php echo $contactUs['phone']; ?>" required>
+                                                <label for="inputName">Name</label>
+                                                <input type="text" id="inputName" name="user_name" class="form-control" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputEmail">Email</label>
-                                                <input type="text" id="inputEmail" name="contact_us_email" class="form-control" value="<?php echo $contactUs['email']; ?>" required>
+                                                <label for="inputAnswer">Email</label>
+                                                <input type="email" id="inputEmail" name="user_email" class="form-control" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPassword">Password</label>
+                                                <input type="password" id="inputPassword" name="user_password" class="form-control" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputConfirmPassword">Confirm Password</label>
+                                                <input type="password" id="inputConfirmPassword" name="user_confirm_password" class="form-control" required>
+                                            </div>
+                                            <div class="form-group col-lg-3">
+                                                <label for="inputConfirmPassword">Role</label>
+                                                <select class="form-control" name="user_role" required>
+                                                    <option value="" disabled selected>-- Pilih --</option>
+                                                    <option value="owner">Owner</option>
+                                                    <option value="admin">Admin</option>
+                                                    <option value="manager">Manager</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -101,7 +123,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-success float-right">Update Contact Us</button>
+                                    <button type="submit" class="btn btn-success float-right">Add a User</button>
                                 </div>
                             </div>
                         </form>
@@ -133,6 +155,26 @@
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#inputQuestion'), {
+                toolbar: ['bold', 'italic', 'bulletedList', 'numberedList']
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#inputAnswer'), {
+                toolbar: ['bold', 'italic', 'bulletedList', 'numberedList']
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 
     <script>
         $.widget.bridge('uibutton', $.ui.button)

@@ -78,9 +78,21 @@ $routes->post('admin/outlet/delete/(:num)', 'OutletController::delete/$1');
 
 $routes->get('admin/customer_pages/contact_us', 'CustomerPagesController::contactUs');
 $routes->get('admin/customer_pages/contact_us/search', 'CustomerPagesController::contactUsSearch');
-$routes->get('admin/customer_pages/contact_us/view/(:num)', 'CustomerPagesController::view/$1');
-$routes->post('admin/customer_pages/edit_contact_us/(:num)', 'CustomerPagesController::update/$1');
+$routes->get('admin/customer_pages/contact_us/view/(:num)', 'CustomerPagesController::contactUsView/$1');
+$routes->post('admin/customer_pages/edit_contact_us/(:num)', 'CustomerPagesController::contactUsUpdate/$1');
 
+$routes->get('admin/customer_pages/faq', 'CustomerPagesController::faq');
+$routes->get('admin/customer_pages/faq/search', 'CustomerPagesController::faqSearch');
+$routes->get('admin/customer_pages/faq/view/(:num)', 'CustomerPagesController::faqView/$1');
+$routes->post('admin/customer_pages/faq/delete/(:num)', 'CustomerPagesController::faqDelete/$1');
+$routes->post('admin/customer_pages/edit_faq/(:num)', 'CustomerPagesController::faqUpdate/$1');
+$routes->get('admin/customer_pages/add_faq', 'CustomerPagesController::faqAdd');
+$routes->post('admin/customer_pages/add_faq', 'CustomerPagesController::faqStore');
+
+$routes->get('admin/user', 'UserController::index');
+$routes->get('admin/user/search', 'UserController::search');
+$routes->get('admin/add_user', 'UserController::add');
+$routes->post('admin/add_user', 'UserController::store');
 
 
 //Login and Registration

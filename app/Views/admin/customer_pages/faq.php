@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sinar Terang | Edit Contact Us Page</title>
+    <title>Sinar Terang | Frequently Asked Questions</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -37,41 +37,54 @@
         <?php include(APPPATH . "Views/layout/aside.php"); ?>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-        <?php if (session()->getFlashdata('updateFailed')) : ?>
+        <?php if (session()->getFlashdata('updateSuccessful')) : ?>
             <script>
                 swal({
                     position: 'top-end',
-                    icon: 'error',
-                    title: 'Failed to Update, Please Try Again!',
+                    icon: 'success',
+                    title: 'FAQ Updated Successfuly!',
                     showConfirmButton: false,
                     timer: 1500
                 });
             </script>
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('updateSuccessful')) : ?>
+        <?php if (session()->getFlashdata('insertSuccessful')) : ?>
             <script>
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Update Successful!',
+                    title: 'FAQ Added Successfuly!',
                     showConfirmButton: false,
                     timer: 1500
                 });
             </script>
         <?php endif; ?>
+
+        <?php if (session()->getFlashdata('deleteFaq')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'FAQ ID <?php echo $faq_deleted['id']; ?> Is Successfuly Deleted!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php endif; ?>
+
         <div class="content-wrapper">
+
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Edit Contact Us Page</h1>
+                            <h1 class="m-0">FAQ Page Configuration</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Contact Us Page</li>
-                                <li class="breadcrumb-item active">Edit Contact Us Page</li>
+                                <li class="breadcrumb-item active">FAQ Page</li>
                             </ol>
                         </div>
                     </div>
@@ -79,38 +92,39 @@
             </div>
             <section class="content">
                 <div class="container-fluid">
-                    <section class="content">
-                        <form method="POST" action="<?php echo base_url('admin/customer_pages/edit_contact_us') . '/' . $id ?>">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card card-primary">
-                                        <div class="card-header" style="background-color: #D5CFA3;">
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="inputPhone">Phone</label>
-                                                <input type="text" id="inputPhone" name="contact_us_phone" class="form-control" value="<?php echo $contactUs['phone']; ?>" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputEmail">Email</label>
-                                                <input type="text" id="inputEmail" name="contact_us_email" class="form-control" value="<?php echo $contactUs['email']; ?>" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-success float-right">Update Contact Us</button>
-                                </div>
-                            </div>
-                        </form>
-                    </section>
-                </div>
-                <br>
 
+                    <div class="card">
+                        <?php if ($count_faq < 5) : ?>
+                            <div class="card-header">
+                                <div class="float-right">
+                                    <a href="<?php echo base_url('/admin/customer_pages/add_faq/'); ?>">
+                                        <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Add an FAQ</button>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive" style="align-content:flex-end">
+                            <table id="faq-table" class="table table-striped table-bordered table-sm" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Question</th>
+                                        <th>Answer</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
             </section>
+
         </div>
+
         <footer class="main-footer">
             <strong>Sinar Terang.</strong>
             All rights reserved.
@@ -132,8 +146,54 @@
     <script src="<?php echo base_url('/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('#faq-table').DataTable({
+                scrollX: true,
+                "ajax": {
+                    "url": "<?php echo base_url('admin/customer_pages/faq/search'); ?>",
+                    "dataSrc": ""
+                },
+                "columns": [{
+                        searchable: false,
+                        sortable: false,
+                        data: null,
+                        "width": "20",
+                        name: null,
+                        "className": "dt-center",
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        "data": "question",
+                        "className": "dt-center",
+                        "width": "190"
+                    },
+                    {
+                        "data": "answer",
+                        "className": "dt-center",
+                        "width": "200"
+                    },
+                    {
+                        data: null,
+                        "className": "dt-center",
+                        "width": "12%",
+                        name: null,
+                        sortable: false,
+                        render: function(data, type, row, meta) {
+                            return `<a href="<?php echo base_url('admin/customer_pages/faq/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <form method='POST' action='<?php echo base_url('admin/customer_pages/faq/delete') ?>/${row.id}' style='display: unset;'>
+                                        <button type='submit' class='btn btn-danger' onclick="return confirm('Are You Sure You Want To Delete This FAQ?')"><i class="fa-solid fa-trash"></i></button>
+                                    </form>
+                                    `;
+                        }
+                    },
+                ]
+            });
+        });
+    </script>
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
