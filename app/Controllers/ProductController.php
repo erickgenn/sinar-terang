@@ -207,7 +207,9 @@ class ProductController extends BaseController
             } else {
                 $outlet = $outletModel->where('id', $product[$i]['outlet_id'])->findAll();
             }
+
             $outlet_name = null;
+
             for ($j = 0; $j < count($outlet); $j++) {
                 if (!isset($outlet_name)) {
                     $outlet_name = $outlet[$j]['name'];

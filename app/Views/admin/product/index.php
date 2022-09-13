@@ -195,17 +195,19 @@
                     },
                     {
                         "data": "name",
+                        "width": "130",
                         "className": "dt-center"
                     },
                     {
                         "data": "price",
+                        "width": "100",
                         "className": "dt-body-right dt-head-center"
 
                     },
                     {
                         "data": "quantity",
                         "className": "dt-center",
-                        "width": "90",
+                        "width": "80",
                     },
                     {
                         "data": "outlet_name",
@@ -243,7 +245,7 @@
                     {
                         data: null,
                         "className": "dt-center",
-                        "width": "12%",
+                        "width": "11%",
                         name: null,
                         sortable: false,
                         render: function(data, type, row, meta) {
