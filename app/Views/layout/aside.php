@@ -105,9 +105,9 @@
 
     <aside class="main-sidebar sidebar-dark-light elevation-4" style="background-color: #1C2D49;">
 
-        <a href="index3.html" class="brand-link">
+        <a href="<?php echo base_url('admin/dashboard'); ?>" class="brand-link">
             <img src="<?php echo base_url(); ?>/login/images/logos-03.png" alt="Sinar Terang" class="brand-image" style="opacity: .8; max-height:33px;">
-            <span class="brand-text font-weight-light">Sinar Terang</span>
+            <span class="brand-text">Sinar Terang</span>
         </a>
 
         <div class="sidebar">
