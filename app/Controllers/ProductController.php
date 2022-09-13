@@ -197,24 +197,26 @@ class ProductController extends BaseController
         $outletModel = new OutletModel();
 
         $arr_outlet_id = [];
-
         for ($i = 0; $i < count($product); $i++) {
             $product[$i]['created_at'] = date("d F Y", strtotime($product[$i]['created_at']));
             $product[$i]['price'] = AdminController::money_format_rupiah($product[$i]['price']);
 
-            if (strpos($product[$i]['outlet_id'], ",") !== false) {
+            if (strpos($product[$i]['outlet_id'], ",") != false) {
                 $arr_outlet_id = explode(",", $product[$i]['outlet_id']);
                 $outlet = $outletModel->whereIn('id', $arr_outlet_id)->findAll();
             } else {
                 $outlet = $outletModel->where('id', $product[$i]['outlet_id'])->findAll();
             }
-
+            $outlet_name = null;
             for ($j = 0; $j < count($outlet); $j++) {
-                $product[$i]['outlet_name'] = $outlet[$j]['name'];
+                if (!isset($outlet_name)) {
+                    $outlet_name = $outlet[$j]['name'];
+                } else {
+                    $outlet_name = $outlet_name . ", " . $outlet[$j]['name'];
+                }
             }
+            $product[$i]['outlet_name'] = $outlet_name;
         }
-
-
 
         return json_encode($product);
     }
