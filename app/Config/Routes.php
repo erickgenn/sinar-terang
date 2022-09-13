@@ -46,7 +46,6 @@ $routes->get('/contact', 'CustomerController::contact');
 $routes->get('/services', 'CustomerController::services');
 $routes->get('/product', 'CustomerController::product');
 
-
 //Admin Pages
 $routes->get('admin/dashboard', 'AdminController::index');
 
@@ -54,7 +53,6 @@ $routes->get('admin/customer', 'AdminController::customer');
 $routes->get('admin/customer/search', 'CustomerController::search');
 $routes->get('admin/customer/activate/(:num)', 'CustomerController::activate/$1');
 $routes->get('admin/customer/deactivate/(:num)', 'CustomerController::deactivate/$1');
-
 
 $routes->get('admin/product', 'ProductController::index');
 $routes->get('admin/product/search', 'ProductController::search');
@@ -75,6 +73,10 @@ $routes->post('admin/edit_outlet/(:num)', 'OutletController::update/$1');
 $routes->get('admin/outlet/deactivate/(:num)', 'OutletController::deactivate/$1');
 $routes->get('admin/outlet/activate/(:num)', 'OutletController::activate/$1');
 $routes->post('admin/outlet/delete/(:num)', 'OutletController::delete/$1');
+
+$routes->get('admin/order', 'OrderController::index');
+$routes->get('admin/order/search', 'OrderController::search');
+
 
 $routes->get('admin/customer_pages/contact_us', 'CustomerPagesController::contactUs');
 $routes->get('admin/customer_pages/contact_us/search', 'CustomerPagesController::contactUsSearch');
