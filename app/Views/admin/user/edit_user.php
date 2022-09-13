@@ -82,7 +82,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="inputName">Name</label>
-                                                <input type="text" id="inputName" name="user_name" class="form-control" value="<?php echo $user['name']; ?>" disabled>
+                                                <input type="text" id="inputName" name="user_name" class="form-control" value="<?php echo $user['name']; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputAnswer">Email</label>

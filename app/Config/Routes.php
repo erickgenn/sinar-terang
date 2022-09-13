@@ -99,7 +99,6 @@ $routes->get('admin/user/deactivate/(:num)', 'UserController::deactivate/$1');
 $routes->get('admin/user/activate/(:num)', 'UserController::activate/$1');
 $routes->post('admin/user/delete/(:num)', 'UserController::delete/$1');
 
-
 //Login and Registration
 $routes->get('login/admin', 'AuthController::admin');
 $routes->post('login/admin/auth', 'AuthController::loginAdmin');

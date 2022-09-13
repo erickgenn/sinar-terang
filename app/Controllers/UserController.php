@@ -81,6 +81,7 @@ class UserController extends BaseController
             $data = $this->request->getPost();
 
             $data_update = [
+                'name' => $data['user_name'],
                 'role' => $data['user_role'],
             ];
 
