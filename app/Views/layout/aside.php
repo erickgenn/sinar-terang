@@ -161,6 +161,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="<?php echo base_url("/admin/order"); ?>" id="order" class="nav-link">
+                            <i class="nav-icon fa-solid fa-cart-plus"></i>
+                            <p>
+                                Orders
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?php echo base_url("/admin/user"); ?>" id="user" class="nav-link">
                             <i class="nav-icon fa-solid fa-user-pen"></i>
                             <p>
@@ -303,6 +311,8 @@
                 document.getElementById("outlet").className = "nav-link active";
             } else if (current.includes('/admin/edit_outlet')) {
                 document.getElementById("outlet").className = "nav-link active";
+            } else if (current.includes('/admin/order')) {
+                document.getElementById("order").className = "nav-link active";
             } else if (current.includes('/admin/customer_pages/contact_us')) {
                 document.getElementById("customer_pages").className = "nav-link active";
                 document.getElementById("contact_us").className = "nav-link active";

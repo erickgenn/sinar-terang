@@ -68,10 +68,8 @@
                 </div>
             </div>
 
-
             <section class="content">
                 <div class="container-fluid">
-
                     <section class="content">
                         <form method="POST" action="<?php echo base_url('admin/edit_user') . '/' . $id ?>" name="faq_form">
                             <div class="row">
