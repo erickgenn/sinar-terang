@@ -42,7 +42,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'FAQ Updated Successfuly!',
+                    title: 'User Updated Successfuly!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -54,13 +54,36 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'FAQ Added Successfuly!',
+                    title: 'User Added Successfuly!',
                     showConfirmButton: false,
                     timer: 1500
                 });
             </script>
         <?php endif; ?>
 
+        <?php if (session()->getFlashdata('activateuser')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '<?php echo $user['name']; ?> Is Now Active!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('deactivateuser')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '<?php echo $user['name']; ?> Is Now Not Active!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php endif; ?>
 
 
         <div class="content-wrapper">
@@ -74,7 +97,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Users</li>
+                                <li class="breadcrumb-item active">Users Management</li>
                             </ol>
                         </div>
                     </div>
@@ -149,7 +172,7 @@
                         searchable: false,
                         sortable: false,
                         data: null,
-                        "width": "20",
+                        "width": "70",
                         name: null,
                         "className": "dt-center",
                         render: function(data, type, row, meta) {
@@ -159,7 +182,6 @@
                     {
                         "data": "name",
                         "className": "dt-center",
-                        "width": "190"
                     },
                     {
                         "data": "email",
@@ -167,9 +189,26 @@
                         "width": "200"
                     },
                     {
-                        "data": "role",
+                        data: null,
+                        name: null,
                         "className": "dt-center",
-                        "width": "200"
+                        sortable: false,
+                        render: function(data, type, row, meta) {
+                            switch (row.role) {
+                                case "owner":
+                                    return `Owner`;
+                                    break;
+                                case "admin":
+                                    return `Admin`;
+                                    break;
+                                case "manager":
+                                    return `Manager`;
+                                    break;
+                                default:
+                                    return `-`;
+                                    break;
+                            }
+                        }
                     },
                     {
                         "data": "created_at",
@@ -184,10 +223,10 @@
                         render: function(data, type, row, meta) {
                             switch (row.is_active) {
                                 case "1":
-                                    return `<a type="button" href="<?php echo base_url('admin/customer/deactivate') ?>/` + row.id + `" class="btn btn-block btn-success">Active</a>`;
+                                    return `<a type="button" href="<?php echo base_url('admin/user/deactivate') ?>/` + row.id + `" class="btn btn-block btn-success">Active</a>`;
                                     break;
                                 case "0":
-                                    return `<a type="button" href="<?php echo base_url('admin/customer/activate') ?>/` + row.id + `" class="btn btn-block btn-danger">Inactive</a>`;
+                                    return `<a type="button" href="<?php echo base_url('admin/user/activate') ?>/` + row.id + `" class="btn btn-block btn-danger">Inactive</a>`;
                                     break;
                                 default:
                                     return `-`;
@@ -202,11 +241,16 @@
                         name: null,
                         sortable: false,
                         render: function(data, type, row, meta) {
-                            return `<a href="<?php echo base_url('admin/customer_pages/faq/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <form method='POST' action='<?php echo base_url('admin/customer_pages/faq/delete') ?>/${row.id}' style='display: unset;'>
-                                        <button type='submit' class='btn btn-danger' onclick="return confirm('Are You Sure You Want To Delete This FAQ?')"><i class="fa-solid fa-trash"></i></button>
-                                    </form>
-                                    `;
+                            if (<?php echo $count; ?> <= 1) {
+                                return `<a href="<?php echo base_url('admin/user/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        `;
+                            } else {
+                                return `<a href="<?php echo base_url('admin/user/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <form method='POST' action='<?php echo base_url('admin/user/delete') ?>/${row.id}' style='display: unset;'>
+                                            <button type='submit' class='btn btn-danger' onclick="return confirm('Are You Sure You Want To Delete This User?')"><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                        `;
+                            }
                         }
                     },
                 ]

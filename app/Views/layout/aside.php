@@ -1,5 +1,5 @@
 <script src="https://kit.fontawesome.com/6938e8f442.js" crossorigin="anonymous"></script>
-<?php if ($_SESSION['role'] == 'admin') : ?>
+<?php if ($_SESSION['role'] == 'owner') : ?>
 
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
@@ -12,8 +12,8 @@
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item dropdown">
-                <a class="nav-link" href="dashboard" alt="Refresh">
-                    <i class="fa-solid fa-arrow-rotate-right"></i>
+                <a class="nav-link" href="<?php echo base_url('/logout'); ?>" alt="Log Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <a href="#" class="dropdown-item">
@@ -99,11 +99,6 @@
                     <i class="fas fa-expand-arrows-alt"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                    <i class="fas fa-th-large"></i>
-                </a>
-            </li>
         </ul>
     </nav>
 
@@ -122,7 +117,7 @@
                     <img src="<?php echo base_url(); ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Admin</a>
+                    <a href="#" class="d-block"><?php echo ucwords($_SESSION['name']); ?></a>
                 </div>
             </div>
 
@@ -321,6 +316,8 @@
                 document.getElementById("faq").className = "nav-link active";
                 document.getElementById("nav_customer_pages").className = "nav-item menu-open";
             } else if (current.includes('/admin/user')) {
+                document.getElementById("user").className = "nav-link active";
+            } else if (current.includes('/admin/add_user')) {
                 document.getElementById("user").className = "nav-link active";
             } else if (current.includes('/admin/customer')) {
                 document.getElementById("customer").className = "nav-link active";

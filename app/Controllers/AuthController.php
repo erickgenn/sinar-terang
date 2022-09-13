@@ -31,7 +31,7 @@ class AuthController extends BaseController
         $password = md5($data['password']);
 
         $userModel = new UserModel();
-        $user = $userModel->where('email', $email)->where('password', $password)->first();
+        $user = $userModel->where('email', $email)->where('password', $password)->where('is_active', 1)->first();
 
         if (isset($user)) {
             // If login is successful
@@ -40,7 +40,7 @@ class AuthController extends BaseController
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'isLoggedIn' => TRUE,
-                'role' => 'admin',
+                'role' => $user['role'],
             ];
             $session->set($session_data);
             $session->setFlashdata('login_successful', $user['name']);
@@ -90,6 +90,8 @@ class AuthController extends BaseController
 
     public function logout()
     {
+        session();
         session_unset();
+        return redirect()->to('/');
     }
 }

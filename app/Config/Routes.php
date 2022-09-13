@@ -91,8 +91,13 @@ $routes->post('admin/customer_pages/add_faq', 'CustomerPagesController::faqStore
 
 $routes->get('admin/user', 'UserController::index');
 $routes->get('admin/user/search', 'UserController::search');
+$routes->get('admin/user/view/(:num)', 'UserController::view/$1');
+$routes->post('admin/edit_user/(:num)', 'UserController::update/$1');
 $routes->get('admin/add_user', 'UserController::add');
 $routes->post('admin/add_user', 'UserController::store');
+$routes->get('admin/user/deactivate/(:num)', 'UserController::deactivate/$1');
+$routes->get('admin/user/activate/(:num)', 'UserController::activate/$1');
+$routes->post('admin/user/delete/(:num)', 'UserController::delete/$1');
 
 
 //Login and Registration

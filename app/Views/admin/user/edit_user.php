@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sinar Terang | Add a User</title>
+    <title>Sinar Terang | Edit User</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -37,24 +37,12 @@
         <?php include(APPPATH . "Views/layout/aside.php"); ?>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-        <?php if (session()->getFlashdata('insertFailed')) : ?>
+        <?php if (session()->getFlashdata('updateFailed')) : ?>
             <script>
                 swal({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Failed to Add User, Please Try Again!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
-        <?php if (session()->getFlashdata('emailFound')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'error',
-                    title: "Email Is Not Available!",
+                    title: 'Failed to Update, Please Try Again!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -73,7 +61,7 @@
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/user"); ?>">Users Management</a></li>
-                                <li class="breadcrumb-item active">Add a User</li>
+                                <li class="breadcrumb-item active">Edit User</li>
                             </ol>
                         </div>
                     </div>
@@ -85,7 +73,7 @@
                 <div class="container-fluid">
 
                     <section class="content">
-                        <form onsubmit="return checker(this)" method="POST" action="<?php echo base_url('admin/add_user'); ?>" name="faq_form">
+                        <form method="POST" action="<?php echo base_url('admin/edit_user') . '/' . $id ?>" name="faq_form">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card card-primary">
@@ -94,31 +82,30 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="inputName">Name</label>
-                                                <input type="text" id="inputName" name="user_name" class="form-control" required>
+                                                <input type="text" id="inputName" name="user_name" class="form-control" value="<?php echo $user['name']; ?>" disabled>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputAnswer">Email</label>
-                                                <input type="email" id="inputEmail" name="user_email" class="form-control" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputPassword">Password</label>
-                                                <input type="password" id="inputPassword" name="user_password" class="form-control" required minlength="5">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputConfirmPassword">Confirm Password</label>
-                                                <input type="password" id="inputConfirmPassword" name="user_confirm_password" class="form-control" required minlength="5">
-                                            </div>
-                                            <div id="div_password" class="col-lg-12" style="display: none;">
-                                                <div class="card bg-warning">
-                                                    <div class="card-body">
-                                                        <b>Warning! Both Passwords Don't Match</b>
-                                                    </div>
-                                                </div>
+                                                <input type="email" id="inputEmail" name="user_email" class="form-control" value="<?php echo $user['email']; ?>" disabled>
                                             </div>
                                             <div class="form-group col-lg-3">
                                                 <label for="inputRole">Role</label>
                                                 <select class="form-control" name="user_role" required>
-                                                    <option value="" disabled selected>-- Pilih --</option>
+                                                    <option value="<?php echo $user['role']; ?>" selected>
+                                                        <?php
+                                                        switch ($user['role']) {
+                                                            case "owner":
+                                                                echo "Owner";
+                                                                break;
+                                                            case "admin":
+                                                                echo "Admin";
+                                                                break;
+                                                            case "manager":
+                                                                echo "Manager";
+                                                                break;
+                                                        }
+                                                        ?>
+                                                    </option>
                                                     <option value="owner">Owner</option>
                                                     <option value="admin">Admin</option>
                                                     <option value="manager">Manager</option>
@@ -130,7 +117,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-success float-right">Add a User</button>
+                                    <button type="submit" class="btn btn-success float-right">Edit User</button>
                                 </div>
                             </div>
                         </form>
