@@ -119,7 +119,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-right">
-                                <a href="<?php echo base_url('/admin/add_outlet/'); ?>">
+                                <a href="<?php echo base_url('/admin/add_order/'); ?>">
                                     <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Add an Order</button>
                                 </a>
                             </div>
@@ -173,6 +173,9 @@
     <script>
         $(document).ready(function() {
             $('#outlet-table').DataTable({
+                "language": {
+                    "zeroRecords": "No Order Yet, Please Make an Order :)",
+                },
                 scrollX: true,
                 "ajax": {
                     "url": "<?php echo base_url('admin/order/search'); ?>",

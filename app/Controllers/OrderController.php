@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\OrderModel;
+use App\Models\OutletModel;
+use App\Models\ProductModel;
 use App\Models\UserModel;
 use Exception;
 
@@ -15,7 +17,31 @@ class OrderController extends BaseController
 
     public function add()
     {
-        return view('admin/user/add_user');
+        $productModel = new ProductModel();
+        $outletModel = new OutletModel();
+        $product = $productModel->findAll();
+        for ($i = 0; $i < count($product); $i++) {
+            $product[$i]['price'] = AdminController::money_format_rupiah($product[$i]['price']);
+
+            if (strpos($product[$i]['outlet_id'], ",") != false) {
+                $arr_outlet_id = explode(",", $product[$i]['outlet_id']);
+                $outlet = $outletModel->whereIn('id', $arr_outlet_id)->findAll();
+            } else {
+                $outlet = $outletModel->where('id', $product[$i]['outlet_id'])->findAll();
+            }
+
+            $outlet_name = null;
+
+            for ($j = 0; $j < count($outlet); $j++) {
+                if (!isset($outlet_name)) {
+                    $outlet_name = $outlet[$j]['name'];
+                } else {
+                    $outlet_name = $outlet_name . ", " . $outlet[$j]['name'];
+                }
+            }
+            $product[$i]['outlet_name'] = $outlet_name;
+        }
+        return view('admin/order/add_order', compact('product'));
     }
 
     public function view($id)

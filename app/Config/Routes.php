@@ -76,6 +76,7 @@ $routes->post('admin/outlet/delete/(:num)', 'OutletController::delete/$1');
 
 $routes->get('admin/order', 'OrderController::index');
 $routes->get('admin/order/search', 'OrderController::search');
+$routes->get('admin/add_order', 'OrderController::add');
 
 
 $routes->get('admin/customer_pages/contact_us', 'CustomerPagesController::contactUs');
