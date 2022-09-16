@@ -41,12 +41,12 @@
         <?php include(APPPATH . "Views/layout/aside.php"); ?>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-        <?php if (session()->getFlashdata('insertSuccessful')) : ?>
+        <?php if (session()->getFlashdata('insertFailed')) : ?>
             <script>
                 swal({
                     position: 'top-end',
-                    icon: 'success',
-                    title: 'Outlet Added Successfuly!',
+                    icon: 'error',
+                    title: 'Failed to Add Order, Please Try Again!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -76,7 +76,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div align="center">
-                                <b>Click The Products Below to Make an Order</b>
+                                <b>Click The Products Below to Make an Order</b> <br>
+                                <span>Scroll Down to See More Products</span>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -102,6 +103,7 @@
                                                     <div>
                                                         <span><?= $product[$i]['price'] ?></span>
                                                         <input id="product_name<?php echo $i ?>" type="hidden" value="<?php echo $product[$i]['name'] ?>">
+                                                        <input id="product_id<?php echo $i ?>" type="hidden" value="<?php echo $product[$i]['id'] ?>">
                                                         <input id="product_price<?php echo $i ?>" type="hidden" value="<?php echo $product[$i]['price'] ?>">
                                                         <input id="product_stock<?php echo $i ?>" type="hidden" value="<?php echo $product[$i]['quantity'] ?>">
                                                     </div>
@@ -119,28 +121,34 @@
                     <div class="card">
                         <div class="card-header">
                             <div align="center">
-                                Order Table
+                                <b>Order Table</b>
                             </div>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered dataTable table-sm" id="order-table" style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">Product Name</th>
-                                        <th class="text-center">Product Price</th>
-                                        <th class="text-center">Quantity</th>
-                                        <th class="text-center">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            <button type="submit" class="btn btn-success fa-pull-right">Add Order</button>
+                            <form method="POST" action="<?php echo base_url('admin/add_order'); ?>">
+                                <table class="table table-bordered dataTable table-sm" id="order-table" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Product ID</th>
+                                            <th class="text-center">Product Name</th>
+                                            <th class="text-center">Product Price</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+
+                                <button type="submit" class="btn btn-success fa-pull-right">Add Order</button>
+                                <input type="hidden" id="list_order" name="list_id">
+                            </form>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
+
         <footer class="main-footer">
             <strong>Sinar Terang.</strong>
             All rights reserved.
@@ -167,10 +175,11 @@
         function deleteRow(btn) {
             var row = btn.parentNode.parentNode;
             row.parentNode.removeChild(row);
-            // getCellValues();
+            getCellValues();
         }
 
         function addRow(id) {
+            let productId = document.getElementById("product_id" + id).value;
             let name = document.getElementById("product_name" + id).value;
             let price = document.getElementById("product_price" + id).value;
             let stock = document.getElementById("product_stock" + id).value;
@@ -189,27 +198,29 @@
                 } else {
                     qty_value = parseInt(qty_value) + 1;
                     document.getElementById("product_qty" + id).value = qty_value;
+                    getCellValues();
                 }
             } else {
                 html = `<tr>
+                    <td class="text-center">${productId}</td>
                     <td id="existing_name${id}" class="text-center">${name}</td>
                     <td class="text-right">${price}</td>
-                    <td width="30px"><input id="product_qty${id}" class="form-control" type="number" min="1" max="${stock}" value=1></td>
+                    <td width="30px"><input id="product_qty${id}" name="product_qty[]" class="form-control" type="number" min="1" max="${stock}" onKeyDown="return false" value=1></td>
                     <td class="text-center" width="90px"><button type="button" class="btn btn-danger" onclick="deleteRow(this)"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>`;
                 $('#order-table').append(html);
-                // getCellValues();
+                getCellValues();
             }
         }
 
         function getCellValues() {
-            let list_customer_ids_arr = []
-            var table = document.getElementById('cust-table');
+            let list_order_arr = [];
+            var table = document.getElementById('order-table');
             for (var r = 1, n = table.rows.length; r < n; r++) {
-                list_customer_ids_arr.push(table.rows[r].cells[1].innerHTML);
+                let id = table.rows[r].cells[0].innerHTML;
+                list_order_arr.push(id);
             }
-            let list_customer_ids = list_customer_ids_arr.toString();
-            document.getElementById("list_customer_ids").value = list_customer_ids;
+            document.getElementById("list_order").value = String(list_order_arr);
         }
     </script>
     <script>

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\DetailOrderModel;
 use App\Models\OrderModel;
 use App\Models\OutletModel;
 use App\Models\ProductModel;
@@ -58,6 +59,7 @@ class OrderController extends BaseController
         $order = $orderModel->where('deleted_at', NULL)
             ->findAll();
         for ($i = 0; $i < count($order); $i++) {
+            $order[$i]['total_price'] = AdminController::money_format_rupiah($order[$i]['total_price']);
             $order[$i]['created_at'] = date("d F Y", strtotime($order[$i]['created_at']));
         }
 
@@ -67,33 +69,47 @@ class OrderController extends BaseController
     public function store()
     {
         $session = session();
-        $userModel = new UserModel();
+        $orderModel = new OrderModel();
+        $detailOrderModel = new DetailOrderModel();
+        $productModel = new ProductModel();
         try {
             $data = $this->request->getPost();
 
-            $data_insert = [
-                'name' => $data['user_name'],
-                'email' => $data['user_email'],
-                'password' => md5($data['user_password']),
-                'role' => $data['user_role'],
-            ];
+            $product_id = explode(",", $data['list_id']);
 
-            $user = $userModel->where('email', $data['user_email'])->first();
-            if (isset($user)) {
-                $session->setFlashdata('emailFound', 'Upload Failed, Please Try Again');
-                return redirect()->to(base_url('admin/add_user'));
+            $total_price = 0;
+            for ($i = 0; $i < count($product_id); $i++) {
+                $product = $productModel->where('id', $product_id[$i])->first();
+                $price = $product['price'];
+                $qty = $data['product_qty'][$i];
+                $total_temp = $price * $qty;
+                $total_price = $total_price + $total_temp;
             }
 
-            $userModel->insert($data_insert);
-            $user = $userModel->findAll();
-            $count = count($user);
+            $data_insert = [
+                'total_price' => $total_price,
+            ];
+
+            $orderModel->insert($data_insert);
+
+            for ($i = 0; $i < count($product_id); $i++) {
+                $product = $productModel->where('id', $product_id[$i])->first();
+                $data_insert_detail = [
+                    'product_id' => $product_id[$i],
+                    'product_price' => $product['price'],
+                    'quantity' => $data['product_qty'][$i],
+                    'order_id' => $orderModel->getInsertID(),
+                ];
+                $detailOrderModel->insert($data_insert_detail);
+            }
+
             $session->setFlashdata('insertSuccessful', 'abc');
-            return view('admin/user/index', compact('count'));
+            return redirect()->to(base_url('admin/order'));
         } catch (Exception $e) {
-            $session->setFlashdata('insertFailed', 'Upload Failed, Please Try Again');
-            return redirect()->to(base_url('admin/add_user'));
+            $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
+            return redirect()->to(base_url('admin/add_order'));
         }
-        return redirect()->to(base_url('admin/add_user'));
+        return redirect()->to(base_url('admin/add_order'));
     }
 
     public function update($id)
