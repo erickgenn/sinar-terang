@@ -313,6 +313,8 @@
                 document.getElementById("outlet").className = "nav-link active";
             } else if (current.includes('/admin/order')) {
                 document.getElementById("order").className = "nav-link active";
+            } else if (current.includes('/admin/add_order')) {
+                document.getElementById("order").className = "nav-link active";
             } else if (current.includes('/admin/customer_pages/contact_us')) {
                 document.getElementById("customer_pages").className = "nav-link active";
                 document.getElementById("contact_us").className = "nav-link active";

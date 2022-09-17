@@ -4,12 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class OrderModel extends Model
+class OrderCancelRequestModel extends Model
 {
-    protected $table      = 'mstr_order';
+    protected $table      = 'mstr_order_cancel_req';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['total_price', 'request_cancel'];
+    protected $allowedFields = ['reason', 'request_by'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

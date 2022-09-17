@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\DetailOrderModel;
+use App\Models\OrderCancelRequestModel;
 use App\Models\OrderModel;
 use App\Models\OutletModel;
 use App\Models\ProductModel;
@@ -20,7 +21,7 @@ class OrderController extends BaseController
     {
         $productModel = new ProductModel();
         $outletModel = new OutletModel();
-        $product = $productModel->findAll();
+        $product = $productModel->where('quantity !=', 0)->findAll();
         for ($i = 0; $i < count($product); $i++) {
             $product[$i]['price'] = AdminController::money_format_rupiah($product[$i]['price']);
 
@@ -66,6 +67,32 @@ class OrderController extends BaseController
         return json_encode($order);
     }
 
+    public function searchDetail($id)
+    {
+        $detailOrderModel = new DetailOrderModel();
+        $productModel = new ProductModel();
+        $detail = $detailOrderModel->where('order_id', $id)->findAll();
+
+        for ($i = 0; $i < count($detail); $i++) {
+            $product = $productModel->where('id', $detail[$i]['product_id'])->first();
+            $detail[$i]['product_name'] = $product['name'];
+            $detail[$i]['amount'] = (int) $detail[$i]['product_price'] * (int) $detail[$i]['quantity'];
+            $detail[$i]['amount'] = AdminController::money_format_rupiah($detail[$i]['amount']);
+            $detail[$i]['product_price'] = AdminController::money_format_rupiah($detail[$i]['product_price']);
+        }
+
+        return json_encode($detail);
+    }
+
+    public function print($id)
+    {
+        $orderModel = new OrderModel();
+        $order = $orderModel->where('id', $id)->first();
+        $order['created_at'] = date("d F Y", strtotime($order['created_at']));
+        $order['total_price'] = AdminController::money_format_rupiah($order['total_price']);
+        return view("admin/order/print_invoice", compact('id', 'order'));
+    }
+
     public function store()
     {
         $session = session();
@@ -82,8 +109,13 @@ class OrderController extends BaseController
                 $product = $productModel->where('id', $product_id[$i])->first();
                 $price = $product['price'];
                 $qty = $data['product_qty'][$i];
+                $updated_qty = (int) $product['quantity'] - $qty;
                 $total_temp = $price * $qty;
                 $total_price = $total_price + $total_temp;
+                $data_update = [
+                    'quantity' => $updated_qty,
+                ];
+                $productModel->update($product_id[$i], $data_update);
             }
 
             $data_insert = [
@@ -138,25 +170,34 @@ class OrderController extends BaseController
         return redirect()->to(base_url('admin/user/view') . '/' . $id);
     }
 
-    public function delete($id)
+    public function requestCancel($id)
     {
         $session = session();
-        $userModel = new UserModel();
+        $orderModel = new OrderModel();
+        $orderRequestModel = new OrderCancelRequestModel();
+        try {
+            $data = $this->request->getPost();
 
-        $data = [
-            'is_active' => 0
-        ];
+            $data_update = [
+                'request_cancel' => 1,
+            ];
 
-        $userModel->update($id, $data);
+            $data_insert = [
+                'reason' => $data['cancel_reason'],
+                'request_by' => $_SESSION['id'],
+            ];
 
-        $userModel->where('id', $id)->delete();
+            $orderModel->update($id, $data_update);
 
-        $user = $userModel->findAll();
-        $count = count($user);
+            $orderRequestModel->insert($data_insert);
 
-        $session->setFlashdata('deleteOutlet', '.');
-
-        return view('admin/user/index', compact('count'));
+            $session->setFlashdata('cancelSuccessful', 'abc');
+            return redirect()->to(base_url('admin/order'));
+        } catch (Exception $e) {
+            $session->setFlashdata('cancelFailed', 'Insert Failed, Please Try Again');
+            return redirect()->to(base_url('admin/add_order'));
+        }
+        return redirect()->to(base_url('admin/add_order'));
     }
 
     public function activate($id)

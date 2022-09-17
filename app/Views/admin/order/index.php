@@ -97,6 +97,18 @@
             </script>
         <?php endif; ?>
 
+        <?php if (session()->getFlashdata('cancelSuccessful')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Cancel Request Sent!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php endif; ?>
+
         <div class="content-wrapper">
 
             <div class="content-header">
@@ -126,7 +138,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive" style="align-content:flex-end">
-                            <table id="outlet-table" class="table table-striped table-bordered table-sm" style="width:100%">
+                            <table id="order-table" class="table table-striped table-bordered table-sm" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -146,10 +158,7 @@
             </section>
         </div>
 
-        <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-success fa-pull-right">Add Order</button>
-
-        <!-- Modal -->
+        <!-- Invoice Modal -->
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog modal-lg">
 
@@ -158,46 +167,32 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <div class="modal-body">
+                    <div id="invoice" class="modal-body">
                         <div class="invoice p-3 mb-3">
 
                             <div class="row">
                                 <div class="col-12">
                                     <h4>
                                         <img src="<?php echo base_url(); ?>/assets/logos-02.png" alt="Sinar Terang" class="brand-image" style="max-height:40px;"> Sinar Terang
-                                        <small class="float-right">Date: <?php echo date('l, d-m-Y') ?></small>
+                                        <small id="invoice_date" class="float-right"></small>
                                     </h4>
                                 </div>
 
                             </div>
 
                             <div class="row">
-                                <div class="col-12 table-responsive">
-                                    <table class="table table-striped">
+                                <div class="card-body table-responsive" style="align-content:flex-end">
+                                    <table id="detail-table" class="table table-striped table-bordered table-sm" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Qty</th>
-                                                <th>Product</th>
-                                                <th>Serial #</th>
-                                                <th>Description</th>
-                                                <th>Subtotal</th>
+                                                <th>No.</th>
+                                                <th>Product Name</th>
+                                                <th class="text-center">Price per Unit @ Rp</th>
+                                                <th>Quantity</th>
+                                                <th class="text-center">Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Call of Duty</td>
-                                                <td>455-981-221</td>
-                                                <td>El snort testosterone trophy driving gloves handsome</td>
-                                                <td>$64.50</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Need for Speed IV</td>
-                                                <td>247-925-726</td>
-                                                <td>Wes Anderson umami biodiesel</td>
-                                                <td>$50.00</td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -210,35 +205,19 @@
                                     <p class="lead">Payment Methods:</p>
                                     <img src="<?php echo base_url() ?>/dist/img/credit/visa.png" alt="Visa">
                                     <img src="<?php echo base_url() ?>/dist/img/credit/mastercard.png" alt="Mastercard">
-                                    <img src="<?php echo base_url() ?>/dist/img/credit/american-express.png" alt="American Express">
-                                    <img src="<?php echo base_url() ?>/dist/img/credit/paypal2.png" alt="Paypal">
+                                    <img src="<?php echo base_url() ?>/dist/img/credit/qris.png" alt="QRIS" style="max-height: 39px;">
                                     <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                                        plugg
-                                        dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                                        No Refunds. Except as expressly provided herein, all payments under this Agreement will be irrevocable, non-refundable, and non-exchangeable.
                                     </p>
                                 </div>
 
                                 <div class="col-6">
-                                    <p class="lead">Amount Due 2/22/2014</p>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <th style="width:50%">Subtotal:</th>
-                                                    <td>$250.30</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Tax (9.3%)</th>
-                                                    <td>$10.34</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Shipping:</th>
-                                                    <td>$5.80</td>
-                                                </tr>
-                                                <tr>
                                                     <th>Total:</th>
-                                                    <td>$265.24</td>
+                                                    <td id="invoice_total_price" class="text-right"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -250,13 +229,9 @@
 
                             <div class="row no-print">
                                 <div class="col-12">
-                                    <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                                    <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                                        Payment
-                                    </button>
-                                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                        <i class="fas fa-download"></i> Generate PDF
-                                    </button>
+                                    <a id="print_button" type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                        <i class="fas fa-print"></i> Print
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -264,6 +239,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <footer class="main-footer">
             <strong>Sinar Terang.</strong>
@@ -289,7 +266,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#outlet-table').DataTable({
+            $('#order-table').DataTable({
                 "language": {
                     "zeroRecords": "No Order Yet, Please Make an Order :)",
                 },
@@ -331,16 +308,101 @@
                         name: null,
                         sortable: false,
                         render: function(data, type, row, meta) {
-                            return `<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>
-                                    <form method='POST' action='<?php echo base_url('admin/outlet/delete') ?>/${row.id}' style='display: unset;'>
-                                        <button type='submit' class='btn btn-danger' onclick="return confirm('Are You Sure You Want To Delete This Outlet?')"><i class="fa-solid fa-trash"></i></button>
+                            switch (row.request_cancel) {
+                                case "0":
+                                    return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>
+                                    <button type='button' class='btn btn-danger' data-toggle="modal" data-target="#cancelModal"><i class="fa-solid fa-trash"></i></button>
+                                    
+                                    <!-- Cancel Modal -->
+                                    <form method="POST" action="<?php echo base_url('admin/order/request_cancel'); ?>/${row.id}">
+                                        <div id="cancelModal" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Cancel Order</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body" style="width:100%">
+                                                        <p>Why do you want to <b>cancel</b> this order?</p>
+                                                        <textarea style="width:70%" name="cancel_reason"></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-success">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </form>
                                     `;
+                                    break;
+                                case "1":
+                                    return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>`;
+                                    break;
+                                default:
+                                    return `-`;
+                                    break;
+                            }
                         }
                     },
                 ]
             });
         });
+    </script>
+
+    <script>
+        function detailTable(date, id, total_price) {
+            document.getElementById('invoice_date').innerText = "Date: " + date;
+            document.getElementById('invoice_total_price').innerText = total_price;
+            document.getElementById('print_button').href = "<?php echo base_url('admin/order/print'); ?>/" + id;
+
+            $('#detail-table').DataTable().clear();
+            $('#detail-table').DataTable().destroy();
+            $('#detail-table').DataTable({
+                scrollX: true,
+                "paging": false,
+                "info": false,
+                "searching": false,
+                "ajax": {
+                    "url": `<?php echo base_url('admin/order/search_detail'); ?>/${id}`,
+                    "dataSrc": ""
+                },
+                "columns": [{
+                        searchable: false,
+                        sortable: false,
+                        data: null,
+                        "width": "60",
+                        name: null,
+                        "className": "dt-center",
+                        render: function(data, type, row, meta) {
+                            return meta.row + meta.settings._iDisplayStart + 1;
+                        }
+                    },
+                    {
+                        "data": "product_name",
+                        "className": "dt-center",
+                        "width": "170"
+                    },
+                    {
+                        "data": "product_price",
+                        "className": "dt-body-right",
+                        "width": "170"
+                    },
+                    {
+                        "data": "quantity",
+                        "className": "dt-center",
+                        "width": "80"
+                    },
+                    {
+                        "data": "amount",
+                        "className": "dt-body-right",
+                        "width": "100"
+                    },
+
+                ]
+            });
+        }
     </script>
     <script>
         $.widget.bridge('uibutton', $.ui.button)

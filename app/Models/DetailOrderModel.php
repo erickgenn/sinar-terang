@@ -11,6 +11,10 @@ class DetailOrderModel extends Model
 
     protected $allowedFields = ['product_id', 'product_price', 'order_id', 'quantity'];
 
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
+
     protected $useSoftDeletes = true;
     // protected $useSoftDeletes = true;
 }
