@@ -110,6 +110,10 @@ class OrderController extends BaseController
                 $price = $product['price'];
                 $qty = $data['product_qty'][$i];
                 $updated_qty = (int) $product['quantity'] - $qty;
+                if ($updated_qty < 0) {
+                    $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
+                    return redirect()->to(base_url('admin/add_order'));
+                }
                 $total_temp = $price * $qty;
                 $total_price = $total_price + $total_temp;
                 $data_update = [

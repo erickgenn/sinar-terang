@@ -223,10 +223,7 @@
                                         </table>
                                     </div>
                                 </div>
-
                             </div>
-
-
                             <div class="row no-print">
                                 <div class="col-12">
                                     <a id="print_button" type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
@@ -239,9 +236,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <footer class="main-footer">
             <strong>Sinar Terang.</strong>
             All rights reserved.
@@ -249,11 +243,8 @@
                 <b>Version</b> 1.0.0
             </div>
         </footer>
-
         <aside class="control-sidebar control-sidebar-dark">
-
         </aside>
-
     </div>
     <link rel="stylesheet" href="<?php echo base_url('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>">
 

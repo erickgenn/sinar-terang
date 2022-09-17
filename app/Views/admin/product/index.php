@@ -205,9 +205,18 @@
 
                     },
                     {
-                        "data": "quantity",
+                        data: null,
+                        name: null,
                         "className": "dt-center",
                         "width": "80",
+                        sortable: false,
+                        render: function(data, type, row, meta) {
+                            if (row.quantity <= 10) {
+                                return `<h3 style="color:#990000">` + row.quantity + `</h3>`;
+                            } else {
+                                return row.quantity;
+                            }
+                        }
                     },
                     {
                         "data": "outlet_name",
