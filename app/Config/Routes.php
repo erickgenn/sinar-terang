@@ -86,6 +86,15 @@ $routes->post('admin/order/request_cancel', 'OrderController::requestCancel');
 $routes->get('admin/order/request/accept/(:num)/(:num)', 'OrderController::acceptRequest/$1/$2');
 $routes->get('admin/order/request/decline/(:num)/(:num)', 'OrderController::declineRequest/$1/$2');
 
+$routes->get('admin/vendor', 'VendorController::index');
+$routes->get('admin/add_vendor', 'VendorController::add');
+$routes->post('admin/add_vendor', 'VendorController::store');
+$routes->get('admin/vendor/search', 'VendorController::search');
+$routes->get('admin/vendor/activate/(:num)', 'VendorController::activate/$1');
+$routes->get('admin/vendor/deactivate/(:num)', 'VendorController::deactivate/$1');
+$routes->get('admin/vendor/view/(:num)', 'VendorController::view/$1');
+$routes->post('admin/edit_vendor/(:num)', 'VendorController::update/$1');
+
 
 $routes->get('admin/customer_pages/contact_us', 'CustomerPagesController::contactUs');
 $routes->get('admin/customer_pages/contact_us/search', 'CustomerPagesController::contactUsSearch');
