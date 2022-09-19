@@ -1,8 +1,6 @@
 <script src="https://kit.fontawesome.com/6938e8f442.js" crossorigin="anonymous"></script>
 <?php if ($_SESSION['role'] == 'owner') : ?>
-
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -160,13 +158,28 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url("/admin/order"); ?>" id="order" class="nav-link">
-                            <i class="nav-icon fa-solid fa-cart-plus"></i>
+                    <li id="nav_order" class="nav-item">
+                        <a href="#" id="order_pages" class="nav-link">
+                            <i class="nav-icon fa-regular fa-file-lines"></i>
                             <p>
                                 Orders
+                                <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a id="order" href="<?php echo base_url("/admin/order"); ?>" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Orders List</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="order_request" href="<?php echo base_url("admin/order/request_cancel"); ?>" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Cancel Request</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="<?php echo base_url("/admin/user"); ?>" id="user" class="nav-link">
@@ -311,10 +324,22 @@
                 document.getElementById("outlet").className = "nav-link active";
             } else if (current.includes('/admin/edit_outlet')) {
                 document.getElementById("outlet").className = "nav-link active";
+            } else if (current.includes('/admin/order/request_cancel')) {
+                document.getElementById("order_pages").className = "nav-link active";
+                document.getElementById("order_request").className = "nav-link active";
+                document.getElementById("nav_order").className = "nav-item menu-open";
+            } else if (current.includes('/admin/order/request/')) {
+                document.getElementById("order_pages").className = "nav-link active";
+                document.getElementById("order_request").className = "nav-link active";
+                document.getElementById("nav_order").className = "nav-item menu-open";
             } else if (current.includes('/admin/order')) {
+                document.getElementById("order_pages").className = "nav-link active";
                 document.getElementById("order").className = "nav-link active";
+                document.getElementById("nav_order").className = "nav-item menu-open";
             } else if (current.includes('/admin/add_order')) {
+                document.getElementById("order_pages").className = "nav-link active";
                 document.getElementById("order").className = "nav-link active";
+                document.getElementById("nav_order").className = "nav-item menu-open";
             } else if (current.includes('/admin/customer_pages/contact_us')) {
                 document.getElementById("customer_pages").className = "nav-link active";
                 document.getElementById("contact_us").className = "nav-link active";

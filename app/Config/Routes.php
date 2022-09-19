@@ -75,12 +75,16 @@ $routes->get('admin/outlet/activate/(:num)', 'OutletController::activate/$1');
 $routes->post('admin/outlet/delete/(:num)', 'OutletController::delete/$1');
 
 $routes->get('admin/order', 'OrderController::index');
+$routes->get('admin/order/request_cancel', 'OrderController::request');
 $routes->get('admin/order/search', 'OrderController::search');
+$routes->get('admin/order/search/request', 'OrderController::searchRequest');
 $routes->get('admin/order/print/(:num)', 'OrderController::print/$1');
 $routes->get('admin/order/search_detail/(:num)', 'OrderController::searchDetail/$1');
 $routes->get('admin/add_order', 'OrderController::add');
 $routes->post('admin/add_order', 'OrderController::store');
-$routes->post('admin/order/request_cancel/(:num)', 'OrderController::requestCancel/$1');
+$routes->post('admin/order/request_cancel', 'OrderController::requestCancel');
+$routes->get('admin/order/request/accept/(:num)/(:num)', 'OrderController::acceptRequest/$1/$2');
+$routes->get('admin/order/request/decline/(:num)/(:num)', 'OrderController::declineRequest/$1/$2');
 
 
 $routes->get('admin/customer_pages/contact_us', 'CustomerPagesController::contactUs');

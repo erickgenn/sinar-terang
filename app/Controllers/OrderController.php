@@ -17,6 +17,11 @@ class OrderController extends BaseController
         return view('admin/order/index');
     }
 
+    public function request()
+    {
+        return view('admin/order/cancel_request');
+    }
+
     public function add()
     {
         $productModel = new ProductModel();
@@ -65,6 +70,23 @@ class OrderController extends BaseController
         }
 
         return json_encode($order);
+    }
+
+    public function searchRequest()
+    {
+        $orderRequestModel = new OrderCancelRequestModel();
+        $userModel = new UserModel();
+
+        $request = $orderRequestModel->where('deleted_at', NULL)
+            ->findAll();
+
+        for ($i = 0; $i < count($request); $i++) {
+            $user = $userModel->where('id', $request[$i]['request_by'])->first();
+            $request[$i]['request_by'] = $user['name'];
+            $request[$i]['created_at'] = date("d F Y", strtotime($request[$i]['created_at']));
+        }
+
+        return json_encode($request);
     }
 
     public function searchDetail($id)
@@ -174,7 +196,7 @@ class OrderController extends BaseController
         return redirect()->to(base_url('admin/user/view') . '/' . $id);
     }
 
-    public function requestCancel($id)
+    public function requestCancel()
     {
         $session = session();
         $orderModel = new OrderModel();
@@ -189,9 +211,10 @@ class OrderController extends BaseController
             $data_insert = [
                 'reason' => $data['cancel_reason'],
                 'request_by' => $_SESSION['id'],
+                'order_id' => $data['order_id'],
             ];
 
-            $orderModel->update($id, $data_update);
+            $orderModel->update($data['order_id'], $data_update);
 
             $orderRequestModel->insert($data_insert);
 
@@ -201,42 +224,40 @@ class OrderController extends BaseController
             $session->setFlashdata('cancelFailed', 'Insert Failed, Please Try Again');
             return redirect()->to(base_url('admin/add_order'));
         }
-        return redirect()->to(base_url('admin/add_order'));
+        return redirect()->to(base_url('admin/order'));
     }
 
-    public function activate($id)
+    public function acceptRequest($cancel_id, $order_id)
     {
         $session = session();
-        $userModel = new UserModel();
-        $data = [
-            'is_active' => 1,
-        ];
+        $orderModel = new OrderModel();
+        $orderRequestModel = new OrderCancelRequestModel();
 
-        $userModel->update($id, $data);
+        $orderRequestModel->delete($cancel_id);
+        $order = $orderModel->where('id', $order_id)->first();
+        $orderModel->delete($order_id);
 
-        $user = $userModel->where('id', $id)->first();
-        $user_all = $userModel->findAll();
-        $count = count($user_all);
+        $session->setFlashdata('acceptRequest', '.');
 
-        $session->setFlashdata('activateuser', '.');
-
-        return view('admin/user/index', compact('user', 'count'));
+        return view('admin/order/cancel_request', compact('order'));
     }
 
-    public function deactivate($id)
+    public function declineRequest($cancel_id, $order_id)
     {
         $session = session();
-        $userModel = new UserModel();
-        $data = [
-            'is_active' => 0,
+        $orderModel = new OrderModel();
+        $orderRequestModel = new OrderCancelRequestModel();
+
+        $orderRequestModel->delete($cancel_id);
+
+        $data_update = [
+            'request_cancel' => 0,
         ];
-        $userModel->update($id, $data);
+        $orderModel->update($order_id, $data_update);
 
-        $user = $userModel->where('id', $id)->first();
-        $user_all = $userModel->findAll();
-        $count = count($user_all);
-        $session->setFlashdata('deactivateuser', '.');
+        $order = $orderModel->where('id', $order_id)->first();
 
-        return view('admin/user/index', compact('user', 'count'));
+        $session->setFlashdata('declineRequest', '.');
+        return view('admin/order/cancel_request', compact('order'));
     }
 }

@@ -302,10 +302,10 @@
                             switch (row.request_cancel) {
                                 case "0":
                                     return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>
-                                    <button type='button' class='btn btn-danger' data-toggle="modal" data-target="#cancelModal"><i class="fa-solid fa-trash"></i></button>
+                                    <button type='button' onclick="getOrderID('${row.id}')" class='btn btn-danger' data-toggle="modal" data-target="#cancelModal"><i class="fa-solid fa-trash"></i></button>
                                     
                                     <!-- Cancel Modal -->
-                                    <form method="POST" action="<?php echo base_url('admin/order/request_cancel'); ?>/${row.id}">
+                                    <form method="POST" action="<?php echo base_url('admin/order/request_cancel'); ?>">
                                         <div id="cancelModal" class="modal fade" role="dialog">
                                             <div class="modal-dialog">
                                                 <!-- Modal content-->
@@ -317,6 +317,7 @@
                                                     <div class="modal-body" style="width:100%">
                                                         <p>Why do you want to <b>cancel</b> this order?</p>
                                                         <textarea style="width:70%" name="cancel_reason"></textarea>
+                                                        <input type="hidden" id="order_id_hidden" name="order_id">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -393,6 +394,10 @@
 
                 ]
             });
+        }
+
+        function getOrderID(order_id) {
+            document.getElementById('order_id_hidden').value = order_id;
         }
     </script>
     <script>
