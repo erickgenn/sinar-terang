@@ -116,4 +116,23 @@ class VendorController extends BaseController
 
         return view('admin/vendor/index', compact('vendor'));
     }
+
+    public function delete($id)
+    {
+        $session = session();
+        $vendorModel = new VendorModel();
+
+        $data = [
+            'is_active' => 0
+        ];
+
+        $vendorModel->update($id, $data);
+        $vendor = $vendorModel->where('id', $id)->first();
+
+        $vendorModel->where('id', $id)->delete();
+
+        $session->setFlashdata('deleteVendor', '.');
+
+        return view('admin/vendor/index', compact('vendor'));
+    }
 }

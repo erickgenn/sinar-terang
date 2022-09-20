@@ -94,6 +94,7 @@ $routes->get('admin/vendor/activate/(:num)', 'VendorController::activate/$1');
 $routes->get('admin/vendor/deactivate/(:num)', 'VendorController::deactivate/$1');
 $routes->get('admin/vendor/view/(:num)', 'VendorController::view/$1');
 $routes->post('admin/edit_vendor/(:num)', 'VendorController::update/$1');
+$routes->post('admin/vendor/delete/(:num)', 'VendorController::delete/$1');
 
 
 $routes->get('admin/customer_pages/contact_us', 'CustomerPagesController::contactUs');
