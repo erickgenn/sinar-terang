@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sinar Terang | Points</title>
+    <title>Sinar Terang | Points Configuration</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -47,55 +47,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Vendor Updated Successfuly!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
-        <?php if (session()->getFlashdata('insertSuccessful')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Vendor Added Successfuly!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
-        <?php if (session()->getFlashdata('activatevendor')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Vendor <?php echo $vendor['name']; ?> Is Now Active!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
-        <?php if (session()->getFlashdata('deactivatevendor')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Vendor <?php echo $vendor['name']; ?> Is Now Not Active!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
-        <?php if (session()->getFlashdata('deleteVendor')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Vendor <?php echo $vendor['name']; ?> Deleted Successfuly!',
+                    title: 'Points Configuration Updated Successfuly!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -108,12 +60,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Points Report</h1>
+                            <h1 class="m-0">Points Configuration</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Points</li>
+                                <li class="breadcrumb-item active">Points Configuration</li>
                             </ol>
                         </div>
                     </div>
@@ -124,22 +76,18 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card" style="max-height: 750px; overflow: hidden;">
-                        <div class="card-header">
-                            <div class="text-center">
-                                <span style="font-size: 1.3em; font-weight:500;">Transaction Details</span>
-                            </div>
-                        </div>
                         <!-- /.card-header -->
                         <div id="" class="card-body table-responsive" style="align-content:flex-end; ">
-                            <table id="detail-table" class="table table-striped table-bordered table-sm" style="width:100%;">
+                            <table id="config-table" class="table table-striped table-bordered table-sm" style="width:100%;">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Customer ID</th>
-                                        <th>Customer Name</th>
-                                        <th>Points</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Point</th>
+                                        <th>Value</th>
+                                        <th>Last Updated</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -149,20 +97,6 @@
                         <!-- /.card-body -->
                     </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="text-center">
-                                <span style="font-size: 1.3em; font-weight:500;">Graphics</span>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body" style="align-content:flex-end; ">
-                            <div>
-                                <canvas id="myChart"></canvas>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
                 </div>
             </section>
 
@@ -198,8 +132,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#detail-table').DataTable({
-                dom: 'Bfrtip',
+            $('#config-table').DataTable({
                 "scrollY": "29vh",
                 scrollCollapse: true,
                 paging: true,
@@ -207,7 +140,7 @@
                     'copyHtml5', 'excelHtml5'
                 ],
                 "ajax": {
-                    "url": "<?php echo base_url('admin/point/search'); ?>",
+                    "url": "<?php echo base_url('admin/point/config/search'); ?>",
                     "dataSrc": ""
                 },
                 "columns": [{
@@ -221,66 +154,40 @@
                         }
                     },
                     {
-                        "data": "customer_id",
+                        "data": "name",
                         "className": "dt-center",
                     },
                     {
-                        "data": "customer_name",
+                        "data": "description",
                         "className": "dt-center",
                     },
                     {
-                        data: null,
-                        name: null,
+                        "data": "point",
                         "className": "dt-center",
-                        sortable: false,
-                        render: function(data, type, row, meta) {
-                            return row.operation + ` ` + row.point;
-                        }
+                    },
+                    {
+                        "data": "value",
+                        "className": "dt-center",
                     },
                     {
                         "data": "date",
                         "className": "dt-center",
                     },
                     {
-                        "data": "time",
+                        data: null,
                         "className": "dt-center",
+                        "width": "11%",
+                        name: null,
+                        sortable: false,
+                        render: function(data, type, row, meta) {
+                            return `<a href="<?php echo base_url('admin/point/config/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    `;
+                        }
                     },
                 ]
             });
 
-            const myChart = new Chart(
-                document.getElementById('myChart'),
-                config
-            );
         });
-    </script>
-
-    <script>
-        const labels = [
-            'Given To Customer',
-            'Used By Customer',
-        ];
-
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'Points',
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                ],
-                data: [
-                    <?php echo $total_point_given ?>,
-                    <?php echo $total_point_used ?>,
-                ],
-            }]
-        };
-
-        const config = {
-            type: 'pie',
-            data: data,
-            options: {}
-        };
     </script>
 
     <script>

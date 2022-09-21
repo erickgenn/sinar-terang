@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CustomerModel;
+use App\Models\PointConfigurationModel;
 use App\Models\PointModel;
 use App\Models\VendorModel;
 use Exception;
@@ -11,67 +12,63 @@ class PointController extends BaseController
 {
     public function index()
     {
-        return view('admin/point/index');
+        $pointModel = new PointModel();
+        $pointGiven = $pointModel->where('deleted_at', NULL)->where('operation', '+')
+            ->findAll();
+
+        $total_point_given = 0;
+        for ($i = 0; $i < count($pointGiven); $i++) {
+            $total_point_given = $total_point_given + $pointGiven[$i]['point'];
+        }
+
+        $pointUsed = $pointModel->where('deleted_at', NULL)->where('operation', '-')
+            ->findAll();
+
+        $total_point_used = 0;
+        for ($i = 0; $i < count($pointUsed); $i++) {
+            $total_point_used = $total_point_used + $pointUsed[$i]['point'];
+        }
+
+        return view('admin/point/index', compact('total_point_given', 'total_point_used'));
     }
 
-    public function add()
+    public function config()
     {
-        return view('admin/vendor/add_vendor');
+        return view('admin/point/configuration');
     }
 
     public function view($id)
     {
-        $vendorModel = new VendorModel();
-        $vendor = $vendorModel->where('id', $id)->first();
-        return view('admin/vendor/edit_vendor', compact('vendor', 'id'));
-    }
+        $pointConfigModel = new PointConfigurationModel();
 
-    public function store()
-    {
-        $session = session();
-        $vendorModel = new VendorModel();
-        try {
-            $data = $this->request->getPost();
-
-            $data_insert = [
-                'name' => $data['vendor_name'],
-                'phone' => $data['vendor_phone'],
-                'contact_person' => $data['vendor_contact_person'],
-            ];
-
-            $vendorModel->insert($data_insert);
-
-            $session->setFlashdata('insertSuccessful', 'abc');
-            return redirect()->to(base_url('admin/vendor'));
-        } catch (Exception $e) {
-            $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
-            return redirect()->to(base_url('admin/add_vendor'));
-        }
-        return redirect()->to(base_url('admin/add_vendor'));
+        $point = $pointConfigModel->where('id', $id)->first();
+        return view('admin/point/edit_config', compact('point', 'id'));
     }
 
     public function update($id)
     {
         $session = session();
-        $vendorModel = new VendorModel();
+        $pointConfigModel = new PointConfigurationModel();
         try {
             $data = $this->request->getPost();
 
             $data_update = [
-                'name' => $data['vendor_name'],
-                'phone' => $data['vendor_phone'],
-                'contact_person' => $data['vendor_contact_person'],
+                'name' => $data['point_name'],
+                'description' => $data['point_description'],
+                'point' => $data['point_point'],
+                'value' => $data['point_value'],
+                'updated_at' => date('Y-m-d H:i:s.u')
             ];
 
-            $vendorModel->update($id, $data_update);
+            $pointConfigModel->update($id, $data_update);
 
             $session->setFlashdata('updateSuccessful', 'abc');
-            return redirect()->to(base_url('admin/vendor'));
+            return redirect()->to(base_url('admin/point/config'));
         } catch (Exception $e) {
             $session->setFlashdata('updateFailed', 'Update Failed, Please Try Again');
-            return redirect()->to(base_url('admin/vendor/view') . '/' . $id);
+            return redirect()->to(base_url('admin/point/config/view') . '/' . $id);
         }
-        return redirect()->to(base_url('admin/vendor/view') . '/' . $id);
+        return redirect()->to(base_url('admin/point/config/view') . '/' . $id);
     }
 
     public function search()
@@ -88,6 +85,27 @@ class PointController extends BaseController
             $point[$i]['date'] = date("d F Y", strtotime($point[$i]['created_at']));
             $point[$i]['time'] = date("H:i", strtotime($point[$i]['created_at']));
             $point[$i]['customer_name'] = $customer['name'];
+        }
+
+        return json_encode($point);
+    }
+
+    public function searchConfig()
+    {
+        $pointConfigModel = new PointConfigurationModel();
+
+        $point = $pointConfigModel->where('deleted_at', NULL)
+            ->findAll();
+
+        for ($i = 0; $i < count($point); $i++) {
+            if (isset($point[$i]['updated_at'])) {
+
+                $point[$i]['date'] = date("d F Y", strtotime($point[$i]['updated_at']));
+                $point[$i]['time'] = date("H:i", strtotime($point[$i]['updated_at']));
+            } else {
+                $point[$i]['date'] = "No Update Yet";
+            }
+            $point[$i]['value'] = AdminController::money_format_rupiah($point[$i]['value']);
         }
 
         return json_encode($point);

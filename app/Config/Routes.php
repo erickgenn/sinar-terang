@@ -97,7 +97,11 @@ $routes->post('admin/edit_vendor/(:num)', 'VendorController::update/$1');
 $routes->post('admin/vendor/delete/(:num)', 'VendorController::delete/$1');
 
 $routes->get('admin/point', 'PointController::index');
+$routes->get('admin/point/config', 'PointController::config');
 $routes->get('admin/point/search', 'PointController::search');
+$routes->get('admin/point/config/search', 'PointController::searchConfig');
+$routes->get('admin/point/config/view/(:num)', 'PointController::view/$1');
+$routes->post('admin/point/edit_config/(:num)', 'PointController::update/$1');
 
 
 

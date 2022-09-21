@@ -220,13 +220,33 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url("/admin/point"); ?>" id="point" class="nav-link">
+                    <li id="nav_point_pages" class="nav-item">
+                        <a href="#" id="point_pages" class="nav-link">
                             <i class="nav-icon fa-solid fa-medal"></i>
                             <p>
-                                Points Report
+                                Points
+                                <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?php echo base_url("/admin/point"); ?>" id="point" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>
+                                        Points Report
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="point_config" href="<?php echo base_url("/admin/point/config"); ?>" href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Points Configuration</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+
                     </li>
 
 
@@ -375,8 +395,14 @@
                 document.getElementById("user").className = "nav-link active";
             } else if (current.includes('/admin/customer')) {
                 document.getElementById("customer").className = "nav-link active";
+            } else if (current.includes('/admin/point/config')) {
+                document.getElementById("point_pages").className = "nav-link active";
+                document.getElementById("point_config").className = "nav-link active";
+                document.getElementById("nav_point_pages").className = "nav-item menu-open";
             } else if (current.includes('/admin/point')) {
+                document.getElementById("point_pages").className = "nav-link active";
                 document.getElementById("point").className = "nav-link active";
+                document.getElementById("nav_point_pages").className = "nav-item menu-open";
             }
         });
     </script>
