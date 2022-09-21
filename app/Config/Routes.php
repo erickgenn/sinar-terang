@@ -96,6 +96,10 @@ $routes->get('admin/vendor/view/(:num)', 'VendorController::view/$1');
 $routes->post('admin/edit_vendor/(:num)', 'VendorController::update/$1');
 $routes->post('admin/vendor/delete/(:num)', 'VendorController::delete/$1');
 
+$routes->get('admin/point', 'PointController::index');
+$routes->get('admin/point/search', 'PointController::search');
+
+
 
 $routes->get('admin/customer_pages/contact_us', 'CustomerPagesController::contactUs');
 $routes->get('admin/customer_pages/contact_us/search', 'CustomerPagesController::contactUsSearch');

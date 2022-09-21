@@ -220,7 +220,14 @@
                             </li>
                         </ul>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="<?php echo base_url("/admin/point"); ?>" id="point" class="nav-link">
+                            <i class="nav-icon fa-solid fa-medal"></i>
+                            <p>
+                                Points Report
+                            </p>
+                        </a>
+                    </li>
 
 
                     <li class="nav-header">MULTI LEVEL EXAMPLE</li>
@@ -368,6 +375,8 @@
                 document.getElementById("user").className = "nav-link active";
             } else if (current.includes('/admin/customer')) {
                 document.getElementById("customer").className = "nav-link active";
+            } else if (current.includes('/admin/point')) {
+                document.getElementById("point").className = "nav-link active";
             }
         });
     </script>
