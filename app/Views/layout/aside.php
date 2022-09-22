@@ -371,6 +371,10 @@
                 document.getElementById("user").className = "nav-link active";
             } else if (current.includes('/admin/customer')) {
                 document.getElementById("customer").className = "nav-link active";
+            } else if (current.includes('/admin/finance/cash')) {
+                document.getElementById("finance_pages").className = "nav-link active";
+                document.getElementById("cash").className = "nav-link active";
+                document.getElementById("nav_finance_pages").className = "nav-item menu-open";
             } else if (current.includes('/admin/finance/sales')) {
                 document.getElementById("finance_pages").className = "nav-link active";
                 document.getElementById("sales").className = "nav-link active";

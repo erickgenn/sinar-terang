@@ -2,10 +2,15 @@
 
 namespace App\Controllers;
 
+use App\Models\BalanceModel;
+use App\Models\CashReportModel;
+use App\Models\CustomerModel;
 use App\Models\DetailOrderModel;
 use App\Models\OrderCancelRequestModel;
 use App\Models\OrderModel;
 use App\Models\OutletModel;
+use App\Models\PointConfigurationModel;
+use App\Models\PointModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
 use Exception;
@@ -49,6 +54,77 @@ class OrderController extends BaseController
             $product[$i]['outlet_name'] = $outlet_name;
         }
         return view('admin/order/add_order', compact('product'));
+    }
+
+    public function addMember()
+    {
+        $productModel = new ProductModel();
+        $outletModel = new OutletModel();
+
+        $data = $this->request->getPost();
+        $customer_id = $data['cust_id'];
+
+        $customerModel = new CustomerModel();
+        $customer = $customerModel->where('id', $customer_id)->first();
+
+        $product = $productModel->where('quantity !=', 0)->findAll();
+        for ($i = 0; $i < count($product); $i++) {
+            $product[$i]['price'] = AdminController::money_format_rupiah($product[$i]['price']);
+
+            if (strpos($product[$i]['outlet_id'], ",") != false) {
+                $arr_outlet_id = explode(",", $product[$i]['outlet_id']);
+                $outlet = $outletModel->whereIn('id', $arr_outlet_id)->findAll();
+            } else {
+                $outlet = $outletModel->where('id', $product[$i]['outlet_id'])->findAll();
+            }
+
+            $outlet_name = null;
+
+            for ($j = 0; $j < count($outlet); $j++) {
+                if (!isset($outlet_name)) {
+                    $outlet_name = $outlet[$j]['name'];
+                } else {
+                    $outlet_name = $outlet_name . ", " . $outlet[$j]['name'];
+                }
+            }
+            $product[$i]['outlet_name'] = $outlet_name;
+        }
+        return view('admin/order/add_order', compact('product', 'customer_id', 'customer'));
+    }
+
+    public function addMembership($customer_id)
+    {
+        $productModel = new ProductModel();
+        $outletModel = new OutletModel();
+
+        $data = $this->request->getPost();
+
+        $customerModel = new CustomerModel();
+        $customer = $customerModel->where('id', $customer_id)->first();
+
+        $product = $productModel->where('quantity !=', 0)->findAll();
+        for ($i = 0; $i < count($product); $i++) {
+            $product[$i]['price'] = AdminController::money_format_rupiah($product[$i]['price']);
+
+            if (strpos($product[$i]['outlet_id'], ",") != false) {
+                $arr_outlet_id = explode(",", $product[$i]['outlet_id']);
+                $outlet = $outletModel->whereIn('id', $arr_outlet_id)->findAll();
+            } else {
+                $outlet = $outletModel->where('id', $product[$i]['outlet_id'])->findAll();
+            }
+
+            $outlet_name = null;
+
+            for ($j = 0; $j < count($outlet); $j++) {
+                if (!isset($outlet_name)) {
+                    $outlet_name = $outlet[$j]['name'];
+                } else {
+                    $outlet_name = $outlet_name . ", " . $outlet[$j]['name'];
+                }
+            }
+            $product[$i]['outlet_name'] = $outlet_name;
+        }
+        return view('admin/order/add_order', compact('product', 'customer_id', 'customer'));
     }
 
     public function view($id)
@@ -121,6 +197,10 @@ class OrderController extends BaseController
         $orderModel = new OrderModel();
         $detailOrderModel = new DetailOrderModel();
         $productModel = new ProductModel();
+        $cashReportModel = new CashReportModel();
+        $balanceModel = new BalanceModel();
+        $pointModel = new PointModel();
+        $customerModel = new CustomerModel();
         try {
             $data = $this->request->getPost();
 
@@ -133,11 +213,17 @@ class OrderController extends BaseController
                 $qty = $data['product_qty'][$i];
                 $updated_qty = (int) $product['quantity'] - $qty;
                 if ($updated_qty < 0) {
-                    $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
-                    return redirect()->to(base_url('admin/add_order'));
+                    if (isset($data['customer_id'])) {
+                        $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
+                        return redirect()->to(base_url('admin/add_order/member') . "/" . $data['customer_id']);
+                    } else {
+                        $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
+                        return redirect()->to(base_url('admin/add_order'));
+                    }
                 }
                 $total_temp = $price * $qty;
                 $total_price = $total_price + $total_temp;
+
                 $data_update = [
                     'quantity' => $updated_qty,
                 ];
@@ -147,6 +233,19 @@ class OrderController extends BaseController
             $data_insert = [
                 'total_price' => $total_price,
             ];
+
+            if ($data['order_points'] != "") {
+                $pointConfigModel = new PointConfigurationModel();
+                $point = $pointConfigModel->where('id', '1')->first();
+                $discount = (int) $data['order_points'] / $point['point'] * $point['value'];
+
+                $total_price = $total_price - $discount;
+
+                $data_insert = [
+                    'total_price' => $total_price,
+                    'discount' => $discount
+                ];
+            }
 
             $orderModel->insert($data_insert);
 
@@ -161,11 +260,50 @@ class OrderController extends BaseController
                 $detailOrderModel->insert($data_insert_detail);
             }
 
+            $balance = $balanceModel->where('id', 1)->first();
+            $balance_new = (int)$balance['balance'] + $total_price;
+
+            $data_insert_cash = [
+                'description' => "Order Number " . $orderModel->getInsertID(),
+                'debit' => $total_price,
+                'balance' => $balance_new,
+                'type' => "order",
+            ];
+
+            $cashReportModel->insert($data_insert_cash);
+
+            $data_update_balance = [
+                'balance' => $balance_new,
+            ];
+
+            $balanceModel->update('1', $data_update_balance);
+
+            if ($data['order_points'] != "") {
+                $data_insert_point = [
+                    'operation' => "-",
+                    "point" => $data['order_points'],
+                    'customer_id' => $data['customer_id']
+                ];
+                $pointModel->insert($data_insert_point);
+
+                $cust = $customerModel->where('id', $data['customer_id'])->first();
+                $data_update_point = [
+                    'point' => (int) $cust['point'] - (int) $data['order_points'],
+                ];
+
+                $customerModel->update($data['customer_id'], $data_update_point);
+            }
+
             $session->setFlashdata('insertSuccessful', 'abc');
             return redirect()->to(base_url('admin/order'));
         } catch (Exception $e) {
-            $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
-            return redirect()->to(base_url('admin/add_order'));
+            if (isset($data['customer_id'])) {
+                $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
+                return redirect()->to(base_url('admin/add_order/member') . "/" . $data['customer_id']);
+            } else {
+                $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
+                return redirect()->to(base_url('admin/add_order'));
+            }
         }
         return redirect()->to(base_url('admin/add_order'));
     }
@@ -259,5 +397,26 @@ class OrderController extends BaseController
 
         $session->setFlashdata('declineRequest', '.');
         return view('admin/order/cancel_request', compact('order'));
+    }
+
+    public function searchCust()
+    {
+        $custModel = new CustomerModel();
+
+
+        if (!isset($_GET['search'])) {
+            $customer = $custModel->where("is_active", 1)->findAll();
+        } else {
+            $field = "name";
+            $customer = $custModel->where("is_active", 1)->like('LOWER(' . $field . ')', strtolower($_GET['search']))->findAll();
+        }
+
+        $list = array();
+        for ($i = 0; $i < count($customer); $i++) {
+            $list[$i]['id'] = $customer[$i]['id'];
+            $list[$i]['text'] = $customer[$i]['name'];
+        }
+
+        return json_encode($list);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CashReportModel;
 use App\Models\CustomerModel;
 use App\Models\OrderModel;
 use App\Models\PointConfigurationModel;
@@ -74,6 +75,49 @@ class FinanceController extends BaseController
         }
 
         return json_encode($order);
+    }
+
+    public function searchCash()
+    {
+        $cashModel = new CashReportModel();
+
+        $month = $this->request->getGet("month");
+
+        $cash = $cashModel->cashReport($month)->getResultArray();
+
+        for ($i = 0; $i < count($cash); $i++) {
+            $cash[$i]['created_at'] = date("d F Y", strtotime($cash[$i]['created_at']));
+            $cash[$i]['balance'] = AdminController::money_format_rupiah($cash[$i]['balance']);
+            if (isset($cash[$i]['debit'])) {
+                $cash[$i]['debit'] = AdminController::money_format_rupiah($cash[$i]['debit']);
+                $cash[$i]['credit'] = "-";
+            } else {
+                $cash[$i]['credit'] = AdminController::money_format_rupiah($cash[$i]['credit']);
+                $cash[$i]['debit'] = "-";
+            }
+        }
+
+        return json_encode($cash);
+    }
+
+    public function searchFirstBalance()
+    {
+        $cashModel = new CashReportModel();
+
+        $month = $this->request->getGet("month");
+
+        $cash = $cashModel->cashReport($month)->getResultArray();
+        if (!isset($cash[0]['credit'])) {
+            $first_balance = $cash[0]['balance'] - $cash[0]['debit'];
+        } else {
+            $first_balance = $cash[0]['balance'] + $cash[0]['credit'];
+        }
+
+        $first_balance = AdminController::money_format_rupiah($first_balance);
+
+        $result['first_balance'] = $first_balance;
+
+        return json_encode($result);
     }
 
     public function searchSalesTotal()

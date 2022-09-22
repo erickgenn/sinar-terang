@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/daterangepicker/daterangepicker.css">
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/summernote/summernote-bs4.min.css">
+
+    <link href="<?php echo base_url(); ?>/plugins/select2/css/select2.css" rel="stylesheet" />
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -130,10 +133,13 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <div class="float-right">
-                                <a href="<?php echo base_url('/admin/add_order/'); ?>">
-                                    <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Add an Order</button>
-                                </a>
+                            <div class="col-12">
+                                <div class="float-right col-2">
+                                    <a type="button" class="btn btn-block btn-success" href="<?php echo base_url('/admin/add_order/'); ?>"><i class="fa-solid fa-plus"></i> Non Member Order</a>
+                                </div>
+                                <div class="float-right col-2">
+                                    <button type='button' class='btn btn-block btn-success' data-toggle="modal" data-target="#memberModal"><i class="fa-solid fa-plus"></i> Member Order</button>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -236,6 +242,37 @@
                 </div>
             </div>
         </div>
+
+        <!-- Membership Modal -->
+        <div id="memberModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <form method="POST" action="<?php echo base_url('/admin/add_order/member'); ?>">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Membership Order</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-sm">
+                                <label>Select Customer</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <select class="form-control" id="customer_id" name="cust_id" style="height:100%; width:70%;">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <footer class="main-footer">
             <strong>Sinar Terang.</strong>
             All rights reserved.
@@ -254,6 +291,8 @@
     <script src="<?php echo base_url('/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
+    <script src="<?php echo base_url(); ?>/plugins/select2/js/select2.min.js"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -340,6 +379,25 @@
                     },
                 ]
             });
+
+            $('#customer_id').select2({
+                placeholder: 'Choose Customer',
+                width: 'resolve',
+                ajax: {
+                    dataType: 'json',
+                    url: '<?php echo base_url("admin/order/search/customer"); ?>',
+                    data: function(params) {
+                        return {
+                            search: params.term
+                        }
+                    },
+                    processResults: function(data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            })
         });
     </script>
 

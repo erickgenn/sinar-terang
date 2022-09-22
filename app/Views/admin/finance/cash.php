@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sinar Terang | Sales Report</title>
+    <title>Sinar Terang | Cash Report</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -65,54 +65,18 @@
             </script>
         <?php endif; ?>
 
-        <?php if (session()->getFlashdata('activatevendor')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Vendor <?php echo $vendor['name']; ?> Is Now Active!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
-        <?php if (session()->getFlashdata('deactivatevendor')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Vendor <?php echo $vendor['name']; ?> Is Now Not Active!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
-        <?php if (session()->getFlashdata('deleteVendor')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Vendor <?php echo $vendor['name']; ?> Deleted Successfuly!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
         <div class="content-wrapper">
 
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Sales Report</h1>
+                            <h1 class="m-0">Cash Report</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Sales Report</li>
+                                <li class="breadcrumb-item active">Cash Report</li>
                             </ol>
                         </div>
                     </div>
@@ -140,25 +104,19 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive" style="align-content:flex-end">
-                            <table id="sales-table" class="table table-striped table-bordered table-sm" style="width:100%">
+                            <table id="cash-table" class="table table-striped table-bordered table-sm" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
                                         <th>Date</th>
                                         <th>Description</th>
-                                        <th>Amount</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Balance</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th style="text-align:right">Total:</th>
-                                        <th id="th-total"></th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
 
@@ -194,6 +152,31 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 
     <script>
+        function getFirstBalance() {
+            $.ajax({
+                url: "<?php echo base_url('admin/finance/cash/search/first'); ?>",
+                "data": {
+                    month: $('#month').val(),
+                },
+                success: function(result) {
+                    data = JSON.parse(result);
+                    var table = $('#cash-table').DataTable();
+                    var row = $('<tr>')
+                        .append('<td>1.</td>')
+                        .append('<td>-</td>')
+                        .append('<td>First Balance</td>')
+                        .append('<td>-</td>')
+                        .append('<td>-</td>')
+                        .append('<td>' + data.first_balance + '</td>')
+
+                    table.row.add(row);
+                    $('#table tbody').prepend(row);
+                    // table.row.add(row).draw(false);
+
+                }
+            });
+        }
+
         function generateTable() {
             let month = Date.parse($('#month').val());
 
@@ -206,26 +189,22 @@
                     timer: 1500
                 });
             } else {
-                let tabel = $('#sales-table').DataTable();
+                let tabel = $('#cash-table').DataTable();
                 tabel.destroy();
-                $('#sales-table').DataTable({
+                getFirstBalance();
+                $('#cash-table').DataTable({
                     dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'copyHtml5',
-                            footer: true
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            footer: true
-                        },
+                    buttons: [
+                        'copyHtml5', 'excelHtml5'
                     ],
                     "ajax": {
-                        "url": "<?php echo base_url('admin/finance/sales/search'); ?>",
+                        "url": "<?php echo base_url('admin/finance/cash/search'); ?>",
                         "data": {
                             month: $('#month').val(),
                         },
                         "dataSrc": ""
                     },
+
                     "columns": [{
                             searchable: false,
                             sortable: false,
@@ -241,40 +220,28 @@
                             "className": "dt-center",
                         },
                         {
-                            data: null,
-                            name: null,
+                            "data": "description",
                             "className": "dt-center",
-                            sortable: false,
-                            render: function(data, type, row, meta) {
-                                return `Order Number ` + row.id;
-                            }
                         },
                         {
-                            "data": "total_price",
+                            "data": "debit",
+                            "className": "dt-center",
+                        },
+                        {
+                            "data": "credit",
+                            "className": "dt-center",
+                        },
+                        {
+                            "data": "balance",
                             "className": "dt-center",
                         },
                     ],
                 });
+
             }
-            getTotal();
-
         }
     </script>
 
-    <script>
-        function getTotal() {
-            $.ajax({
-                url: "<?php echo base_url('admin/finance/sales/search/total'); ?>",
-                "data": {
-                    month: $('#month').val(),
-                },
-                success: function(result) {
-                    result = result.split('"').join('');
-                    $("#th-total").html(result);
-                }
-            });
-        }
-    </script>
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>

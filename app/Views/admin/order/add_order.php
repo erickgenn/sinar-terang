@@ -59,7 +59,11 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Orders</h1>
+                            <?php if (isset($customer_id)) : ?>
+                                <h1 class="m-0">Order for <?php echo $customer['name'] ?></h1>
+                            <?php else : ?>
+                                <h1 class="m-0">Orders</h1>
+                            <?php endif; ?>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -117,15 +121,15 @@
                     </div>
                     <!-- /.card-body -->
                     <!-- Table Card -->
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div align="center">
-                                <b>Order Table</b>
+                    <form method="POST" action="<?php echo base_url('admin/add_order'); ?>">
+                        <div class="card">
+                            <div class="card-header">
+                                <div align="center">
+                                    <b>Order Table</b>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <form method="POST" action="<?php echo base_url('admin/add_order'); ?>">
+
+                            <div class="card-body">
                                 <table class="table table-bordered dataTable table-sm" id="order-table" style="width: 100%">
                                     <thead>
                                         <tr>
@@ -139,12 +143,20 @@
                                     <tbody>
                                     </tbody>
                                 </table>
-
+                            </div>
+                            <div class="card-footer">
+                                <?php if (isset($customer_id)) : ?>
+                                    <div class="form-group col-3">
+                                        <label for="inputPoints">Claim Points</label>
+                                        <input type="number" id="inputPoints" name="order_points" min="0" max="<?php echo $customer['point'] ?>" class="form-control">
+                                        <input type="hidden" name="customer_id" value="<?php echo $customer_id ?>">
+                                    </div>
+                                <?php endif; ?>
                                 <button type="submit" class="btn btn-success fa-pull-right">Add Order</button>
                                 <input type="hidden" id="list_order" name="list_id">
-                            </form>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </section>
         </div>

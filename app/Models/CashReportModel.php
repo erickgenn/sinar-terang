@@ -4,23 +4,22 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class OrderModel extends Model
+class CashReportModel extends Model
 {
-    protected $table      = 'mstr_order';
+    protected $table      = 'mstr_cash_report';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['total_price', 'request_cancel', 'customer_id', 'discount'];
+    protected $allowedFields = ['description', 'debit', 'credit', 'balance', 'type'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
     protected $useSoftDeletes = true;
-    // protected $useSoftDeletes = true;
 
-    public function monthSales($month)
+    public function cashReport($month)
     {
-        $builder = $this->db->table('mstr_order');
+        $builder = $this->db->table('mstr_cash_report');
 
         $m = date('m', strtotime($month));
         $y = date('Y', strtotime($month));

@@ -77,10 +77,13 @@ $routes->post('admin/outlet/delete/(:num)', 'OutletController::delete/$1');
 $routes->get('admin/order', 'OrderController::index');
 $routes->get('admin/order/request_cancel', 'OrderController::request');
 $routes->get('admin/order/search', 'OrderController::search');
+$routes->get('admin/order/search/customer', 'OrderController::searchCust');
 $routes->get('admin/order/search/request', 'OrderController::searchRequest');
 $routes->get('admin/order/print/(:num)', 'OrderController::print/$1');
 $routes->get('admin/order/search_detail/(:num)', 'OrderController::searchDetail/$1');
 $routes->get('admin/add_order', 'OrderController::add');
+$routes->post('admin/add_order/member', 'OrderController::addMember');
+$routes->get('admin/add_order/member/(:num)', 'OrderController::addMembership/$1');
 $routes->post('admin/add_order', 'OrderController::store');
 $routes->post('admin/order/request_cancel', 'OrderController::requestCancel');
 $routes->get('admin/order/request/accept/(:num)/(:num)', 'OrderController::acceptRequest/$1/$2');
@@ -107,6 +110,9 @@ $routes->get('admin/finance/cash', 'FinanceController::cash');
 $routes->get('admin/finance/sales', 'FinanceController::sales');
 $routes->get('admin/finance/sales/search', 'FinanceController::searchSales');
 $routes->get('admin/finance/sales/search/total', 'FinanceController::searchSalesTotal');
+$routes->get('admin/finance/cash/search', 'FinanceController::searchCash');
+$routes->get('admin/finance/cash/search/first', 'FinanceController::searchFirstBalance');
+
 
 
 $routes->get('admin/customer_pages/contact_us', 'CustomerPagesController::contactUs');
