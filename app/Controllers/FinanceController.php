@@ -76,6 +76,23 @@ class FinanceController extends BaseController
         return json_encode($order);
     }
 
+    public function searchSalesTotal()
+    {
+        $orderModel = new OrderModel();
+
+        $month = $this->request->getGet("month");
+
+        $order = $orderModel->monthSales($month)->getResultArray();
+
+        $total = 0;
+        for ($i = 0; $i < count($order); $i++) {
+            $total = $total + $order[$i]['total_price'];
+        }
+        $total = AdminController::money_format_rupiah($total);
+
+        return json_encode($total);
+    }
+
     public function searchConfig()
     {
         $pointConfigModel = new PointConfigurationModel();

@@ -106,6 +106,7 @@ $routes->post('admin/point/edit_config/(:num)', 'PointController::update/$1');
 $routes->get('admin/finance/cash', 'FinanceController::cash');
 $routes->get('admin/finance/sales', 'FinanceController::sales');
 $routes->get('admin/finance/sales/search', 'FinanceController::searchSales');
+$routes->get('admin/finance/sales/search/total', 'FinanceController::searchSalesTotal');
 
 
 $routes->get('admin/customer_pages/contact_us', 'CustomerPagesController::contactUs');

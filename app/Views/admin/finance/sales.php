@@ -127,7 +127,6 @@
                                     <div class="col-sm">
                                         <label for="start_date">Month</label>
                                         <input type="month" class="form-control" name='month' id='month' required>
-
                                     </div>
                                     <div style="margin: 32px 0 0 10px">
                                         <button onclick="generateTable()" class="btn btn-success fa-pull-right">Find</button>
@@ -135,8 +134,6 @@
                                 </div>
 
                             </div>
-
-
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive" style="align-content:flex-end">
@@ -151,8 +148,15 @@
                                 </thead>
                                 <tbody>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="3" style="text-align:right">Total:</th>
+                                        <th id="th-total"></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
+
                         <!-- /.card-body -->
                     </div>
                 </div>
@@ -185,6 +189,7 @@
     <script>
         function generateTable() {
             let month = Date.parse($('#month').val());
+
             if ($('#month').val() === "") {
                 swal({
                     position: 'top-end',
@@ -231,13 +236,28 @@
                             "data": "total_price",
                             "className": "dt-center",
                         },
-                    ]
+                    ],
                 });
             }
+            getTotal();
+
         }
     </script>
 
-
+    <script>
+        function getTotal() {
+            $.ajax({
+                url: "<?php echo base_url('admin/finance/sales/search/total'); ?>",
+                "data": {
+                    month: $('#month').val(),
+                },
+                success: function(result) {
+                    result = result.split('"').join('');
+                    $("#th-total").html(result);
+                }
+            });
+        }
+    </script>
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>

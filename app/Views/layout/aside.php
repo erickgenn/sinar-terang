@@ -245,28 +245,29 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+
+                    <li id="nav_finance_pages" class="nav-item">
+                        <a id="finance_pages" href="#" class="nav-link">
                             <i class="nav-icon fa-solid fa-money-bill-transfer"></i>
                             <p>
                                 Finance
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview" style="display: none;">
+                        <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?php echo base_url("/admin/finance/cash"); ?>" class="nav-link">
+                                <a id="cash" href="<?php echo base_url("/admin/finance/cash"); ?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Cash Report</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo base_url("/admin/finance/sales"); ?>" class="nav-link">
+                                <a id="sales" href="<?php echo base_url("/admin/finance/sales"); ?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Sales Report</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li id="nav_expenses_pages" class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>
@@ -276,25 +277,25 @@
                                 </a>
                                 <ul class="nav nav-treeview" style="display: none;">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a id="salary" href="#" class="nav-link">
                                             <i class="far fa-dot-circle nav-icon"></i>
                                             <p>Salary Expenses</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a id="electrical" href="#" class="nav-link">
                                             <i class="far fa-dot-circle nav-icon"></i>
                                             <p>Electrical Expenses</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a id="rent" href="#" class="nav-link">
                                             <i class="far fa-dot-circle nav-icon"></i>
                                             <p>Rent Expenses</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                        <a id="maintenance" href="#" class="nav-link">
                                             <i class="far fa-dot-circle nav-icon"></i>
                                             <p>Maintenance Expenses</p>
                                         </a>
@@ -302,7 +303,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a id="profit_loss" href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Profit and Loss Report</p>
                                 </a>
@@ -370,6 +371,10 @@
                 document.getElementById("user").className = "nav-link active";
             } else if (current.includes('/admin/customer')) {
                 document.getElementById("customer").className = "nav-link active";
+            } else if (current.includes('/admin/finance/sales')) {
+                document.getElementById("finance_pages").className = "nav-link active";
+                document.getElementById("sales").className = "nav-link active";
+                document.getElementById("nav_finance_pages").className = "nav-item menu-open";
             } else if (current.includes('/admin/point/config')) {
                 document.getElementById("point_pages").className = "nav-link active";
                 document.getElementById("point_config").className = "nav-link active";
