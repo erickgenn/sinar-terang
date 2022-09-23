@@ -1,5 +1,5 @@
 <script src="https://kit.fontawesome.com/6938e8f442.js" crossorigin="anonymous"></script>
-<?php if ($_SESSION['role'] == 'owner') : ?>
+<?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'manager' || $_SESSION['role'] == 'owner') : ?>
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -13,85 +13,8 @@
                 <a class="nav-link" href="<?php echo base_url('/logout'); ?>" alt="Log Out">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
-
-                        <div class="media">
-                            <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Brad Diesel
-                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">Call me whenever you can...</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-
-                        <div class="media">
-                            <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    John Pierce
-                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">I got your message bro</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-
-                        <div class="media">
-                            <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Nora Silvester
-                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">The subject goes here</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                </div>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header">15 Notifications</span>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
-                        <span class="float-right text-muted text-sm">3 mins</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                </div>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                     <i class="fas fa-expand-arrows-alt"></i>
@@ -99,7 +22,6 @@
             </li>
         </ul>
     </nav>
-
 
     <aside class="main-sidebar sidebar-dark-light elevation-4" style="background-color: #1C2D49;">
 
@@ -134,22 +56,24 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url("/admin/customer"); ?>" id="customer" class="nav-link">
-                            <i class="nav-icon fa-solid fa-people-group"></i>
-                            <p>
-                                Customers
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url("/admin/outlet"); ?>" id="outlet" class="nav-link">
-                            <i class="nav-icon fa-solid fa-store"></i>
-                            <p>
-                                Outlets
-                            </p>
-                        </a>
-                    </li>
+                    <?php if ($_SESSION['role'] == 'manager' || $_SESSION['role'] == 'owner') : ?>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url("/admin/customer"); ?>" id="customer" class="nav-link">
+                                <i class="nav-icon fa-solid fa-people-group"></i>
+                                <p>
+                                    Customers
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url("/admin/outlet"); ?>" id="outlet" class="nav-link">
+                                <i class="nav-icon fa-solid fa-store"></i>
+                                <p>
+                                    Outlets
+                                </p>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a href="<?php echo base_url("/admin/product"); ?>" id="product" class="nav-link">
                             <i class="nav-icon fa-solid fa-chair"></i>
@@ -160,7 +84,7 @@
                     </li>
                     <li id="nav_order" class="nav-item">
                         <a href="#" id="order_pages" class="nav-link">
-                            <i class="nav-icon fa-regular fa-file-lines"></i>
+                            <i class="nav-icon fa-solid fa-boxes-stacked"></i>
                             <p>
                                 Orders
                                 <i class="fas fa-angle-left right"></i>
@@ -173,30 +97,34 @@
                                     <p>Orders List</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a id="order_request" href="<?php echo base_url("admin/order/request_cancel"); ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Cancel Request</p>
-                                </a>
-                            </li>
+                            <?php if ($_SESSION['role'] == 'manager' || $_SESSION['role'] == 'owner') : ?>
+                                <li class="nav-item">
+                                    <a id="order_request" href="<?php echo base_url("admin/order/request_cancel"); ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Cancel Request</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url("/admin/vendor"); ?>" id="vendor" class="nav-link">
-                            <i class="nav-icon fa-solid fa-truck-ramp-box"></i>
-                            <p>
-                                Vendors
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url("/admin/user"); ?>" id="user" class="nav-link">
-                            <i class="nav-icon fa-solid fa-user-pen"></i>
-                            <p>
-                                Users Management
-                            </p>
-                        </a>
-                    </li>
+                    <?php if ($_SESSION['role'] == 'owner') : ?>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url("/admin/vendor"); ?>" id="vendor" class="nav-link">
+                                <i class="nav-icon fa-solid fa-truck-ramp-box"></i>
+                                <p>
+                                    Vendors
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url("/admin/user"); ?>" id="user" class="nav-link">
+                                <i class="nav-icon fa-solid fa-user-pen"></i>
+                                <p>
+                                    Users Management
+                                </p>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li id="nav_customer_pages" class="nav-item">
                         <a href="#" id="customer_pages" class="nav-link">
                             <i class="nav-icon fa-regular fa-file-lines"></i>
@@ -220,109 +148,110 @@
                             </li>
                         </ul>
                     </li>
-                    <li id="nav_point_pages" class="nav-item">
-                        <a href="#" id="point_pages" class="nav-link">
-                            <i class="nav-icon fa-solid fa-medal"></i>
-                            <p>
-                                Points
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?php echo base_url("/admin/point"); ?>" id="point" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>
-                                        Points Report
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="point_config" href="<?php echo base_url("/admin/point/config"); ?>" href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Points Configuration</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    <?php if ($_SESSION['role'] == 'manager' || $_SESSION['role'] == 'owner') : ?>
+                        <li id="nav_point_pages" class="nav-item">
+                            <a href="#" id="point_pages" class="nav-link">
+                                <i class="nav-icon fa-solid fa-medal"></i>
+                                <p>
+                                    Points
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url("/admin/point"); ?>" id="point" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Points Report
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="point_config" href="<?php echo base_url("/admin/point/config"); ?>" href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Points Configuration</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-                    <li id="nav_finance_pages" class="nav-item">
-                        <a id="finance_pages" href="#" class="nav-link">
-                            <i class="nav-icon fa-solid fa-money-bill-transfer"></i>
-                            <p>
-                                Finance
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a id="cash" href="<?php echo base_url("/admin/finance/cash"); ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Cash Report</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="sales" href="<?php echo base_url("/admin/finance/sales"); ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Sales Report</p>
-                                </a>
-                            </li>
-                            <li id="nav_expenses_pages" class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>
-                                        Expenses Report
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a id="salary" href="<?php echo base_url("/admin/finance/salary"); ?>" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Salary Expenses</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a id="electrical" href="<?php echo base_url("/admin/finance/electrical"); ?>" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Electrical Expenses</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a id="rent" href="<?php echo base_url("/admin/finance/rent"); ?>" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Rent Expenses</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a id="maintenance" href="<?php echo base_url("/admin/finance/maintenance"); ?>" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Maintenance Expenses</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a id="other" href="<?php echo base_url("/admin/finance/other"); ?>" class="nav-link">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Other Expenses</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a id="profit_loss" href="<?php echo base_url("/admin/finance/profit_loss"); ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Profit and Loss Report</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li id="nav_finance_pages" class="nav-item">
+                            <a id="finance_pages" href="#" class="nav-link">
+                                <i class="nav-icon fa-solid fa-money-bill-transfer"></i>
+                                <p>
+                                    Finance
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a id="cash" href="<?php echo base_url("/admin/finance/cash"); ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Cash Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="sales" href="<?php echo base_url("/admin/finance/sales"); ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Sales Report</p>
+                                    </a>
+                                </li>
+                                <li id="nav_expenses_pages" class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Expenses Report
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a id="salary" href="<?php echo base_url("/admin/finance/salary"); ?>" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Salary Expenses</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="electrical" href="<?php echo base_url("/admin/finance/electrical"); ?>" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Electrical Expenses</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="rent" href="<?php echo base_url("/admin/finance/rent"); ?>" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Rent Expenses</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="maintenance" href="<?php echo base_url("/admin/finance/maintenance"); ?>" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Maintenance Expenses</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a id="other" href="<?php echo base_url("/admin/finance/other"); ?>" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Other Expenses</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
+                            <?php if ($_SESSION['role'] == 'owner') : ?>
+                                <li class="nav-item">
+                                    <a id="profit_loss" href="<?php echo base_url("/admin/finance/profit_loss"); ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Profit and Loss Report</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            </ul>
+                        </li>
                 </ul>
             </nav>
-
         </div>
-
     </aside>
-
     <script src="<?php echo base_url(); ?>/plugins/jquery/jquery.min.js"></script>
     <script>
         $(document).ready(function() {

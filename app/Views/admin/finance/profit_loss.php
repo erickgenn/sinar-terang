@@ -202,6 +202,15 @@
                     ],
                 });
             }
+            swal({
+                position: 'top-end',
+                icon: 'https://cdn.dribbble.com/users/1186261/screenshots/3718681/_______.gif',
+                buttons: false,
+                closeOnClickOutside: false,
+                timer: 5000,
+                title: "Please Wait a Moment",
+                text: "Calculating profits and losses",
+            });
             getTotalExpenses();
         }
     </script>
