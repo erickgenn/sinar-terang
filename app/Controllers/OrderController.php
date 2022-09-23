@@ -229,12 +229,11 @@ class OrderController extends BaseController
                 ];
                 $productModel->update($product_id[$i], $data_update);
             }
-
             $data_insert = [
                 'total_price' => $total_price,
             ];
 
-            if ($data['order_points'] != "") {
+            if (isset($data['order_points'])) {
                 $pointConfigModel = new PointConfigurationModel();
                 $point = $pointConfigModel->where('id', '1')->first();
                 $discount = (int) $data['order_points'] / $point['point'] * $point['value'];
@@ -262,10 +261,10 @@ class OrderController extends BaseController
 
             $balance = $balanceModel->where('id', 1)->first();
             $balance_new = (int)$balance['balance'] + $total_price;
-
             $data_insert_cash = [
                 'description' => "Order Number " . $orderModel->getInsertID(),
                 'debit' => $total_price,
+                'date' => date("Y-m-d"),
                 'balance' => $balance_new,
                 'type' => "order",
             ];
@@ -278,7 +277,7 @@ class OrderController extends BaseController
 
             $balanceModel->update('1', $data_update_balance);
 
-            if ($data['order_points'] != "") {
+            if (isset($data['order_points'])) {
                 $data_insert_point = [
                     'operation' => "-",
                     "point" => $data['order_points'],
@@ -369,10 +368,31 @@ class OrderController extends BaseController
     {
         $session = session();
         $orderModel = new OrderModel();
+        $balanceModel = new BalanceModel();
         $orderRequestModel = new OrderCancelRequestModel();
+        $cashReportModel = new CashReportModel();
 
         $orderRequestModel->delete($cancel_id);
         $order = $orderModel->where('id', $order_id)->first();
+
+        $balance = $balanceModel->where('id', 1)->first();
+        $balance_new = (int)$balance['balance'] - $order['total_price'];
+        $data_insert_cash = [
+            'description' => "Cancelled Order Number " . $orderModel->getInsertID(),
+            'credit' => $order['total_price'],
+            'date' => date("Y-m-d"),
+            'balance' => $balance_new,
+            'type' => "order",
+        ];
+
+        $cashReportModel->insert($data_insert_cash);
+
+        $data_update_balance = [
+            'balance' => $balance_new,
+        ];
+
+        $balanceModel->update('1', $data_update_balance);
+
         $orderModel->delete($order_id);
 
         $session->setFlashdata('acceptRequest', '.');

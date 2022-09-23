@@ -148,7 +148,7 @@
                                 <?php if (isset($customer_id)) : ?>
                                     <div class="form-group col-3">
                                         <label for="inputPoints">Claim Points</label>
-                                        <input type="number" id="inputPoints" name="order_points" min="0" max="<?php echo $customer['point'] ?>" class="form-control">
+                                        <input type="number" id="inputPoints" name="order_points" min="0" max="<?php echo $customer['point'] ?>" class="form-control" required>
                                         <input type="hidden" name="customer_id" value="<?php echo $customer_id ?>">
                                     </div>
                                 <?php endif; ?>

@@ -112,6 +112,9 @@ $routes->get('admin/finance/sales/search', 'FinanceController::searchSales');
 $routes->get('admin/finance/sales/search/total', 'FinanceController::searchSalesTotal');
 $routes->get('admin/finance/cash/search', 'FinanceController::searchCash');
 $routes->get('admin/finance/cash/search/first', 'FinanceController::searchFirstBalance');
+$routes->get('admin/finance/add_cash/(:any)', 'FinanceController::addCash/$1');
+$routes->post('admin/finance/add_cash', 'FinanceController::storeCash');
+
 
 
 

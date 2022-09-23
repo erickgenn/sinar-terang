@@ -9,11 +9,9 @@ class CashReportModel extends Model
     protected $table      = 'mstr_cash_report';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['description', 'debit', 'credit', 'balance', 'type'];
+    protected $allowedFields = ['description', 'debit', 'credit', 'balance', 'type', 'date'];
 
     protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
     protected $useSoftDeletes = true;
 

@@ -359,7 +359,7 @@
                                                         <input type="hidden" id="order_id_hidden" name="order_id">
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-success">Submit</button>
                                                     </div>
                                                 </div>

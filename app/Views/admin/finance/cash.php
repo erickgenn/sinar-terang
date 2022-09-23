@@ -41,24 +41,12 @@
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-        <?php if (session()->getFlashdata('updateSuccessful')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Vendor Updated Successfuly!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
         <?php if (session()->getFlashdata('insertSuccessful')) : ?>
             <script>
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Vendor Added Successfuly!',
+                    title: 'Input Successful!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -87,7 +75,7 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-header">
                             <h4> Filter </h4>
                             <div class="container col-4">
                                 <div class="row">
@@ -101,6 +89,8 @@
                                 </div>
 
                             </div>
+                            <div id="div_add" class="float-right">
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive" style="align-content:flex-end">
@@ -113,6 +103,7 @@
                                         <th>Debit</th>
                                         <th>Credit</th>
                                         <th>Balance</th>
+                                        <th>Input Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -162,12 +153,13 @@
                     data = JSON.parse(result);
                     var table = $('#cash-table').DataTable();
                     var row = $('<tr>')
-                        .append('<td>1.</td>')
+                        .append('<td>-</td>')
                         .append('<td>-</td>')
                         .append('<td>First Balance</td>')
                         .append('<td>-</td>')
                         .append('<td>-</td>')
                         .append('<td>' + data.first_balance + '</td>')
+                        .append('<td>-</td>')
 
                     table.row.add(row);
                     $('#table tbody').prepend(row);
@@ -189,13 +181,28 @@
                     timer: 1500
                 });
             } else {
+                let month = $('#month').val();
+                let input_month = month.split("-");
+                const d = new Date();
+                let current_month = d.getMonth();
+                if (current_month + 1 == input_month[1]) {
+                    let html = `<a href="<?php echo base_url('/admin/finance/add_cash/'); ?>/${month}">
+                                    <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Add a Vendor</button>
+                                </a>`;
+                    document.getElementById("div_add").innerHTML = html;
+                } else {
+                    let html = ``;
+                    document.getElementById("div_add").innerHTML = html;
+                }
                 let tabel = $('#cash-table').DataTable();
                 tabel.destroy();
                 getFirstBalance();
                 $('#cash-table').DataTable({
                     dom: 'Bfrtip',
+                    paging: false,
+                    scrollY: true,
                     buttons: [
-                        'copyHtml5', 'excelHtml5'
+                        'copyHtml5', 'excelHtml5',
                     ],
                     "ajax": {
                         "url": "<?php echo base_url('admin/finance/cash/search'); ?>",
@@ -216,7 +223,7 @@
                             }
                         },
                         {
-                            "data": "created_at",
+                            "data": "date",
                             "className": "dt-center",
                         },
                         {
@@ -233,6 +240,10 @@
                         },
                         {
                             "data": "balance",
+                            "className": "dt-center",
+                        },
+                        {
+                            "data": "created_at",
                             "className": "dt-center",
                         },
                     ],

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\BalanceModel;
 use App\Models\CashReportModel;
 use App\Models\CustomerModel;
 use App\Models\OrderModel;
@@ -15,6 +16,11 @@ class FinanceController extends BaseController
     public function cash()
     {
         return view('admin/finance/cash');
+    }
+
+    public function addCash($month)
+    {
+        return view('admin/finance/add_cash', compact('month'));
     }
 
     public function sales()
@@ -87,6 +93,7 @@ class FinanceController extends BaseController
 
         for ($i = 0; $i < count($cash); $i++) {
             $cash[$i]['created_at'] = date("d F Y", strtotime($cash[$i]['created_at']));
+            $cash[$i]['date'] = date("d F Y", strtotime($cash[$i]['date']));
             $cash[$i]['balance'] = AdminController::money_format_rupiah($cash[$i]['balance']);
             if (isset($cash[$i]['debit'])) {
                 $cash[$i]['debit'] = AdminController::money_format_rupiah($cash[$i]['debit']);
@@ -158,39 +165,48 @@ class FinanceController extends BaseController
         return json_encode($point);
     }
 
-    public function activate($id)
+    public function storeCash()
     {
         $session = session();
-        $vendorModel = new VendorModel();
+        $cashReportModel = new CashReportModel();
+        $balanceModel = new BalanceModel();
+        $data = $this->request->getPost();
+        try {
+            $balance = $balanceModel->where('id', 1)->first();
 
-        $data = [
-            'is_active' => 1,
-        ];
+            if ($data['cash_debit_credit'] == "debit") {
+                $new_balance = (int) $balance['balance'] + (int) $data['cash_amount'];
+                $data_insert_cash = [
+                    'description' => $data['cash_description'],
+                    'debit' => $data['cash_amount'],
+                    'balance' => $new_balance,
+                    'type' => $data['cash_type'],
+                    'date' => $data['cash_date'],
+                ];
+            } else {
+                $new_balance = (int) $balance['balance'] - (int) $data['cash_amount'];
+                $data_insert_cash = [
+                    'description' => $data['cash_description'],
+                    'credit' => $data['cash_amount'],
+                    'balance' => $new_balance,
+                    'type' => $data['cash_type'],
+                    'date' => $data['cash_date'],
+                ];
+            }
 
-        $vendorModel->update($id, $data);
+            $data_update_balance = [
+                'balance' => $new_balance,
+            ];
+            $cashReportModel->insert($data_insert_cash);
+            $balanceModel->update(1, $data_update_balance);
 
-        $vendor = $vendorModel->where('id', $id)->first();
-
-        $session->setFlashdata('activatevendor', '.');
-
-        return view('admin/vendor/index', compact('vendor'));
-    }
-
-    public function deactivate($id)
-    {
-        $session = session();
-        $vendorModel = new VendorModel();
-
-        $data = [
-            'is_active' => 0,
-        ];
-        $vendorModel->update($id, $data);
-
-        $vendor = $vendorModel->where('id', $id)->first();
-
-        $session->setFlashdata('deactivatevendor', '.');
-
-        return view('admin/vendor/index', compact('vendor'));
+            $session->setFlashdata('insertSuccessful', 'abc');
+            return redirect()->to(base_url('admin/finance/cash'));
+        } catch (Exception $e) {
+            $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
+            return redirect()->to(base_url('admin/finance/add_cash') . "/" . $data['cash_month']);
+        }
+        // return redirect()->to(base_url('admin/add_vendor'));
     }
 
     public function delete($id)
