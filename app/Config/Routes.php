@@ -114,7 +114,25 @@ $routes->get('admin/finance/cash/search', 'FinanceController::searchCash');
 $routes->get('admin/finance/cash/search/first', 'FinanceController::searchFirstBalance');
 $routes->get('admin/finance/add_cash/(:any)', 'FinanceController::addCash/$1');
 $routes->post('admin/finance/add_cash', 'FinanceController::storeCash');
-
+$routes->get('admin/finance/salary', 'FinanceController::salary');
+$routes->get('admin/finance/salary/search', 'FinanceController::searchSalary');
+$routes->get('admin/finance/salary/search/total', 'FinanceController::searchSalaryTotal');
+$routes->get('admin/finance/electrical', 'FinanceController::electrical');
+$routes->get('admin/finance/electrical/search', 'FinanceController::searchElectrical');
+$routes->get('admin/finance/electrical/search/total', 'FinanceController::searchElectricalTotal');
+$routes->get('admin/finance/rent', 'FinanceController::rent');
+$routes->get('admin/finance/rent/search', 'FinanceController::searchRent');
+$routes->get('admin/finance/rent/search/total', 'FinanceController::searchRentTotal');
+$routes->get('admin/finance/maintenance', 'FinanceController::maintenance');
+$routes->get('admin/finance/maintenance/search', 'FinanceController::searchMaintenance');
+$routes->get('admin/finance/maintenance/search/total', 'FinanceController::searchMaintenanceTotal');
+$routes->get('admin/finance/other', 'FinanceController::other');
+$routes->get('admin/finance/other/search', 'FinanceController::searchOther');
+$routes->get('admin/finance/other/search/total', 'FinanceController::searchOtherTotal');
+$routes->get('admin/finance/profit_loss', 'FinanceController::profitLoss');
+$routes->get('admin/finance/profit_loss/search', 'FinanceController::searchProfitLoss');
+$routes->get('admin/finance/profit_loss/search/total/expenses', 'FinanceController::searchProfitLossTotalExpenses');
+$routes->get('admin/finance/profit_loss/search/total/profit', 'FinanceController::searchProfitLossTotalProfit');
 
 
 

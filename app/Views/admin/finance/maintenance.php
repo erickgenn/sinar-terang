@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sinar Terang | Cash Report</title>
+    <title>Sinar Terang | Maintenance Expenses Report</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -41,30 +41,18 @@
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-        <?php if (session()->getFlashdata('insertSuccessful')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Input Successful!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
         <div class="content-wrapper">
 
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Cash Report</h1>
+                            <h1 class="m-0">Maintenance Expenses Report</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Cash Report</li>
+                                <li class="breadcrumb-item active">Maintenance Expenses Report</li>
                             </ol>
                         </div>
                     </div>
@@ -75,7 +63,7 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-body">
                             <h4> Filter </h4>
                             <div class="container col-4">
                                 <div class="row">
@@ -89,25 +77,28 @@
                                 </div>
 
                             </div>
-                            <div id="div_add" class="float-right">
-                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive" style="align-content:flex-end">
-                            <table id="cash-table" class="table table-striped table-bordered table-sm" style="width:100%">
+                            <table id="maintenance-table" class="table table-striped table-bordered table-sm" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
                                         <th>Date</th>
                                         <th>Description</th>
-                                        <th>Debit</th>
-                                        <th>Credit</th>
-                                        <th>Balance</th>
-                                        <th>Input Date</th>
+                                        <th>Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th style="text-align:right">Total:</th>
+                                        <th id="th-total"></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
 
@@ -143,32 +134,6 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 
     <script>
-        function getFirstBalance() {
-            $.ajax({
-                url: "<?php echo base_url('admin/finance/cash/search/first'); ?>",
-                "data": {
-                    month: $('#month').val(),
-                },
-                success: function(result) {
-                    data = JSON.parse(result);
-                    var table = $('#cash-table').DataTable();
-                    var row = $('<tr>')
-                        .append('<td>-</td>')
-                        .append('<td>-</td>')
-                        .append('<td>First Balance</td>')
-                        .append('<td>-</td>')
-                        .append('<td>-</td>')
-                        .append('<td>' + data.first_balance + '</td>')
-                        .append('<td>-</td>')
-
-                    table.row.add(row);
-                    $('#table tbody').prepend(row);
-                    // table.row.add(row).draw(false);
-
-                }
-            });
-        }
-
         function generateTable() {
             let month = Date.parse($('#month').val());
 
@@ -181,37 +146,26 @@
                     timer: 1500
                 });
             } else {
-                let month = $('#month').val();
-                let input_month = month.split("-");
-                const d = new Date();
-                let current_month = d.getMonth();
-                if (current_month + 1 == input_month[1]) {
-                    let html = `<a href="<?php echo base_url('/admin/finance/add_cash/'); ?>/${month}">
-                                    <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Input</button>
-                                </a>`;
-                    document.getElementById("div_add").innerHTML = html;
-                } else {
-                    let html = ``;
-                    document.getElementById("div_add").innerHTML = html;
-                }
-                let tabel = $('#cash-table').DataTable();
+                let tabel = $('#maintenance-table').DataTable();
                 tabel.destroy();
-                getFirstBalance();
-                $('#cash-table').DataTable({
+                $('#maintenance-table').DataTable({
                     dom: 'Bfrtip',
-                    paging: false,
-                    scrollY: true,
-                    buttons: [
-                        'copyHtml5', 'excelHtml5',
+                    buttons: [{
+                            extend: 'copyHtml5',
+                            footer: true
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            footer: true
+                        },
                     ],
                     "ajax": {
-                        "url": "<?php echo base_url('admin/finance/cash/search'); ?>",
+                        "url": "<?php echo base_url('admin/finance/maintenance/search'); ?>",
                         "data": {
                             month: $('#month').val(),
                         },
                         "dataSrc": ""
                     },
-
                     "columns": [{
                             searchable: false,
                             sortable: false,
@@ -231,28 +185,31 @@
                             "className": "dt-center",
                         },
                         {
-                            "data": "debit",
-                            "className": "dt-center",
-                        },
-                        {
-                            "data": "credit",
-                            "className": "dt-center",
-                        },
-                        {
-                            "data": "balance",
-                            "className": "dt-center",
-                        },
-                        {
-                            "data": "created_at",
+                            "data": "amount",
                             "className": "dt-center",
                         },
                     ],
                 });
-
             }
+            getTotal();
+
         }
     </script>
 
+    <script>
+        function getTotal() {
+            $.ajax({
+                url: "<?php echo base_url('admin/finance/maintenance/search/total'); ?>",
+                "data": {
+                    month: $('#month').val(),
+                },
+                success: function(result) {
+                    result = result.split('"').join('');
+                    $("#th-total").html(result);
+                }
+            });
+        }
+    </script>
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>

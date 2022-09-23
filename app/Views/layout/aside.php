@@ -275,35 +275,41 @@
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
-                                <ul class="nav nav-treeview" style="display: none;">
+                                <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a id="salary" href="#" class="nav-link">
+                                        <a id="salary" href="<?php echo base_url("/admin/finance/salary"); ?>" class="nav-link">
                                             <i class="far fa-dot-circle nav-icon"></i>
                                             <p>Salary Expenses</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a id="electrical" href="#" class="nav-link">
+                                        <a id="electrical" href="<?php echo base_url("/admin/finance/electrical"); ?>" class="nav-link">
                                             <i class="far fa-dot-circle nav-icon"></i>
                                             <p>Electrical Expenses</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a id="rent" href="#" class="nav-link">
+                                        <a id="rent" href="<?php echo base_url("/admin/finance/rent"); ?>" class="nav-link">
                                             <i class="far fa-dot-circle nav-icon"></i>
                                             <p>Rent Expenses</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a id="maintenance" href="#" class="nav-link">
+                                        <a id="maintenance" href="<?php echo base_url("/admin/finance/maintenance"); ?>" class="nav-link">
                                             <i class="far fa-dot-circle nav-icon"></i>
                                             <p>Maintenance Expenses</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a id="other" href="<?php echo base_url("/admin/finance/other"); ?>" class="nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p>Other Expenses</p>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a id="profit_loss" href="#" class="nav-link">
+                                <a id="profit_loss" href="<?php echo base_url("/admin/finance/profit_loss"); ?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Profit and Loss Report</p>
                                 </a>
@@ -371,13 +377,42 @@
                 document.getElementById("user").className = "nav-link active";
             } else if (current.includes('/admin/customer')) {
                 document.getElementById("customer").className = "nav-link active";
+            } else if (current.includes('/admin/finance/salary')) {
+                document.getElementById("finance_pages").className = "nav-link active";
+                document.getElementById("salary").className = "nav-link active";
+                document.getElementById("nav_finance_pages").className = "nav-item menu-open";
+                document.getElementById("nav_expenses_pages").className = "nav-item menu-open";
+            } else if (current.includes('/admin/finance/electrical')) {
+                document.getElementById("finance_pages").className = "nav-link active";
+                document.getElementById("electrical").className = "nav-link active";
+                document.getElementById("nav_finance_pages").className = "nav-item menu-open";
+                document.getElementById("nav_expenses_pages").className = "nav-item menu-open";
+            } else if (current.includes('/admin/finance/rent')) {
+                document.getElementById("finance_pages").className = "nav-link active";
+                document.getElementById("rent").className = "nav-link active";
+                document.getElementById("nav_finance_pages").className = "nav-item menu-open";
+                document.getElementById("nav_expenses_pages").className = "nav-item menu-open";
+            } else if (current.includes('/admin/finance/maintenance')) {
+                document.getElementById("finance_pages").className = "nav-link active";
+                document.getElementById("maintenance").className = "nav-link active";
+                document.getElementById("nav_finance_pages").className = "nav-item menu-open";
+                document.getElementById("nav_expenses_pages").className = "nav-item menu-open";
+            } else if (current.includes('/admin/finance/other')) {
+                document.getElementById("finance_pages").className = "nav-link active";
+                document.getElementById("other").className = "nav-link active";
+                document.getElementById("nav_finance_pages").className = "nav-item menu-open";
+                document.getElementById("nav_expenses_pages").className = "nav-item menu-open";
             } else if (current.includes('/admin/finance/cash')) {
                 document.getElementById("finance_pages").className = "nav-link active";
                 document.getElementById("cash").className = "nav-link active";
                 document.getElementById("nav_finance_pages").className = "nav-item menu-open";
-            } else if (current.includes('/admin/finance/add_cash')) {
+            } else if (current.includes('/admin/finance/cash')) {
                 document.getElementById("finance_pages").className = "nav-link active";
                 document.getElementById("cash").className = "nav-link active";
+                document.getElementById("nav_finance_pages").className = "nav-item menu-open";
+            } else if (current.includes('/admin/finance/profit_loss')) {
+                document.getElementById("finance_pages").className = "nav-link active";
+                document.getElementById("profit_loss").className = "nav-link active";
                 document.getElementById("nav_finance_pages").className = "nav-item menu-open";
             } else if (current.includes('/admin/finance/sales')) {
                 document.getElementById("finance_pages").className = "nav-link active";
