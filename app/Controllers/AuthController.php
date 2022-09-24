@@ -45,7 +45,11 @@ class AuthController extends BaseController
             $session->set($session_data);
             $session->setFlashdata('login_successful', $user['name']);
 
-            return redirect()->to('admin/dashboard');
+            if ($user['role'] == "owner" || $user['role'] == "manager") {
+                return redirect()->to('admin/dashboard');
+            } else {
+                return redirect()->to('admin/order');
+            }
         } else {
             // If login is not successful
             $session->setFlashdata('login_failed', "failed");

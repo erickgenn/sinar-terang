@@ -53,7 +53,6 @@ class Filters extends BaseConfig
                     'login/auth',
                     'logout', //erase later
                     'register/customer/auth',
-
                 ],
             ],
             // 'honeypot',

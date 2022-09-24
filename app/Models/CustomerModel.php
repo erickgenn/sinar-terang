@@ -16,4 +16,12 @@ class CustomerModel extends Model
     protected $deletedField  = 'deleted_at';
 
     // protected $useSoftDeletes = true;
+
+    public function countRegistrationDate($date)
+    {
+        $builder = $this->db->table('mstr_customer');
+        $builder->where('created_at >=', $date . " 00:00:00.000");
+        $builder->where('created_at <=', $date . " 23:59:59.999");
+        return $builder->get();
+    }
 }
