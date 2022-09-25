@@ -55,6 +55,10 @@ class FinanceController extends BaseController
 
     public function profitLoss()
     {
+        if ($_SESSION['role'] != 'owner') {
+            return redirect()
+                ->to('access/forbidden');
+        }
         return view('admin/finance/profit_loss');
     }
 

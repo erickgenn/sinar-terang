@@ -41,7 +41,7 @@ $routes->get('/home', 'CustomerController::index');
 
 // Customer Pages
 $routes->get('/about', 'CustomerController::about');
-$routes->get('/blog', 'CustomerController::blog');
+$routes->get('/outlet', 'CustomerController::outlet');
 $routes->get('/contact', 'CustomerController::contact');
 $routes->get('/services', 'CustomerController::services');
 $routes->get('/product', 'CustomerController::product');
@@ -162,6 +162,8 @@ $routes->post('admin/user/delete/(:num)', 'UserController::delete/$1');
 //Login and Registration
 $routes->get('login/admin', 'AuthController::admin');
 $routes->post('login/admin/auth', 'AuthController::loginAdmin');
+
+$routes->get('access/forbidden', 'AuthController::forbidden');
 
 $routes->get('login/customer', 'AuthController::customer');
 $routes->post('login/auth', 'AuthController::loginCustomer');

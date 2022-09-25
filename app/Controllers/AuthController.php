@@ -14,6 +14,11 @@ class AuthController extends BaseController
         return view('auth/login_admin');
     }
 
+    public function forbidden()
+    {
+        return view('forbidden');
+    }
+
     public function customer()
     {
         return view('auth/login_customer');
@@ -76,12 +81,11 @@ class AuthController extends BaseController
                 'name' => $customer['name'],
                 'email' => $customer['email'],
                 'isLoggedIn' => TRUE,
-                'role' => 'admin',
+                'role' => 'customer',
             ];
             $session->set($session_data);
             $session->setFlashdata('login_successful', $customer['name']);
-
-            // return redirect()->to('home');
+            return redirect()->to('/');
         } else {
             // If login is not successful
             $session->setFlashdata('login_failed', "failed");

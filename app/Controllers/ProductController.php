@@ -77,7 +77,7 @@ class ProductController extends BaseController
                 }
 
                 // Check file size
-                if ($file->getSize() > 5000000) {
+                if ($file->getSize() > 70000000) {
                     $uploadOk = 0;
                 }
 
@@ -129,7 +129,7 @@ class ProductController extends BaseController
             // upload image
             $file = $this->request->getFile('product_picture');
 
-            $target_dir = "uploads/product";
+            $target_dir = "uploads/product/";
             $target_file = $target_dir . '/' . basename($file->getName());
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -138,14 +138,16 @@ class ProductController extends BaseController
             if (isset($file)) {
                 $check = getimagesize($file->getTempName());
                 if ($check !== false) {
+                    // echo "File is an image - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
+                    // echo "File is not an image.";
                     $uploadOk = 0;
                 }
             }
 
             // Check file size
-            if ($file->getSize() > 5000000) {
+            if ($file->getSize() > 700000000) {
                 $uploadOk = 0;
             }
 
@@ -153,14 +155,15 @@ class ProductController extends BaseController
             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
                 $uploadOk = 0;
             }
-
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
                 $session->setFlashdata('ImageFailed', 'Please Try Another Image');
+
                 // echo "Sorry, your file was not uploaded.";
                 // if everything is ok, try to upload file
             } else {
-                if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
+                if (move_uploaded_file($file->getTempName(), $target_dir . $file->getName())) {
+
                     // upload to db
                     $data_insert = [
                         'name' => $data['product_name'],

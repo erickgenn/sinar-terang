@@ -57,6 +57,22 @@
 
 		<?php include(APPPATH . "Views/layout/aside_cust.php"); ?>
 
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+		<?php if (session()->getFlashdata('login_successful')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'https://cdn.dribbble.com/users/400493/screenshots/2703191/hello.gif',
+					buttons: false,
+					closeOnClickOutside: false,
+					timer: 2500,
+					title: "Hi! <?php echo $_SESSION['login_successful'] ?>",
+					text: "Glad to see you again!",
+				});
+			</script>
+		<?php endif; ?>
+
 		<div id="colorlib-main">
 			<aside id="colorlib-hero" class="js-fullheight">
 				<div class="flexslider js-fullheight">
@@ -111,22 +127,7 @@
 			</aside>
 
 
-			<div id="get-in-touch" class="colorlib-bg-color">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<h2>Get in Touch!</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<p class="colorlib-lead"></p>
-							<p><a href="#" class="btn btn-primary btn-learn">Contact me!</a></p>
-						</div>
 
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 

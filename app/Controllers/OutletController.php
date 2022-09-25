@@ -68,10 +68,9 @@ class OutletController extends BaseController
                 }
 
                 // Check file size
-                if ($file->getSize() > 5000000) {
+                if ($file->getSize() > 7000000) {
                     $uploadOk = 0;
                 }
-
                 // Allow certain file formats
                 if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
                     $uploadOk = 0;
@@ -121,7 +120,6 @@ class OutletController extends BaseController
             $target_file = $target_dir . '/' . basename($file->getName());
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
             // Check if image file is a actual image or fake image
             if (isset($file)) {
                 $check = getimagesize($file->getTempName());
@@ -133,7 +131,7 @@ class OutletController extends BaseController
             }
 
             // Check file size
-            if ($file->getSize() > 5000000) {
+            if ($file->getSize() > 7000000) {
                 $uploadOk = 0;
             }
 

@@ -2,7 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Models\ContactUsModel;
 use App\Models\CustomerModel;
+use App\Models\FaqModel;
+use App\Models\OrderModel;
+use App\Models\OutletModel;
+use App\Models\ProductModel;
 use App\Models\UserModel;
 
 class CustomerController extends BaseController
@@ -14,17 +19,38 @@ class CustomerController extends BaseController
 
     public function about()
     {
-        return view('customer/about');
+        $productModel = new ProductModel();
+        $outletModel = new OutletModel();
+        $orderModel = new OrderModel();
+        $faqModel = new FaqModel();
+
+        $product = $productModel->findAll();
+        $count_product = count($product);
+
+        $outlet = $outletModel->findAll();
+        $count_outlet = count($outlet);
+
+        $order = $orderModel->findAll();
+        $count_order = count($order);
+
+        $faq = $faqModel->where('deleted_at', NULL)->findAll();
+
+        return view('customer/about', compact('count_product', 'count_outlet', 'count_order', 'faq'));
     }
 
-    public function blog()
+    public function outlet()
     {
-        return view('customer/blog');
+        $outletModel = new OutletModel();
+        $outlet = $outletModel->where('deleted_at', null)->findAll();
+        return view('customer/outlet', compact('outlet'));
     }
 
     public function contact()
     {
-        return view('customer/contact');
+        $contactModel = new ContactUsModel();
+
+        $contact = $contactModel->first();
+        return view('customer/contact', compact('contact'));
     }
 
     public function services()
@@ -34,7 +60,33 @@ class CustomerController extends BaseController
 
     public function product()
     {
-        return view('customer/product');
+        $productModel = new ProductModel();
+        $product = $productModel->where('deleted_at', null)->findAll();
+        $loop = count($product) - 1;
+
+        $col_num = [];
+        $lastKey = 0;
+        while (!isset($col_num[$loop])) {
+            $num = rand(3, 6);
+            if (isset($col_num[$lastKey]) && isset($col_num[$lastKey - 1])) {
+                if ($num == 6) {
+                    if ($col_num[$lastKey] == 6 || $col_num[$lastKey - 1] == 6) {
+                        continue;
+                    }
+                }
+            }
+
+            if ($num == 3 || $num == 6) {
+                array_push($col_num, $num);
+            }
+
+            $lastKey = key(array_slice($col_num, -1, 1, true));
+        }
+        for ($i = 0; $i < count($product); $i++) {
+            $product[$i]['price'] = AdminController::money_format_rupiah($product[$i]['price']);
+        }
+
+        return view('customer/product', compact('col_num', 'product'));
     }
 
     public function search()
