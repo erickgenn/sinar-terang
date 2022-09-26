@@ -47,6 +47,9 @@
         } else
         if (current.includes('/contact')) {
             document.getElementById("contact").className = "colorlib-active";
+        } else
+        if (current.includes('/point')) {
+            document.getElementById("point").className = "colorlib-active";
         }
 
         //keep "/" the last
