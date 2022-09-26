@@ -61,37 +61,43 @@
 
 			<div class="colorlib-contact">
 				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Contact Us</span>
-							<h2 class="colorlib-heading">Get in Touch</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-5">
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
-									<i class="icon-globe-outline"></i>
-								</div>
-								<div class="colorlib-text">
-									<p style="font-weight: 500;"><a href="#"><?php echo $contact['email'] ?></a></p>
+					<div class="row row-bottom-padded-md">
+						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+							<div class="about-desc">
+								<span class="heading-meta">Contact Us</span>
+								<h2 class="colorlib-heading">Get In Touch</h2>
+							</div>
+							<div class="row padding">
+								<div class="col-md-5">
+									<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
+										<div class="colorlib-icon">
+											<i class="icon-globe-outline"></i>
+										</div>
+										<div class="colorlib-text">
+											<p style="font-weight: 500;font-size:x-large"><a href="#"><?php echo $contact['email'] ?></a></p>
+										</div>
+									</div>
+
+									<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
+										<div class="colorlib-icon">
+											<i class="icon-phone"></i>
+										</div>
+										<div class="colorlib-text">
+											<p style="font-weight: 500; font-size:x-large"><a href="tel://"><?php echo $contact['phone'] ?></a></p>
+										</div>
+									</div>
 								</div>
 							</div>
-
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
-									<i class="icon-phone"></i>
-								</div>
-								<div class="colorlib-text">
-									<p style="font-weight: 500;"><a href="tel://"><?php echo $contact['phone'] ?></a></p>
-								</div>
+						</div>
+						<div class="col-md-6">
+							<div class="about-img animate-box" data-animate-effect="fadeInLeft" style="background-image: url(/customer_page/images/contact_us.jpg);">
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<!-- jQuery -->

@@ -73,6 +73,20 @@
 			</script>
 		<?php endif; ?>
 
+		<?php if (session()->getFlashdata('qr_claimed')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'https://cdn.dribbble.com/users/2050145/screenshots/5486129/sad_face.gif',
+					buttons: false,
+					closeOnClickOutside: false,
+					timer: 2500,
+					title: "Oops!",
+					text: "This QR Has Been Claimed Before",
+				});
+			</script>
+		<?php endif; ?>
+
 		<div id="colorlib-main">
 			<aside id="colorlib-hero" class="js-fullheight">
 				<div class="flexslider js-fullheight">

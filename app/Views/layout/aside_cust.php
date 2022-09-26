@@ -11,7 +11,7 @@
             <?php if (!isset($_SESSION['isLoggedIn'])) : ?>
                 <li id="login"><a href="<?php echo base_url("/login/customer"); ?>">Log In</a></li>
             <?php elseif (isset($_SESSION['isLoggedIn'])) : ?>
-                <li id="point"><a href="<?php echo base_url("/contact"); ?>">Your Points</a></li>
+                <li id="point"><a href="<?php echo base_url("/point"); ?>">Your Points</a></li>
                 <li id="logout"><a href="<?php echo base_url("/logout"); ?>">Log Out</a></li>
             <?php endif; ?>
         </ul>

@@ -45,6 +45,9 @@ $routes->get('/outlet', 'CustomerController::outlet');
 $routes->get('/contact', 'CustomerController::contact');
 $routes->get('/services', 'CustomerController::services');
 $routes->get('/product', 'CustomerController::product');
+$routes->get('/point', 'CustomerController::point');
+$routes->get('/qr/(:any)', 'CustomerController::claimQR/$1');
+$routes->post('/qr/claim', 'CustomerController::claimPoint');
 
 //Admin Pages
 $routes->get('admin/dashboard', 'AdminController::index');

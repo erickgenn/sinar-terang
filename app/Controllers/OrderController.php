@@ -17,6 +17,16 @@ use Exception;
 
 class OrderController extends BaseController
 {
+    private $salt, $iv, $key, $method;
+
+    function __construct()
+    {
+        $this->salt = "59731B52B3EC58FA";
+        $this->key = "05788993F8E4CE6A";
+        $this->iv = "46060159617A8U7J";
+        $this->method = "AES-128-CBC";
+    }
+
     public function index()
     {
         return view('admin/order/index');
@@ -182,14 +192,7 @@ class OrderController extends BaseController
         return json_encode($detail);
     }
 
-    public function print($id)
-    {
-        $orderModel = new OrderModel();
-        $order = $orderModel->where('id', $id)->first();
-        $order['created_at'] = date("d F Y", strtotime($order['created_at']));
-        $order['total_price'] = AdminController::money_format_rupiah($order['total_price']);
-        return view("admin/order/print_invoice", compact('id', 'order'));
-    }
+
 
     public function store()
     {
@@ -438,5 +441,34 @@ class OrderController extends BaseController
         }
 
         return json_encode($list);
+    }
+
+    public function print($id)
+    {
+        $orderModel = new OrderModel();
+        $order = $orderModel->where('id', $id)->first();
+
+        $encrypt_qr = OrderController::aes128Encrypt($id);
+        $order['created_at'] = date("d F Y", strtotime($order['created_at']));
+        $order['total_price'] = AdminController::money_format_rupiah($order['total_price']);
+        return view("admin/order/print_invoice", compact('id', 'order', 'encrypt_qr'));
+    }
+
+    public function aes128Encrypt($order_id)
+    {
+        $ivlen = openssl_cipher_iv_length($cipher = "AES-128-CBC");
+        $iv = openssl_random_pseudo_bytes($ivlen);
+
+        $plaintext = [
+            "order_id" => $order_id,
+        ];
+
+        $plain = json_encode($plaintext, TRUE);
+
+        $ciphertext_raw = openssl_encrypt($plain, $this->method, $this->key, OPENSSL_RAW_DATA, $this->iv);
+
+        $ciphertext = base64_encode($ciphertext_raw);
+
+        return $ciphertext;
     }
 }

@@ -9,7 +9,7 @@ class OrderModel extends Model
     protected $table      = 'mstr_order';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['total_price', 'request_cancel', 'customer_id', 'discount'];
+    protected $allowedFields = ['total_price', 'request_cancel', 'customer_id', 'discount', 'is_claimed'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

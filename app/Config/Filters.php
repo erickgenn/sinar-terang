@@ -54,6 +54,9 @@ class Filters extends BaseConfig
                     'login/auth',
                     'register/customer/auth',
                     'access/forbidden',
+                    'qr/*',
+                    'qr/claim',
+
                 ],
             ],
             'authManager' => [
@@ -103,6 +106,9 @@ class Filters extends BaseConfig
                     'admin/customer_pages/edit_faq/*',
                     'admin/customer_pages/add_faq',
                     'access/forbidden',
+                    'qr/*',
+                    'qr/claim',
+
                 ],
             ],
             // 'honeypot',

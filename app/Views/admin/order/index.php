@@ -213,7 +213,7 @@
                                     <img src="<?php echo base_url() ?>/dist/img/credit/mastercard.png" alt="Mastercard">
                                     <img src="<?php echo base_url() ?>/dist/img/credit/qris.png" alt="QRIS" style="max-height: 39px;">
                                     <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        No Refunds. Except as expressly provided herein, all payments under this Agreement will be irrevocable, non-refundable, and non-exchangeable.
+                                        No Refunds. Except as expressly provided herein, all payments under this Agreement will be non-refundable and non-exchangeable.
                                     </p>
                                 </div>
 
