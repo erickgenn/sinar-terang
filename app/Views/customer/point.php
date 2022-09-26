@@ -60,6 +60,22 @@
 
 		<?php include(APPPATH . "Views/layout/aside_cust.php"); ?>
 
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+		<?php if (session()->getFlashdata('claim_success')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'https://cdn.dribbble.com/users/2050145/screenshots/5485422/head_dribbble.gif',
+					buttons: false,
+					closeOnClickOutside: false,
+					timer: 3500,
+					title: "Claim Success!",
+					text: "This QR Has Been Claimed Before",
+				});
+			</script>
+		<?php endif; ?>
+
 		<div id="colorlib-main">
 
 			<div class="colorlib-about">
@@ -67,7 +83,7 @@
 					<div class="row row-bottom-padded-md">
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="about-desc">
-								<span class="heading-meta">Points</span>
+								<span class="heading-meta"><?php echo $customer['name'] ?>'s Points</span>
 								<h2 class="colorlib-heading colorlib-counter js-counter" data-from="0" data-to="<?php echo $customer['point'] ?>" data-speed="1500" data-refresh-interval="50" style="font-size: 27px;"></h2>
 								<p>You can earn points by scanning the QR codes provided on your order bills</p>
 								<p>These points can be exchanged as a discount for your next orders.</p>

@@ -75,6 +75,7 @@ class CustomerController extends BaseController
 
     public function point()
     {
+        $session = session();
         $customerModel = new CustomerModel();
         $customer = $customerModel->where('id', $_SESSION['id'])->first();
 
@@ -185,13 +186,7 @@ class CustomerController extends BaseController
         $customer = $customerModel->where('email', $email)->where('password', $password)->first();
 
         if (isset($customer)) {
-            $session_data = [
-                'id' => $customer['id'],
-                'name' => $customer['name'],
-                'email' => $customer['email'],
-                'isLoggedIn' => TRUE,
-                'role' => 'customer',
-            ];
+
 
             $decrypt = CustomerController::aes128Decrypt($ciphertext);
             $order_id = $decrypt['order_id'];
@@ -202,6 +197,15 @@ class CustomerController extends BaseController
                 $session->setFlashdata('qr_claimed', "failed");
                 return redirect()->to('/');
             } else {
+                $session_data = [
+                    'id' => $customer['id'],
+                    'name' => $customer['name'],
+                    'email' => $customer['email'],
+                    'isLoggedIn' => TRUE,
+                    'role' => 'customer',
+                ];
+                $session->set($session_data);
+
                 $qr_point = $pointConfigModel->where('id', 2)->first();
 
                 $data_update_customer = [
@@ -237,8 +241,9 @@ class CustomerController extends BaseController
     public function aes128Decrypt($ciphertext_raw)
     {
 
-        $ciphertext = base64_decode($ciphertext_raw);
+        $ciphertext_raw = CustomerController::FromBase64UrlString($ciphertext_raw);
 
+        $ciphertext = base64_decode($ciphertext_raw);
         $ivlen = openssl_cipher_iv_length($cipher = "AES-128-CBC");
         $iv = openssl_random_pseudo_bytes($ivlen);
         $ciphertext_raw = openssl_decrypt($ciphertext, $cipher, $this->key, $options = OPENSSL_RAW_DATA, $this->iv);
@@ -246,5 +251,12 @@ class CustomerController extends BaseController
         $data_decrypt = json_decode($ciphertext_raw, TRUE);
 
         return $data_decrypt;
+    }
+
+    public function FromBase64UrlString($text)
+    {
+        $step_1 = str_replace("_", "/", $text);
+        $step_2 = str_replace("-", "+", $step_1);
+        return $step_2;
     }
 }

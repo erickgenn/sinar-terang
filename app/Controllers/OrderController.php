@@ -447,8 +447,9 @@ class OrderController extends BaseController
     {
         $orderModel = new OrderModel();
         $order = $orderModel->where('id', $id)->first();
-
         $encrypt_qr = OrderController::aes128Encrypt($id);
+
+        dd($encrypt_qr);
         $order['created_at'] = date("d F Y", strtotime($order['created_at']));
         $order['total_price'] = AdminController::money_format_rupiah($order['total_price']);
         return view("admin/order/print_invoice", compact('id', 'order', 'encrypt_qr'));
@@ -469,6 +470,15 @@ class OrderController extends BaseController
 
         $ciphertext = base64_encode($ciphertext_raw);
 
+        $ciphertext = OrderController::ToBase64UrlString($ciphertext);
+
         return $ciphertext;
+    }
+
+    public function ToBase64UrlString($text)
+    {
+        $step_1 = str_replace("/", "_", $text);
+        $step_2 = str_replace("+", "-", $step_1);
+        return $step_2;
     }
 }

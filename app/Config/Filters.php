@@ -56,6 +56,10 @@ class Filters extends BaseConfig
                     'access/forbidden',
                     'qr/*',
                     'qr/claim',
+                    'forgot_password/customer/index',
+                    'forgot_password/customer/auth',
+                    'forgot_password/customer/change_pass/*',
+                    'forgot_password/customer/new_pass/*',
 
                 ],
             ],
@@ -108,7 +112,10 @@ class Filters extends BaseConfig
                     'access/forbidden',
                     'qr/*',
                     'qr/claim',
-
+                    'forgot_password/customer/index',
+                    'forgot_password/customer/auth',
+                    'forgot_password/customer/change_pass/*',
+                    'forgot_password/customer/new_pass/*',
                 ],
             ],
             // 'honeypot',

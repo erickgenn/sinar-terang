@@ -73,6 +73,20 @@
 			</script>
 		<?php endif; ?>
 
+		<?php if (session()->getFlashdata('logout_successful')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'https://cdn.dribbble.com/users/253590/screenshots/6058509/media/6d657daf5316f4926a71c4c564371305.gif',
+					buttons: false,
+					closeOnClickOutside: false,
+					timer: 2500,
+					title: "Bye-Bye!",
+					text: "Sad to see you go",
+				});
+			</script>
+		<?php endif; ?>
+
 		<?php if (session()->getFlashdata('qr_claimed')) : ?>
 			<script>
 				swal({
@@ -86,6 +100,8 @@
 				});
 			</script>
 		<?php endif; ?>
+
+
 
 		<div id="colorlib-main">
 			<aside id="colorlib-hero" class="js-fullheight">

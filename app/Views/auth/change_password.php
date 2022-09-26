@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Sinar Terang | Login</title>
+	<title>Sinar Terang | Change Password</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -40,48 +40,13 @@
 			</script>
 		<?php endif; ?>
 
-		<?php if (session()->getFlashdata('registration_successful')) : ?>
-			<script>
-				swal({
-					position: 'top-end',
-					icon: 'success',
-					title: 'Registration Successful!',
-					showConfirmButton: false,
-					timer: 1800
-				});
-			</script>
-		<?php endif; ?>
 
-		<?php if (session()->getFlashdata('email_sent')) : ?>
-			<script>
-				swal({
-					position: 'top-end',
-					icon: 'success',
-					title: 'Please Check Your Email',
-					showConfirmButton: false,
-					timer: 1800
-				});
-			</script>
-		<?php endif; ?>
-
-		<?php if (session()->getFlashdata('password_changed')) : ?>
-			<script>
-				swal({
-					position: 'top-end',
-					icon: 'success',
-					title: 'Your Password is Successfuly Changed!',
-					showConfirmButton: false,
-					timer: 1800
-				});
-			</script>
-		<?php endif; ?>
-
-		<?php if (session()->getFlashdata('email_failed')) : ?>
+		<?php if (session()->getFlashdata('email_incorrect')) : ?>
 			<script>
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: 'Email Failed to Be Sent, Please Try Again!',
+					title: 'Email is Wrong!',
 					showConfirmButton: false,
 					timer: 1800
 				});
@@ -89,15 +54,15 @@
 		<?php endif; ?>
 
 		<div class="container-login100">
-			<div style="background-color: #D5CFA3;" class="wrap-login100">
+			<div style="background-color: #D5CFA3; padding: 85px 130px 75px 95px;" class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="/login/images/logos-02.png" alt="IMG">
 				</div>
 
-				<form action="<?php echo base_url("/login/auth") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
+				<form action="<?php echo base_url("/forgot_password/customer/new_pass") . "/" . $token ?>" method="POST" class="login100-form validate-form">
 
 					<span class="login100-form-title">
-						Welcome Back!
+						Change Your Password
 					</span>
 					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.com">
 						<input class="input100" type="text" name="email" placeholder="Email">
@@ -115,36 +80,20 @@
 						</span>
 					</div>
 
+					<div class="wrap-input100 validate-input" data-validate="Confirm Password is required">
+						<input class="input100" type="password" name="confirm_password" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
-							Login
+							Change Password
 						</button>
 					</div>
 
-					<div class="text-center p-t-12">
-						<span class="txt1">
-							Forgot your password?
-						</span>
-						<a class="txt2" href="<?php echo base_url('forgot_password/customer/index'); ?>">
-							Click Here
-						</a>
-					</div>
-
-					<div class="text-center p-t-12">
-						<span class="txt1">
-							Are you an admin?
-						</span>
-						<a class="txt2" href="<?php echo base_url("login/admin"); ?>">
-							Click Here
-						</a>
-					</div>
-
-					<div class="text-center p-t-136">
-						<a class="txt2" href="<?php echo base_url("register/customer"); ?>">
-							Create your Account
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
-					</div>
 				</form>
 			</div>
 		</div>
