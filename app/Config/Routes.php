@@ -171,7 +171,8 @@ $routes->get('access/forbidden', 'AuthController::forbidden');
 $routes->get('login/customer', 'AuthController::customer');
 $routes->post('login/auth', 'AuthController::loginCustomer');
 $routes->get('register/customer', 'AuthController::registerCustomer');
-$routes->post('register/customer/auth', 'AuthController::registerCustomerAuth');
+$routes->post('register/customer/email', 'AuthController::registerCustomerAuthEmail');
+$routes->get('register/customer/auth/(:any)', 'AuthController::registerCustomerAuth/$1');
 
 $routes->get('forgot_password/customer/index', 'AuthController::customerForgotPassword');
 $routes->post('forgot_password/customer/auth', 'AuthController::customerForgotAuth');
