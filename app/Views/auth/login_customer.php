@@ -69,7 +69,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'success',
-					title: 'Your Password is Successfuly Changed!',
+					title: 'Your Password Has Been Changed!',
 					showConfirmButton: false,
 					timer: 1800
 				});

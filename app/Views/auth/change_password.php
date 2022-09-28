@@ -53,6 +53,18 @@
 			</script>
 		<?php endif; ?>
 
+		<?php if (session()->getFlashdata('password_different')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'error',
+					title: "Password Doesn't Match!",
+					showConfirmButton: false,
+					timer: 1900
+				});
+			</script>
+		<?php endif; ?>
+
 		<div class="container-login100">
 			<div style="background-color: #D5CFA3; padding: 85px 130px 75px 95px;" class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>

@@ -449,7 +449,7 @@ class OrderController extends BaseController
         $order = $orderModel->where('id', $id)->first();
         $encrypt_qr = OrderController::aes128Encrypt($id);
 
-        dd($encrypt_qr);
+        // dd($encrypt_qr);
         $order['created_at'] = date("d F Y", strtotime($order['created_at']));
         $order['total_price'] = AdminController::money_format_rupiah($order['total_price']);
         return view("admin/order/print_invoice", compact('id', 'order', 'encrypt_qr'));

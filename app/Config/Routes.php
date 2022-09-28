@@ -178,6 +178,11 @@ $routes->post('forgot_password/customer/auth', 'AuthController::customerForgotAu
 $routes->get('forgot_password/customer/change_pass/(:any)', 'AuthController::customerForgotChange/$1');
 $routes->post('forgot_password/customer/new_pass/(:any)', 'AuthController::customerForgotNew/$1');
 
+$routes->get('forgot_password/admin/index', 'AuthController::adminForgotPassword');
+$routes->post('forgot_password/admin/auth', 'AuthController::adminForgotAuth');
+$routes->get('forgot_password/admin/change_pass/(:any)', 'AuthController::adminForgotChange/$1');
+$routes->post('forgot_password/admin/new_pass/(:any)', 'AuthController::adminForgotNew/$1');
+
 
 $routes->get('logout', 'AuthController::logout');
 
