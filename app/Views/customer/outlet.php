@@ -73,7 +73,11 @@
 								<div class="blog-entry">
 									<a class="blog-img"><img src="<?php echo base_url('/uploads/outlet') . "/" . $outlet[$i]['picture'] ?>" class="img-responsive" alt="Store"></a>
 									<div class="desc">
-										<span><small>Store <?php echo $i + 1 ?> </small></span>
+										<?php if ($outlet[$i]['is_active'] == 1) : ?>
+											<span><small style="color: #133A1B;">Open | Store <?php echo $i + 1 ?> </small></span>
+										<?php else : ?>
+											<span><small style="color: #B8293D;">Closed | Store <?php echo $i + 1 ?> </small></span>
+										<?php endif; ?>
 										<h3><a><?php echo $outlet[$i]['name']; ?></a></h3>
 										<p><?php echo $outlet[$i]['location']; ?></p>
 									</div>

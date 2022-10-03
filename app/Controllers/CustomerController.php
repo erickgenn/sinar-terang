@@ -58,8 +58,6 @@ class CustomerController extends BaseController
         return view('customer/outlet', compact('outlet'));
     }
 
-
-
     public function contact()
     {
         $contactModel = new ContactUsModel();
