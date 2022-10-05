@@ -145,7 +145,11 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="<?php echo base_url('admin/finance/profit_loss'); ?>" class="small-box-footer">See Profit and Loss <i class="fas fa-arrow-circle-right"></i></a>
+                                <?php if ($_SESSION['role'] == 'owner') : ?>
+                                    <a href="<?php echo base_url('admin/finance/profit_loss'); ?>" class="small-box-footer">See Profit and Loss <i class="fas fa-arrow-circle-right"></i></a>
+                                <?php else : ?>
+                                    <a href="<?php echo base_url('admin/finance/cash'); ?>" class="small-box-footer">See Cash Report <i class="fas fa-arrow-circle-right"></i></a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
