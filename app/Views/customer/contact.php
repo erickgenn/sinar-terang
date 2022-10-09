@@ -40,7 +40,7 @@
 	<link rel="stylesheet" href="/customer_page/css/owl.carousel.min.css">
 	<link rel="stylesheet" href="/customer_page/css/owl.theme.default.min.css">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="/customer_page/css/style.css">
+	<link rel="stylesheet" href="/customer_page/css/style.css?v=1.10">
 
 	<!-- Modernizr JS -->
 	<script src="/customer_page/js/modernizr-2.6.2.min.js"></script>
