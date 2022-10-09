@@ -41,7 +41,7 @@
 		<?php endif; ?>
 
 		<div class="container-login100">
-			<div style="background-color: #D5CFA3;padding: 80px 125px 50px 95px;" class="wrap-login100">
+			<div style="background-color: #D5CFA3;padding: 50px 25px 50px 25px;" class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="/login/images/logos-02.png" alt="IMG">
 				</div>

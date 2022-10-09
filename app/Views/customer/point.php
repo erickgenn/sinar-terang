@@ -71,7 +71,7 @@
 					closeOnClickOutside: false,
 					timer: 3500,
 					title: "Claim Success!",
-					text: "This QR Has Been Claimed Before",
+					text: "Points Have Been Rewarded To You!",
 				});
 			</script>
 		<?php endif; ?>
