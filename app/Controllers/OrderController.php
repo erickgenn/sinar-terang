@@ -41,7 +41,7 @@ class OrderController extends BaseController
     {
         $productModel = new ProductModel();
         $outletModel = new OutletModel();
-        $product = $productModel->where('quantity !=', 0)->findAll();
+        $product = $productModel->where('quantity !=', 0)->where('is_active', 1)->findAll();
         for ($i = 0; $i < count($product); $i++) {
             $product[$i]['price'] = AdminController::money_format_rupiah($product[$i]['price']);
 

@@ -162,6 +162,7 @@
 
     <script>
         $(document).ready(function() {
+
             $('#user-table').DataTable({
                 scrollX: true,
                 "ajax": {
@@ -242,6 +243,9 @@
                         sortable: false,
                         render: function(data, type, row, meta) {
                             if (<?php echo $count; ?> <= 1) {
+                                return `<a href="<?php echo base_url('admin/user/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        `;
+                            } else if (<?php echo $_SESSION['id'] ?> == row.id) {
                                 return `<a href="<?php echo base_url('admin/user/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>
                                         `;
                             } else {

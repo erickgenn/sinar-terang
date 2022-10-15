@@ -10,6 +10,7 @@ class UserController extends BaseController
 {
     public function index()
     {
+        $session = session();
         if ($_SESSION['role'] != 'owner') {
             return redirect()
                 ->to('access/forbidden');
@@ -17,11 +18,12 @@ class UserController extends BaseController
         $userModel = new UserModel();
         $user = $userModel->findAll();
         $count = count($user);
-        return view('admin/user/index', compact('count'));
+        return view('admin/user/index', compact('count', 'user'));
     }
 
     public function add()
     {
+        $session = session();
         if ($_SESSION['role'] != 'owner') {
             return redirect()
                 ->to('access/forbidden');
@@ -31,6 +33,8 @@ class UserController extends BaseController
 
     public function view($id)
     {
+        $session = session();
+
         if ($_SESSION['role'] != 'owner') {
             return redirect()
                 ->to('access/forbidden');
