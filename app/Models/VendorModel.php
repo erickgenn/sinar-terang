@@ -9,7 +9,7 @@ class VendorModel extends Model
     protected $table      = 'mstr_vendor';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name', 'phone', 'contact_person', 'is_active'];
+    protected $allowedFields = ['name', 'phone', 'contact_person', 'is_active', 'updated_at'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

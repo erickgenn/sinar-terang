@@ -67,6 +67,7 @@ class VendorController extends BaseController
                 'name' => $data['vendor_name'],
                 'phone' => $data['vendor_phone'],
                 'contact_person' => $data['vendor_contact_person'],
+                'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
             ];
 
             $vendorModel->update($id, $data_update);

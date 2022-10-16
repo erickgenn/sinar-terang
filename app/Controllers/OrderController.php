@@ -310,32 +310,6 @@ class OrderController extends BaseController
         return redirect()->to(base_url('admin/add_order'));
     }
 
-    public function update($id)
-    {
-        $session = session();
-        $userModel = new UserModel();
-        try {
-            $data = $this->request->getPost();
-
-            $data_update = [
-                'name' => $data['user_name'],
-                'role' => $data['user_role'],
-            ];
-
-            $userModel->update($id, $data_update);
-
-            $user = $userModel->findAll();
-            $count = count($user);
-
-            $session->setFlashdata('updateSuccessful', 'abc');
-            return view('admin/user/index', compact('count'));
-        } catch (Exception $e) {
-            $session->setFlashdata('updateFailed', 'Update Failed, Please Try Again');
-            return redirect()->to(base_url('admin/user/view') . '/' . $id);
-        }
-        return redirect()->to(base_url('admin/user/view') . '/' . $id);
-    }
-
     public function requestCancel()
     {
         $session = session();

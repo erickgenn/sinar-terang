@@ -99,6 +99,7 @@ class UserController extends BaseController
             $data_update = [
                 'name' => $data['user_name'],
                 'role' => $data['user_role'],
+                'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
             ];
 
             $userModel->update($id, $data_update);

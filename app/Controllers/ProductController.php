@@ -47,7 +47,8 @@ class ProductController extends BaseController
                         'price'    => $data['product_price'],
                         'picture'  => $data['product_picture_default'],
                         'description' => $data['product_description'],
-                        'outlet_id' => $data['product_outlet_id']
+                        'outlet_id' => $data['product_outlet_id'],
+                        'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
                     ];
 
                     $productModel->update($id, $data_update);
@@ -100,7 +101,8 @@ class ProductController extends BaseController
                             'price'    => $data['product_price'],
                             'picture'    => $file->getName(),
                             'description' => $data['product_description'],
-                            'outlet_id' => $data['product_outlet_id']
+                            'outlet_id' => $data['product_outlet_id'],
+                            'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
                         ];
 
                         $productModel->update($id, $data_update);

@@ -39,8 +39,8 @@ class OutletController extends BaseController
                         'name' => $data['outlet_name'],
                         'location' => $data['outlet_location'],
                         'picture'  => $data['outlet_picture_default'],
+                        'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
                     ];
-
                     $outletModel->update($id, $data_update);
 
                     $session->setFlashdata('updateSuccessful', 'abc');
@@ -88,6 +88,7 @@ class OutletController extends BaseController
                             'name' => $data['outlet_name'],
                             'location' => $data['outlet_location'],
                             'picture'    => $file->getName(),
+                            'updated_at' => date("Y-m-d H:i:s.000"), strtotime("Now"),
                         ];
 
                         $outletModel->update($id, $data_update);
@@ -186,7 +187,7 @@ class OutletController extends BaseController
         $outletModel = new OutletModel();
 
         $data = [
-            'is_active' => 0
+            'is_active' => 0,
         ];
 
         $outletModel->update($id, $data);
