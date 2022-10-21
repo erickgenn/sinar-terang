@@ -80,7 +80,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="inputName">Name</label>
-                                                <input type="text" id="inputName" name="point_name" class="form-control" value="<?php echo $point['name']; ?>">
+                                                <input type="text" id="inputName" name="point_name" class="form-control" value="<?php echo $point['name']; ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputDescription">Description</label>

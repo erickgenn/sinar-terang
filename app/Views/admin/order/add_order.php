@@ -142,6 +142,15 @@
                             </div>
                             <div class="card-footer">
                                 <?php if (isset($customer_id)) : ?>
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-warning"><i class="fa-sharp fa-solid fa-coins"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text"><?php echo $customer['name'] ?>'s Points:</span>
+                                                <span class="info-box-number" style="font-size: 20px;"><?php echo $customer['point'] ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group col-3">
                                         <label for="inputPoints">Claim Points</label>
                                         <input type="number" id="inputPoints" name="order_points" min="0" max="<?php echo $customer['point'] ?>" class="form-control" required>

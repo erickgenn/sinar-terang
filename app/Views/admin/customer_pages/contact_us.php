@@ -42,7 +42,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Outlet Updated Successfuly!',
+                    title: 'Contact Updated Successfuly!',
                     showConfirmButton: false,
                     timer: 1500
                 });

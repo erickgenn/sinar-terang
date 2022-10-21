@@ -108,14 +108,6 @@
                     </li>
                     <?php if ($_SESSION['role'] == 'owner') : ?>
                         <li class="nav-item">
-                            <a href="<?php echo base_url("/admin/vendor"); ?>" id="vendor" class="nav-link">
-                                <i class="nav-icon fa-solid fa-truck-ramp-box"></i>
-                                <p>
-                                    Vendors
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?php echo base_url("/admin/user"); ?>" id="user" class="nav-link">
                                 <i class="nav-icon fa-solid fa-user-pen"></i>
                                 <p>
@@ -269,8 +261,6 @@
                 document.getElementById("outlet").className = "nav-link active";
             } else if (current.includes('/admin/edit_outlet')) {
                 document.getElementById("outlet").className = "nav-link active";
-            } else if (current.includes('/admin/vendor')) {
-                document.getElementById("vendor").className = "nav-link active";
             } else if (current.includes('/admin/order/request_cancel')) {
                 document.getElementById("order_pages").className = "nav-link active";
                 document.getElementById("order_request").className = "nav-link active";
