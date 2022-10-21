@@ -85,6 +85,18 @@
             </script>
         <?php endif; ?>
 
+        <?php if (session()->getFlashdata('deleteOutlet')) : ?>
+            <script>
+                swal({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'User Deleted Successfuly!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        <?php endif; ?>
+
 
         <div class="content-wrapper">
 

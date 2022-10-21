@@ -293,6 +293,8 @@
                 document.getElementById("user").className = "nav-link active";
             } else if (current.includes('/admin/add_user')) {
                 document.getElementById("user").className = "nav-link active";
+            } else if (current.includes('/admin/edit_user')) {
+                document.getElementById("user").className = "nav-link active";
             } else if (current.includes('/admin/customer')) {
                 document.getElementById("customer").className = "nav-link active";
             } else if (current.includes('/admin/finance/salary')) {
