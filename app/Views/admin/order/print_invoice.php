@@ -83,6 +83,10 @@
                                     <table class="table">
                                         <tbody>
                                             <tr>
+                                                <th>Discount:</th>
+                                                <td id="invoice_total_price" class="text-right"><?php echo $order['discount']; ?></td>
+                                            </tr>
+                                            <tr>
                                                 <th>Total:</th>
                                                 <td id="invoice_total_price" class="text-right"><?php echo $order['total_price']; ?></td>
                                             </tr>

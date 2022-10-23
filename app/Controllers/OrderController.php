@@ -152,6 +152,7 @@ class OrderController extends BaseController
             ->findAll();
         for ($i = 0; $i < count($order); $i++) {
             $order[$i]['total_price'] = AdminController::money_format_rupiah($order[$i]['total_price']);
+            $order[$i]['discount'] = AdminController::money_format_rupiah($order[$i]['discount']);
             $order[$i]['created_at'] = date("d F Y", strtotime($order[$i]['created_at']));
         }
 
@@ -178,12 +179,12 @@ class OrderController extends BaseController
     public function searchDetail($id)
     {
         $detailOrderModel = new DetailOrderModel();
-        $productModel = new ProductModel();
+        // $productModel = new ProductModel();
         $detail = $detailOrderModel->where('order_id', $id)->findAll();
 
         for ($i = 0; $i < count($detail); $i++) {
-            $product = $productModel->where('id', $detail[$i]['product_id'])->first();
-            $detail[$i]['product_name'] = $product['name'];
+            // $product = $productModel->where('id', $detail[$i]['product_id'])->first();
+            $detail[$i]['product_name'] = $detail[$i]['product_name'];
             $detail[$i]['amount'] = (int) $detail[$i]['product_price'] * (int) $detail[$i]['quantity'];
             $detail[$i]['amount'] = AdminController::money_format_rupiah($detail[$i]['amount']);
             $detail[$i]['product_price'] = AdminController::money_format_rupiah($detail[$i]['product_price']);
@@ -191,8 +192,6 @@ class OrderController extends BaseController
 
         return json_encode($detail);
     }
-
-
 
     public function store()
     {
@@ -255,6 +254,7 @@ class OrderController extends BaseController
                 $product = $productModel->where('id', $product_id[$i])->first();
                 $data_insert_detail = [
                     'product_id' => $product_id[$i],
+                    'product_name' => $product['name'],
                     'product_price' => $product['price'],
                     'quantity' => $data['product_qty'][$i],
                     'order_id' => $orderModel->getInsertID(),
@@ -355,7 +355,7 @@ class OrderController extends BaseController
         $balance = $balanceModel->where('id', 1)->first();
         $balance_new = (int)$balance['balance'] - $order['total_price'];
         $data_insert_cash = [
-            'description' => "Cancelled Order Number " . $orderModel->getInsertID(),
+            'description' => "Cancelled Order Number " . $order['id'],
             'credit' => $order['total_price'],
             'date' => date("Y-m-d"),
             'balance' => $balance_new,
@@ -426,6 +426,7 @@ class OrderController extends BaseController
         // dd($encrypt_qr);
         $order['created_at'] = date("d F Y", strtotime($order['created_at']));
         $order['total_price'] = AdminController::money_format_rupiah($order['total_price']);
+        $order['discount'] = AdminController::money_format_rupiah($order['discount']);
         return view("admin/order/print_invoice", compact('id', 'order', 'encrypt_qr'));
     }
 

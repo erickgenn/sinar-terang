@@ -222,6 +222,10 @@
                                         <table class="table">
                                             <tbody>
                                                 <tr>
+                                                    <th>Dscount:</th>
+                                                    <td id="invoice_discount" class="text-right"></td>
+                                                </tr>
+                                                <tr>
                                                     <th>Total:</th>
                                                     <td id="invoice_total_price" class="text-right"></td>
                                                 </tr>
@@ -340,7 +344,7 @@
                         render: function(data, type, row, meta) {
                             switch (row.request_cancel) {
                                 case "0":
-                                    return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>
+                                    return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}', '${row.discount}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>
                                     <button type='button' onclick="getOrderID('${row.id}')" class='btn btn-danger' data-toggle="modal" data-target="#cancelModal"><i class="fa-solid fa-trash"></i></button>
                                     
                                     <!-- Cancel Modal -->
@@ -402,9 +406,10 @@
     </script>
 
     <script>
-        function detailTable(date, id, total_price) {
+        function detailTable(date, id, total_price, discount) {
             document.getElementById('invoice_date').innerText = "Date: " + date;
             document.getElementById('invoice_total_price').innerText = total_price;
+            document.getElementById('invoice_discount').innerText = discount;
             document.getElementById('print_button').href = "<?php echo base_url('admin/order/print'); ?>/" + id;
 
             $('#detail-table').DataTable().clear();
