@@ -109,7 +109,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-success float-right">Edit User</button>
+                                    <button type="submit" class="btn btn-success float-right">Edit Point Configuration</button>
                                 </div>
                             </div>
                         </form>

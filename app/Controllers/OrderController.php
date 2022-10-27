@@ -148,7 +148,7 @@ class OrderController extends BaseController
     {
         $orderModel = new OrderModel();
 
-        $order = $orderModel->where('deleted_at', NULL)
+        $order = $orderModel->where('deleted_at', NULL)->orderBy('created_at', 'desc')
             ->findAll();
         for ($i = 0; $i < count($order); $i++) {
             $order[$i]['total_price'] = AdminController::money_format_rupiah($order[$i]['total_price']);
