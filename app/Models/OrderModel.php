@@ -16,7 +16,6 @@ class OrderModel extends Model
     protected $deletedField  = 'deleted_at';
 
     protected $useSoftDeletes = true;
-    // protected $useSoftDeletes = true;
 
     public function monthSales($month)
     {

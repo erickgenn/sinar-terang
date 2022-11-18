@@ -9,6 +9,8 @@ class AuthController extends BaseController
 {
     private $salt, $iv, $key, $method;
 
+    // Encryption Key
+
     function __construct()
     {
         $this->salt = "59731B52B3EC58FA";
@@ -80,7 +82,6 @@ class AuthController extends BaseController
 
             return redirect()->to('login/admin');
         }
-        // return view('auth/login_admin');
     }
 
     public function loginCustomer()
@@ -111,7 +112,6 @@ class AuthController extends BaseController
 
             return redirect()->to('login/customer');
         }
-        // return view('auth/login_admin');
     }
 
     public function registerCustomerAuthEmail()
@@ -740,6 +740,7 @@ class AuthController extends BaseController
         return $data_decrypt;
     }
 
+    // Replace "/" and "+" with "_" and "-" because ciphertext will be sent through URL
     public function ToBase64UrlString($text)
     {
         $step_1 = str_replace("/", "_", $text);
@@ -747,6 +748,7 @@ class AuthController extends BaseController
         return $step_2;
     }
 
+    // Replace "_" and "-" with "/" and "+" because ciphertext will be read by system
     public function FromBase64UrlString($text)
     {
         $step_1 = str_replace("_", "/", $text);

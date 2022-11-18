@@ -16,5 +16,4 @@ class OrderCancelRequestModel extends Model
     protected $deletedField  = 'deleted_at';
 
     protected $useSoftDeletes = true;
-    // protected $useSoftDeletes = true;
 }

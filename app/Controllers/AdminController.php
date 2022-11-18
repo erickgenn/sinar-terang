@@ -41,6 +41,7 @@ class AdminController extends BaseController
         $date_saturday = date("Y-m-d", strtotime("Saturday This Week"));
         $date_sunday = date("Y-m-d", strtotime("Sunday This Week"));
 
+        // Count new customer's registration
         $monday = $customerModel->countRegistrationDate($date_monday)->getResultArray();
         $tuesday = $customerModel->countRegistrationDate($date_tuesday)->getResultArray();
         $wednesday = $customerModel->countRegistrationDate($date_wednesday)->getResultArray();
@@ -51,7 +52,7 @@ class AdminController extends BaseController
 
         $count_customer = [count($monday), count($tuesday), count($wednesday), count($thursday), count($friday), count($saturday), count($sunday)];
 
-        // get low quantity product
+        // Get low quantity product
         $low_product = $productModel->where('quantity <=', '5')->findAll();
 
         return view('admin/dashboard', compact('total_order', 'total_request', 'total_customer', 'gross_sales', 'count_customer', 'low_product'));
@@ -62,6 +63,7 @@ class AdminController extends BaseController
         return view('admin/customer/index');
     }
 
+    // Money format
     public static function money_format_rupiah($num)
     {
         $result = "Rp " . number_format($num, 2, ',', '.');

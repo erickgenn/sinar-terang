@@ -38,7 +38,7 @@ class ProductController extends BaseController
         $productModel = new ProductModel();
         try {
             $data = $this->request->getPost();
-            // upload image
+            // Upload image
             if ($_FILES['product_picture']['name'] == '') {
                 try {
                     $data_update = [
@@ -90,7 +90,6 @@ class ProductController extends BaseController
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) {
                     $session->setFlashdata('ImageFailed', 'Please Try Another Image');
-                    // echo "Sorry, your file was not uploaded.";
                     // if everything is ok, try to upload file
                 } else {
                     if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
@@ -128,7 +127,7 @@ class ProductController extends BaseController
         $productModel = new ProductModel();
         try {
             $data = $this->request->getPost();
-            // upload image
+            // Upload image
             $file = $this->request->getFile('product_picture');
 
             $target_dir = "uploads/product/";
@@ -140,10 +139,8 @@ class ProductController extends BaseController
             if (isset($file)) {
                 $check = getimagesize($file->getTempName());
                 if ($check !== false) {
-                    // echo "File is an image - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
-                    // echo "File is not an image.";
                     $uploadOk = 0;
                 }
             }
@@ -160,13 +157,10 @@ class ProductController extends BaseController
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
                 $session->setFlashdata('ImageFailed', 'Please Try Another Image');
-
-                // echo "Sorry, your file was not uploaded.";
                 // if everything is ok, try to upload file
             } else {
                 if (move_uploaded_file($file->getTempName(), $target_dir . $file->getName())) {
-
-                    // upload to db
+                    // Upload to db
                     $data_insert = [
                         'name' => $data['product_name'],
                         'quantity' => $data['product_quantity'],

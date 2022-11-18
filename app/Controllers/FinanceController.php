@@ -4,10 +4,8 @@ namespace App\Controllers;
 
 use App\Models\BalanceModel;
 use App\Models\CashReportModel;
-use App\Models\CustomerModel;
 use App\Models\OrderModel;
 use App\Models\PointConfigurationModel;
-use App\Models\PointModel;
 use App\Models\VendorModel;
 use Exception;
 
@@ -685,7 +683,6 @@ class FinanceController extends BaseController
             $session->setFlashdata('insertFailed', 'Insert Failed, Please Try Again');
             return redirect()->to(base_url('admin/finance/add_cash') . "/" . $data['cash_month']);
         }
-        // return redirect()->to(base_url('admin/add_vendor'));
     }
 
     public function delete($id)

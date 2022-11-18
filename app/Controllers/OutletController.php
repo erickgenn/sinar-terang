@@ -32,7 +32,7 @@ class OutletController extends BaseController
         $outletModel = new OutletModel();
         try {
             $data = $this->request->getPost();
-            // upload image
+            // Upload image
             if ($_FILES['outlet_picture']['name'] == '') {
                 try {
                     $data_update = [
@@ -79,7 +79,6 @@ class OutletController extends BaseController
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) {
                     $session->setFlashdata('ImageFailed', 'Please Try Another Image');
-                    // echo "Sorry, your file was not uploaded.";
                     // if everything is ok, try to upload file
                 } else {
                     if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
@@ -114,7 +113,7 @@ class OutletController extends BaseController
         $outletModel = new OutletModel();
         try {
             $data = $this->request->getPost();
-            // upload image
+            // Upload image
             $file = $this->request->getFile('outlet_picture');
 
             $target_dir = "uploads/outlet";
@@ -144,7 +143,6 @@ class OutletController extends BaseController
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
                 $session->setFlashdata('ImageFailed', 'Please Try Another Image');
-                // echo "Sorry, your file was not uploaded.";
                 // if everything is ok, try to upload file
             } else {
                 if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {

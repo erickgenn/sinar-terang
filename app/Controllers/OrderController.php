@@ -179,11 +179,9 @@ class OrderController extends BaseController
     public function searchDetail($id)
     {
         $detailOrderModel = new DetailOrderModel();
-        // $productModel = new ProductModel();
         $detail = $detailOrderModel->where('order_id', $id)->findAll();
 
         for ($i = 0; $i < count($detail); $i++) {
-            // $product = $productModel->where('id', $detail[$i]['product_id'])->first();
             $detail[$i]['product_name'] = $detail[$i]['product_name'];
             $detail[$i]['amount'] = (int) $detail[$i]['product_price'] * (int) $detail[$i]['quantity'];
             $detail[$i]['amount'] = AdminController::money_format_rupiah($detail[$i]['amount']);
@@ -423,7 +421,6 @@ class OrderController extends BaseController
         $order = $orderModel->where('id', $id)->first();
         $encrypt_qr = OrderController::aes128Encrypt($id);
 
-        // dd($encrypt_qr);
         $order['created_at'] = date("d F Y", strtotime($order['created_at']));
         $order['total_price'] = AdminController::money_format_rupiah($order['total_price']);
         $order['discount'] = AdminController::money_format_rupiah($order['discount']);
