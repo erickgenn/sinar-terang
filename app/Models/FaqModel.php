@@ -9,11 +9,11 @@ class FaqModel extends Model
     protected $table      = 'cust_faq';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['question', 'answer'];
+    protected $allowedFields = ['question', 'answer', 'updated_at'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // protected $useSoftDeletes = true;
+    protected $useSoftDeletes = true;
 }

@@ -41,6 +41,30 @@
 			</script>
 		<?php endif; ?>
 
+		<?php if (session()->getFlashdata('email_sent')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Please Check Your Email',
+					showConfirmButton: false,
+					timer: 1800
+				});
+			</script>
+		<?php endif; ?>
+
+		<?php if (session()->getFlashdata('email_failed')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'error',
+					title: 'Email Failed to Be Sent, Please Try Again!',
+					showConfirmButton: false,
+					timer: 1800
+				});
+			</script>
+		<?php endif; ?>
+
 		<?php if (session()->getFlashdata('email_used')) : ?>
 			<script>
 				swal({
@@ -54,12 +78,12 @@
 		<?php endif; ?>
 
 		<div class="container-login100">
-			<div style="background-color: #D5CFA3;" class="wrap-login100">
+			<div style="background-color: #D5CFA3;padding: 93px 130px 2px 95px;" class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="/login/images/logos-02.png" alt="IMG">
 				</div>
 
-				<form action="<?php echo base_url("/register/customer/auth") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
+				<form action="<?php echo base_url("/register/customer/email") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
 
 					<span class="login100-form-title">
 						Register Your Account

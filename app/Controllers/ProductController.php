@@ -38,7 +38,7 @@ class ProductController extends BaseController
         $productModel = new ProductModel();
         try {
             $data = $this->request->getPost();
-            // upload image
+            // Upload image
             if ($_FILES['product_picture']['name'] == '') {
                 try {
                     $data_update = [
@@ -47,7 +47,8 @@ class ProductController extends BaseController
                         'price'    => $data['product_price'],
                         'picture'  => $data['product_picture_default'],
                         'description' => $data['product_description'],
-                        'outlet_id' => $data['product_outlet_id']
+                        'outlet_id' => $data['product_outlet_id'],
+                        'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
                     ];
 
                     $productModel->update($id, $data_update);
@@ -77,7 +78,7 @@ class ProductController extends BaseController
                 }
 
                 // Check file size
-                if ($file->getSize() > 5000000) {
+                if ($file->getSize() > 70000000) {
                     $uploadOk = 0;
                 }
 
@@ -89,7 +90,6 @@ class ProductController extends BaseController
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) {
                     $session->setFlashdata('ImageFailed', 'Please Try Another Image');
-                    // echo "Sorry, your file was not uploaded.";
                     // if everything is ok, try to upload file
                 } else {
                     if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
@@ -100,7 +100,8 @@ class ProductController extends BaseController
                             'price'    => $data['product_price'],
                             'picture'    => $file->getName(),
                             'description' => $data['product_description'],
-                            'outlet_id' => $data['product_outlet_id']
+                            'outlet_id' => $data['product_outlet_id'],
+                            'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
                         ];
 
                         $productModel->update($id, $data_update);
@@ -126,10 +127,10 @@ class ProductController extends BaseController
         $productModel = new ProductModel();
         try {
             $data = $this->request->getPost();
-            // upload image
+            // Upload image
             $file = $this->request->getFile('product_picture');
 
-            $target_dir = "uploads/product";
+            $target_dir = "uploads/product/";
             $target_file = $target_dir . '/' . basename($file->getName());
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -145,7 +146,7 @@ class ProductController extends BaseController
             }
 
             // Check file size
-            if ($file->getSize() > 5000000) {
+            if ($file->getSize() > 700000000) {
                 $uploadOk = 0;
             }
 
@@ -153,15 +154,13 @@ class ProductController extends BaseController
             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
                 $uploadOk = 0;
             }
-
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
                 $session->setFlashdata('ImageFailed', 'Please Try Another Image');
-                // echo "Sorry, your file was not uploaded.";
                 // if everything is ok, try to upload file
             } else {
-                if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
-                    // upload to db
+                if (move_uploaded_file($file->getTempName(), $target_dir . $file->getName())) {
+                    // Upload to db
                     $data_insert = [
                         'name' => $data['product_name'],
                         'quantity' => $data['product_quantity'],

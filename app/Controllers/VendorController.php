@@ -9,6 +9,10 @@ class VendorController extends BaseController
 {
     public function index()
     {
+        if ($_SESSION['role'] != 'owner') {
+            return redirect()
+                ->to('access/forbidden');
+        }
         return view('admin/vendor/index');
     }
 
@@ -19,6 +23,10 @@ class VendorController extends BaseController
 
     public function view($id)
     {
+        if ($_SESSION['role'] != 'owner') {
+            return redirect()
+                ->to('access/forbidden');
+        }
         $vendorModel = new VendorModel();
         $vendor = $vendorModel->where('id', $id)->first();
         return view('admin/vendor/edit_vendor', compact('vendor', 'id'));
@@ -59,6 +67,7 @@ class VendorController extends BaseController
                 'name' => $data['vendor_name'],
                 'phone' => $data['vendor_phone'],
                 'contact_person' => $data['vendor_contact_person'],
+                'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
             ];
 
             $vendorModel->update($id, $data_update);

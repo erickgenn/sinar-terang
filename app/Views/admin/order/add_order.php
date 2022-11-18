@@ -8,11 +8,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-    <link rel="stylesheet" href="<?php
-
-                                    use App\Controllers\AdminController;
-
-                                    echo base_url(); ?>/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/plugins/fontawesome-free/css/all.min.css">
 
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
@@ -146,9 +142,18 @@
                             </div>
                             <div class="card-footer">
                                 <?php if (isset($customer_id)) : ?>
+                                    <div class="col-md-3 col-sm-6 col-12">
+                                        <div class="info-box">
+                                            <span class="info-box-icon bg-warning"><i class="fa-sharp fa-solid fa-coins"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text"><?php echo $customer['name'] ?>'s Points:</span>
+                                                <span class="info-box-number" style="font-size: 20px;"><?php echo $customer['point'] ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group col-3">
                                         <label for="inputPoints">Claim Points</label>
-                                        <input type="number" id="inputPoints" name="order_points" min="0" max="<?php echo $customer['point'] ?>" class="form-control">
+                                        <input type="number" id="inputPoints" name="order_points" min="0" max="<?php echo $customer['point'] ?>" class="form-control" required>
                                         <input type="hidden" name="customer_id" value="<?php echo $customer_id ?>">
                                     </div>
                                 <?php endif; ?>

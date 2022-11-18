@@ -17,6 +17,16 @@ use Exception;
 
 class OrderController extends BaseController
 {
+    private $salt, $iv, $key, $method;
+
+    function __construct()
+    {
+        $this->salt = "59731B52B3EC58FA";
+        $this->key = "05788993F8E4CE6A";
+        $this->iv = "46060159617A8U7J";
+        $this->method = "AES-128-CBC";
+    }
+
     public function index()
     {
         return view('admin/order/index');
@@ -31,7 +41,7 @@ class OrderController extends BaseController
     {
         $productModel = new ProductModel();
         $outletModel = new OutletModel();
-        $product = $productModel->where('quantity !=', 0)->findAll();
+        $product = $productModel->where('quantity !=', 0)->where('is_active', 1)->findAll();
         for ($i = 0; $i < count($product); $i++) {
             $product[$i]['price'] = AdminController::money_format_rupiah($product[$i]['price']);
 
@@ -138,10 +148,11 @@ class OrderController extends BaseController
     {
         $orderModel = new OrderModel();
 
-        $order = $orderModel->where('deleted_at', NULL)
+        $order = $orderModel->where('deleted_at', NULL)->orderBy('created_at', 'desc')
             ->findAll();
         for ($i = 0; $i < count($order); $i++) {
             $order[$i]['total_price'] = AdminController::money_format_rupiah($order[$i]['total_price']);
+            $order[$i]['discount'] = AdminController::money_format_rupiah($order[$i]['discount']);
             $order[$i]['created_at'] = date("d F Y", strtotime($order[$i]['created_at']));
         }
 
@@ -168,27 +179,16 @@ class OrderController extends BaseController
     public function searchDetail($id)
     {
         $detailOrderModel = new DetailOrderModel();
-        $productModel = new ProductModel();
         $detail = $detailOrderModel->where('order_id', $id)->findAll();
 
         for ($i = 0; $i < count($detail); $i++) {
-            $product = $productModel->where('id', $detail[$i]['product_id'])->first();
-            $detail[$i]['product_name'] = $product['name'];
+            $detail[$i]['product_name'] = $detail[$i]['product_name'];
             $detail[$i]['amount'] = (int) $detail[$i]['product_price'] * (int) $detail[$i]['quantity'];
             $detail[$i]['amount'] = AdminController::money_format_rupiah($detail[$i]['amount']);
             $detail[$i]['product_price'] = AdminController::money_format_rupiah($detail[$i]['product_price']);
         }
 
         return json_encode($detail);
-    }
-
-    public function print($id)
-    {
-        $orderModel = new OrderModel();
-        $order = $orderModel->where('id', $id)->first();
-        $order['created_at'] = date("d F Y", strtotime($order['created_at']));
-        $order['total_price'] = AdminController::money_format_rupiah($order['total_price']);
-        return view("admin/order/print_invoice", compact('id', 'order'));
     }
 
     public function store()
@@ -229,12 +229,11 @@ class OrderController extends BaseController
                 ];
                 $productModel->update($product_id[$i], $data_update);
             }
-
             $data_insert = [
                 'total_price' => $total_price,
             ];
 
-            if ($data['order_points'] != "") {
+            if (isset($data['order_points'])) {
                 $pointConfigModel = new PointConfigurationModel();
                 $point = $pointConfigModel->where('id', '1')->first();
                 $discount = (int) $data['order_points'] / $point['point'] * $point['value'];
@@ -253,6 +252,7 @@ class OrderController extends BaseController
                 $product = $productModel->where('id', $product_id[$i])->first();
                 $data_insert_detail = [
                     'product_id' => $product_id[$i],
+                    'product_name' => $product['name'],
                     'product_price' => $product['price'],
                     'quantity' => $data['product_qty'][$i],
                     'order_id' => $orderModel->getInsertID(),
@@ -262,10 +262,10 @@ class OrderController extends BaseController
 
             $balance = $balanceModel->where('id', 1)->first();
             $balance_new = (int)$balance['balance'] + $total_price;
-
             $data_insert_cash = [
                 'description' => "Order Number " . $orderModel->getInsertID(),
                 'debit' => $total_price,
+                'date' => date("Y-m-d"),
                 'balance' => $balance_new,
                 'type' => "order",
             ];
@@ -278,7 +278,7 @@ class OrderController extends BaseController
 
             $balanceModel->update('1', $data_update_balance);
 
-            if ($data['order_points'] != "") {
+            if (isset($data['order_points'])) {
                 $data_insert_point = [
                     'operation' => "-",
                     "point" => $data['order_points'],
@@ -306,32 +306,6 @@ class OrderController extends BaseController
             }
         }
         return redirect()->to(base_url('admin/add_order'));
-    }
-
-    public function update($id)
-    {
-        $session = session();
-        $userModel = new UserModel();
-        try {
-            $data = $this->request->getPost();
-
-            $data_update = [
-                'name' => $data['user_name'],
-                'role' => $data['user_role'],
-            ];
-
-            $userModel->update($id, $data_update);
-
-            $user = $userModel->findAll();
-            $count = count($user);
-
-            $session->setFlashdata('updateSuccessful', 'abc');
-            return view('admin/user/index', compact('count'));
-        } catch (Exception $e) {
-            $session->setFlashdata('updateFailed', 'Update Failed, Please Try Again');
-            return redirect()->to(base_url('admin/user/view') . '/' . $id);
-        }
-        return redirect()->to(base_url('admin/user/view') . '/' . $id);
     }
 
     public function requestCancel()
@@ -369,10 +343,31 @@ class OrderController extends BaseController
     {
         $session = session();
         $orderModel = new OrderModel();
+        $balanceModel = new BalanceModel();
         $orderRequestModel = new OrderCancelRequestModel();
+        $cashReportModel = new CashReportModel();
 
         $orderRequestModel->delete($cancel_id);
         $order = $orderModel->where('id', $order_id)->first();
+
+        $balance = $balanceModel->where('id', 1)->first();
+        $balance_new = (int)$balance['balance'] - $order['total_price'];
+        $data_insert_cash = [
+            'description' => "Cancelled Order Number " . $order['id'],
+            'credit' => $order['total_price'],
+            'date' => date("Y-m-d"),
+            'balance' => $balance_new,
+            'type' => "order",
+        ];
+
+        $cashReportModel->insert($data_insert_cash);
+
+        $data_update_balance = [
+            'balance' => $balance_new,
+        ];
+
+        $balanceModel->update('1', $data_update_balance);
+
         $orderModel->delete($order_id);
 
         $session->setFlashdata('acceptRequest', '.');
@@ -418,5 +413,44 @@ class OrderController extends BaseController
         }
 
         return json_encode($list);
+    }
+
+    public function print($id)
+    {
+        $orderModel = new OrderModel();
+        $order = $orderModel->where('id', $id)->first();
+        $encrypt_qr = OrderController::aes128Encrypt($id);
+
+        $order['created_at'] = date("d F Y", strtotime($order['created_at']));
+        $order['total_price'] = AdminController::money_format_rupiah($order['total_price']);
+        $order['discount'] = AdminController::money_format_rupiah($order['discount']);
+        return view("admin/order/print_invoice", compact('id', 'order', 'encrypt_qr'));
+    }
+
+    public function aes128Encrypt($order_id)
+    {
+        $ivlen = openssl_cipher_iv_length($cipher = "AES-128-CBC");
+        $iv = openssl_random_pseudo_bytes($ivlen);
+
+        $plaintext = [
+            "order_id" => $order_id,
+        ];
+
+        $plain = json_encode($plaintext, TRUE);
+
+        $ciphertext_raw = openssl_encrypt($plain, $this->method, $this->key, OPENSSL_RAW_DATA, $this->iv);
+
+        $ciphertext = base64_encode($ciphertext_raw);
+
+        $ciphertext = OrderController::ToBase64UrlString($ciphertext);
+
+        return $ciphertext;
+    }
+
+    public function ToBase64UrlString($text)
+    {
+        $step_1 = str_replace("/", "_", $text);
+        $step_2 = str_replace("+", "-", $step_1);
+        return $step_2;
     }
 }

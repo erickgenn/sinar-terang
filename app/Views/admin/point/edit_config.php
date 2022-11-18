@@ -80,7 +80,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="inputName">Name</label>
-                                                <input type="text" id="inputName" name="point_name" class="form-control" value="<?php echo $point['name']; ?>">
+                                                <input type="text" id="inputName" name="point_name" class="form-control" value="<?php echo $point['name']; ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputDescription">Description</label>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-success float-right">Edit User</button>
+                                    <button type="submit" class="btn btn-success float-right">Edit Point Configuration</button>
                                 </div>
                             </div>
                         </form>

@@ -211,9 +211,8 @@
                                     <p class="lead">Payment Methods:</p>
                                     <img src="<?php echo base_url() ?>/dist/img/credit/visa.png" alt="Visa">
                                     <img src="<?php echo base_url() ?>/dist/img/credit/mastercard.png" alt="Mastercard">
-                                    <img src="<?php echo base_url() ?>/dist/img/credit/qris.png" alt="QRIS" style="max-height: 39px;">
                                     <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                        No Refunds. Except as expressly provided herein, all payments under this Agreement will be irrevocable, non-refundable, and non-exchangeable.
+                                        No Refunds. Except as expressly provided herein, all payments under this Agreement will be non-refundable and non-exchangeable.
                                     </p>
                                 </div>
 
@@ -221,6 +220,10 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tbody>
+                                                <tr>
+                                                    <th>Discount:</th>
+                                                    <td id="invoice_discount" class="text-right"></td>
+                                                </tr>
                                                 <tr>
                                                     <th>Total:</th>
                                                     <td id="invoice_total_price" class="text-right"></td>
@@ -340,7 +343,7 @@
                         render: function(data, type, row, meta) {
                             switch (row.request_cancel) {
                                 case "0":
-                                    return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>
+                                    return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}', '${row.discount}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>
                                     <button type='button' onclick="getOrderID('${row.id}')" class='btn btn-danger' data-toggle="modal" data-target="#cancelModal"><i class="fa-solid fa-trash"></i></button>
                                     
                                     <!-- Cancel Modal -->
@@ -359,7 +362,7 @@
                                                         <input type="hidden" id="order_id_hidden" name="order_id">
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-success">Submit</button>
                                                     </div>
                                                 </div>
@@ -402,9 +405,10 @@
     </script>
 
     <script>
-        function detailTable(date, id, total_price) {
+        function detailTable(date, id, total_price, discount) {
             document.getElementById('invoice_date').innerText = "Date: " + date;
             document.getElementById('invoice_total_price').innerText = total_price;
+            document.getElementById('invoice_discount').innerText = "- " + discount;
             document.getElementById('print_button').href = "<?php echo base_url('admin/order/print'); ?>/" + id;
 
             $('#detail-table').DataTable().clear();

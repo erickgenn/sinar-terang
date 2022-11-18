@@ -40,7 +40,7 @@
 	<link rel="stylesheet" href="/customer_page/css/owl.carousel.min.css">
 	<link rel="stylesheet" href="/customer_page/css/owl.theme.default.min.css">
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="/customer_page/css/style.css">
+	<link rel="stylesheet" href="/customer_page/css/style.css?v=1.10">
 
 	<!-- Modernizr JS -->
 	<script src="/customer_page/js/modernizr-2.6.2.min.js"></script>
@@ -66,119 +66,20 @@
 						</div>
 					</div>
 					<div class="row row-bottom-padded-md">
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/customer_page/images/img-1.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="<?php echo base_url("/product"); ?>">Work 01</a></h3>
-										<span>Building</span>
+						<?php for ($i = 0; $i < count($product); $i++) : ?>
+							<div class="col-md-<?php echo $col_num[$i] ?> animate-box" data-animate-effect="fadeInLeft">
+								<div class="project" style="background-image: url(<?php echo base_url('/uploads/product') . "/" . $product[$i]['picture'] ?>);">
+									<div class="desc">
+										<div class="con">
+											<h2 style="font-color: white;"><a><?php echo $product[$i]['name'] ?></a></h2>
+											<span><a style="color: white;"><?php echo $product[$i]['description'] ?></a></span>
+											<br>
+											<h3><a><?php echo $product[$i]['price'] ?></a></h3>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/customer_page/images/img-2.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="<?php echo base_url("/product"); ?>">Work 02</a></h3>
-										<span>House, Apartment</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/customer_page/images/img-3.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="<?php echo base_url("/product"); ?>">Work 03</a></h3>
-										<span>Dining Room</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/customer_page/images/img-4.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="<?php echo base_url("/product"); ?>">Work 04</a></h3>
-										<span>House, Building</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/customer_page/images/img-5.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="<?php echo base_url("/product"); ?>">Work 05</a></h3>
-										<span>Condo, Pad</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/customer_page/images/img-6.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="<?php echo base_url("/product"); ?>">Work 06</a></h3>
-										<span>Table, Chairs</span>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/customer_page/images/img-7.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="<?php echo base_url("/product"); ?>">Work 02</a></h3>
-										<span>House, Apartment</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/customer_page/images/img-8.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="<?php echo base_url("/product"); ?>">Work 03</a></h3>
-										<span>Dining Room</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/customer_page/images/img-9.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="<?php echo base_url("/product"); ?>">Work 04</a></h3>
-										<span>House, Building</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(/customer_page/images/img-5.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="<?php echo base_url("/product"); ?>">Work 05</a></h3>
-										<span>Condo, Pad</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<ul class="pagination">
-								<li class="disabled"><a href="#">&laquo;</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">&raquo;</a></li>
-							</ul>
-						</div>
+						<?php endfor; ?>
 					</div>
 				</div>
 			</div>

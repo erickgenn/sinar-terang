@@ -76,6 +76,7 @@ class CustomerPagesController extends BaseController
             $data_update = [
                 'phone' => $data['contact_us_phone'],
                 'email' => $data['contact_us_email'],
+                'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
             ];
 
             $contactUsModel->update($id, $data_update);
@@ -104,6 +105,7 @@ class CustomerPagesController extends BaseController
             $data_update = [
                 'question' => $data['faq_question'],
                 'answer' => $data['faq_answer'],
+                'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
             ];
 
             $faqModel->update($id, $data_update);

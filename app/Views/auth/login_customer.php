@@ -52,6 +52,42 @@
 			</script>
 		<?php endif; ?>
 
+		<?php if (session()->getFlashdata('email_sent')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Please Check Your Email',
+					showConfirmButton: false,
+					timer: 1800
+				});
+			</script>
+		<?php endif; ?>
+
+		<?php if (session()->getFlashdata('password_changed')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Your Password Has Been Changed!',
+					showConfirmButton: false,
+					timer: 1800
+				});
+			</script>
+		<?php endif; ?>
+
+		<?php if (session()->getFlashdata('email_failed')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'error',
+					title: 'Email Failed to Be Sent, Please Try Again!',
+					showConfirmButton: false,
+					timer: 1800
+				});
+			</script>
+		<?php endif; ?>
+
 		<div class="container-login100">
 			<div style="background-color: #D5CFA3;" class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
@@ -89,7 +125,7 @@
 						<span class="txt1">
 							Forgot your password?
 						</span>
-						<a class="txt2" href="#">
+						<a class="txt2" href="<?php echo base_url('forgot_password/customer/index'); ?>">
 							Click Here
 						</a>
 					</div>

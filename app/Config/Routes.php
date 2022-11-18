@@ -41,10 +41,13 @@ $routes->get('/home', 'CustomerController::index');
 
 // Customer Pages
 $routes->get('/about', 'CustomerController::about');
-$routes->get('/blog', 'CustomerController::blog');
+$routes->get('/outlet', 'CustomerController::outlet');
 $routes->get('/contact', 'CustomerController::contact');
 $routes->get('/services', 'CustomerController::services');
 $routes->get('/product', 'CustomerController::product');
+$routes->get('/point', 'CustomerController::point');
+$routes->get('/qr/(:any)', 'CustomerController::claimQR/$1');
+$routes->post('/qr/claim', 'CustomerController::claimPoint');
 
 //Admin Pages
 $routes->get('admin/dashboard', 'AdminController::index');
@@ -112,6 +115,27 @@ $routes->get('admin/finance/sales/search', 'FinanceController::searchSales');
 $routes->get('admin/finance/sales/search/total', 'FinanceController::searchSalesTotal');
 $routes->get('admin/finance/cash/search', 'FinanceController::searchCash');
 $routes->get('admin/finance/cash/search/first', 'FinanceController::searchFirstBalance');
+$routes->get('admin/finance/add_cash/(:any)', 'FinanceController::addCash/$1');
+$routes->post('admin/finance/add_cash', 'FinanceController::storeCash');
+$routes->get('admin/finance/salary', 'FinanceController::salary');
+$routes->get('admin/finance/salary/search', 'FinanceController::searchSalary');
+$routes->get('admin/finance/salary/search/total', 'FinanceController::searchSalaryTotal');
+$routes->get('admin/finance/electrical', 'FinanceController::electrical');
+$routes->get('admin/finance/electrical/search', 'FinanceController::searchElectrical');
+$routes->get('admin/finance/electrical/search/total', 'FinanceController::searchElectricalTotal');
+$routes->get('admin/finance/rent', 'FinanceController::rent');
+$routes->get('admin/finance/rent/search', 'FinanceController::searchRent');
+$routes->get('admin/finance/rent/search/total', 'FinanceController::searchRentTotal');
+$routes->get('admin/finance/maintenance', 'FinanceController::maintenance');
+$routes->get('admin/finance/maintenance/search', 'FinanceController::searchMaintenance');
+$routes->get('admin/finance/maintenance/search/total', 'FinanceController::searchMaintenanceTotal');
+$routes->get('admin/finance/other', 'FinanceController::other');
+$routes->get('admin/finance/other/search', 'FinanceController::searchOther');
+$routes->get('admin/finance/other/search/total', 'FinanceController::searchOtherTotal');
+$routes->get('admin/finance/profit_loss', 'FinanceController::profitLoss');
+$routes->get('admin/finance/profit_loss/search', 'FinanceController::searchProfitLoss');
+$routes->get('admin/finance/profit_loss/search/total/expenses', 'FinanceController::searchProfitLossTotalExpenses');
+$routes->get('admin/finance/profit_loss/search/total/profit', 'FinanceController::searchProfitLossTotalProfit');
 
 
 
@@ -142,10 +166,24 @@ $routes->post('admin/user/delete/(:num)', 'UserController::delete/$1');
 $routes->get('login/admin', 'AuthController::admin');
 $routes->post('login/admin/auth', 'AuthController::loginAdmin');
 
+$routes->get('access/forbidden', 'AuthController::forbidden');
+
 $routes->get('login/customer', 'AuthController::customer');
 $routes->post('login/auth', 'AuthController::loginCustomer');
 $routes->get('register/customer', 'AuthController::registerCustomer');
-$routes->post('register/customer/auth', 'AuthController::registerCustomerAuth');
+$routes->post('register/customer/email', 'AuthController::registerCustomerAuthEmail');
+$routes->get('register/customer/auth/(:any)', 'AuthController::registerCustomerAuth/$1');
+
+$routes->get('forgot_password/customer/index', 'AuthController::customerForgotPassword');
+$routes->post('forgot_password/customer/auth', 'AuthController::customerForgotAuth');
+$routes->get('forgot_password/customer/change_pass/(:any)', 'AuthController::customerForgotChange/$1');
+$routes->post('forgot_password/customer/new_pass/(:any)', 'AuthController::customerForgotNew/$1');
+
+$routes->get('forgot_password/admin/index', 'AuthController::adminForgotPassword');
+$routes->post('forgot_password/admin/auth', 'AuthController::adminForgotAuth');
+$routes->get('forgot_password/admin/change_pass/(:any)', 'AuthController::adminForgotChange/$1');
+$routes->post('forgot_password/admin/new_pass/(:any)', 'AuthController::adminForgotNew/$1');
+
 
 $routes->get('logout', 'AuthController::logout');
 

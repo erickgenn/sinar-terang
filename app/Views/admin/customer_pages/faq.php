@@ -66,7 +66,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'FAQ ID <?php echo $faq_deleted['id']; ?> Is Successfuly Deleted!',
+                    title: 'FAQ Is Successfuly Deleted!',
                     showConfirmButton: false,
                     timer: 1500
                 });

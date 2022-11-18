@@ -10,19 +10,35 @@ class UserController extends BaseController
 {
     public function index()
     {
+        $session = session();
+        if ($_SESSION['role'] != 'owner') {
+            return redirect()
+                ->to('access/forbidden');
+        }
         $userModel = new UserModel();
         $user = $userModel->findAll();
         $count = count($user);
-        return view('admin/user/index', compact('count'));
+        return view('admin/user/index', compact('count', 'user'));
     }
 
     public function add()
     {
+        $session = session();
+        if ($_SESSION['role'] != 'owner') {
+            return redirect()
+                ->to('access/forbidden');
+        }
         return view('admin/user/add_user');
     }
 
     public function view($id)
     {
+        $session = session();
+
+        if ($_SESSION['role'] != 'owner') {
+            return redirect()
+                ->to('access/forbidden');
+        }
         $userModel = new UserModel();
         $user = $userModel->where('id', $id)->first();
         return view('admin/user/edit_user', compact('user', 'id'));
@@ -83,6 +99,7 @@ class UserController extends BaseController
             $data_update = [
                 'name' => $data['user_name'],
                 'role' => $data['user_role'],
+                'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
             ];
 
             $userModel->update($id, $data_update);

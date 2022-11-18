@@ -32,15 +32,15 @@ class OutletController extends BaseController
         $outletModel = new OutletModel();
         try {
             $data = $this->request->getPost();
-            // upload image
+            // Upload image
             if ($_FILES['outlet_picture']['name'] == '') {
                 try {
                     $data_update = [
                         'name' => $data['outlet_name'],
                         'location' => $data['outlet_location'],
                         'picture'  => $data['outlet_picture_default'],
+                        'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
                     ];
-
                     $outletModel->update($id, $data_update);
 
                     $session->setFlashdata('updateSuccessful', 'abc');
@@ -68,10 +68,9 @@ class OutletController extends BaseController
                 }
 
                 // Check file size
-                if ($file->getSize() > 5000000) {
+                if ($file->getSize() > 7000000) {
                     $uploadOk = 0;
                 }
-
                 // Allow certain file formats
                 if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
                     $uploadOk = 0;
@@ -80,7 +79,6 @@ class OutletController extends BaseController
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) {
                     $session->setFlashdata('ImageFailed', 'Please Try Another Image');
-                    // echo "Sorry, your file was not uploaded.";
                     // if everything is ok, try to upload file
                 } else {
                     if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
@@ -89,6 +87,7 @@ class OutletController extends BaseController
                             'name' => $data['outlet_name'],
                             'location' => $data['outlet_location'],
                             'picture'    => $file->getName(),
+                            'updated_at' => date("Y-m-d H:i:s.000"), strtotime("Now"),
                         ];
 
                         $outletModel->update($id, $data_update);
@@ -114,14 +113,13 @@ class OutletController extends BaseController
         $outletModel = new OutletModel();
         try {
             $data = $this->request->getPost();
-            // upload image
+            // Upload image
             $file = $this->request->getFile('outlet_picture');
 
             $target_dir = "uploads/outlet";
             $target_file = $target_dir . '/' . basename($file->getName());
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
             // Check if image file is a actual image or fake image
             if (isset($file)) {
                 $check = getimagesize($file->getTempName());
@@ -133,7 +131,7 @@ class OutletController extends BaseController
             }
 
             // Check file size
-            if ($file->getSize() > 5000000) {
+            if ($file->getSize() > 7000000) {
                 $uploadOk = 0;
             }
 
@@ -145,7 +143,6 @@ class OutletController extends BaseController
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
                 $session->setFlashdata('ImageFailed', 'Please Try Another Image');
-                // echo "Sorry, your file was not uploaded.";
                 // if everything is ok, try to upload file
             } else {
                 if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
@@ -188,7 +185,7 @@ class OutletController extends BaseController
         $outletModel = new OutletModel();
 
         $data = [
-            'is_active' => 0
+            'is_active' => 0,
         ];
 
         $outletModel->update($id, $data);

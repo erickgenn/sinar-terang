@@ -62,18 +62,17 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
 
                         <div class="row">
 
                             <div class="col-6">
-                                <p class="lead">Payment Methods:</p>
                                 <img src="<?php echo base_url() ?>/dist/img/credit/visa.png" alt="Visa">
                                 <img src="<?php echo base_url() ?>/dist/img/credit/mastercard.png" alt="Mastercard">
-                                <img src="<?php echo base_url() ?>/dist/img/credit/qris.png" alt="QRIS" style="max-height: 39px;">
+                                <p class="lead">Scan the QR Code to Get Points!</p>
+                                <img id='barcode' alt="" title="" width="150" height="150" />
                                 <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                    No Refunds. Except as expressly provided herein, all payments under this Agreement will be irrevocable, non-refundable, and non-exchangeable.
+                                    No Refunds. Except as expressly provided herein, all payments under this Agreement will be non-refundable and non-exchangeable.
                                 </p>
                             </div>
 
@@ -81,6 +80,10 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
+                                            <tr>
+                                                <th>Discount:</th>
+                                                <td id="invoice_total_price" class="text-right"><?php echo "- " . $order['discount']; ?></td>
+                                            </tr>
                                             <tr>
                                                 <th>Total:</th>
                                                 <td id="invoice_total_price" class="text-right"><?php echo $order['total_price']; ?></td>
@@ -118,8 +121,16 @@
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"></script>
 
+    <script type="text/javascript">
+        function generateBarCode() {
+            var nric = $('#text').val();
+            var url = 'https://api.qrserver.com/v1/create-qr-code/?data=<?php echo base_url('qr') . '/' . $encrypt_qr; ?>&amp;size=50x50';
+            $('#barcode').attr('src', url);
+        }
+    </script>
     <script>
         $(document).ready(function() {
+            generateBarCode();
             $('#detail-table').DataTable({
                 scrollX: true,
                 "paging": false,

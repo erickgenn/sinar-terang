@@ -46,6 +46,43 @@
 				});
 			</script>
 		<?php endif; ?>
+
+		<?php if (session()->getFlashdata('email_sent')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Please Check Your Email',
+					showConfirmButton: false,
+					timer: 1800
+				});
+			</script>
+		<?php endif; ?>
+
+		<?php if (session()->getFlashdata('password_changed')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'success',
+					title: 'Your Password Has Been Changed!',
+					showConfirmButton: false,
+					timer: 1800
+				});
+			</script>
+		<?php endif; ?>
+
+		<?php if (session()->getFlashdata('email_failed')) : ?>
+			<script>
+				swal({
+					position: 'top-end',
+					icon: 'error',
+					title: 'Email Failed to Be Sent, Please Try Again!',
+					showConfirmButton: false,
+					timer: 1800
+				});
+			</script>
+		<?php endif; ?>
+
 		<div class="container-login100" style="background-color: #0d152d;">
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image: url(/login_admin/images/bg-01.jpg);">
@@ -74,7 +111,7 @@
 						<div>
 							<p class="txt1">
 								Forgot your password?
-								<a href="#" class="txt1">
+								<a href="<?php echo base_url('forgot_password/admin/index'); ?>" class="txt1">
 									Click Here
 								</a>
 							</p>
