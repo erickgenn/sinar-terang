@@ -211,7 +211,6 @@
                                     <p class="lead">Payment Methods:</p>
                                     <img src="<?php echo base_url() ?>/dist/img/credit/visa.png" alt="Visa">
                                     <img src="<?php echo base_url() ?>/dist/img/credit/mastercard.png" alt="Mastercard">
-                                    <img src="<?php echo base_url() ?>/dist/img/credit/qris.png" alt="QRIS" style="max-height: 39px;">
                                     <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
                                         No Refunds. Except as expressly provided herein, all payments under this Agreement will be non-refundable and non-exchangeable.
                                     </p>
@@ -222,7 +221,7 @@
                                         <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <th>Dscount:</th>
+                                                    <th>Discount:</th>
                                                     <td id="invoice_discount" class="text-right"></td>
                                                 </tr>
                                                 <tr>
@@ -409,7 +408,7 @@
         function detailTable(date, id, total_price, discount) {
             document.getElementById('invoice_date').innerText = "Date: " + date;
             document.getElementById('invoice_total_price').innerText = total_price;
-            document.getElementById('invoice_discount').innerText = discount;
+            document.getElementById('invoice_discount').innerText = "- " + discount;
             document.getElementById('print_button').href = "<?php echo base_url('admin/order/print'); ?>/" + id;
 
             $('#detail-table').DataTable().clear();

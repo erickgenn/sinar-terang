@@ -62,7 +62,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
 
                         <div class="row">
@@ -70,7 +69,6 @@
                             <div class="col-6">
                                 <img src="<?php echo base_url() ?>/dist/img/credit/visa.png" alt="Visa">
                                 <img src="<?php echo base_url() ?>/dist/img/credit/mastercard.png" alt="Mastercard">
-                                <img src="<?php echo base_url() ?>/dist/img/credit/qris.png" alt="QRIS" style="max-height: 39px;">
                                 <p class="lead">Scan the QR Code to Get Points!</p>
                                 <img id='barcode' alt="" title="" width="150" height="150" />
                                 <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
@@ -84,7 +82,7 @@
                                         <tbody>
                                             <tr>
                                                 <th>Discount:</th>
-                                                <td id="invoice_total_price" class="text-right"><?php echo $order['discount']; ?></td>
+                                                <td id="invoice_total_price" class="text-right"><?php echo "- " . $order['discount']; ?></td>
                                             </tr>
                                             <tr>
                                                 <th>Total:</th>
