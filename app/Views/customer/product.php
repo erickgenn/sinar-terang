@@ -62,7 +62,7 @@
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<h2 class="colorlib-heading">Our Products</h2>
+							<h2 class="colorlib-heading">Produk Kami</h2>
 						</div>
 					</div>
 					<div class="row row-bottom-padded-md">

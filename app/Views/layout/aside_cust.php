@@ -3,16 +3,16 @@
     <h1 id="colorlib-logo""><a href=" <?php echo base_url("/home"); ?>">Sinar Terang</a></h1>
     <nav id="colorlib-main-menu" role="navigation">
         <ul>
-            <li id="home"><a href="<?php echo base_url("/home"); ?>">Home</a></li>
-            <li id="outlet"><a href="<?php echo base_url("/outlet"); ?>">Stores</a></li>
-            <li id="product"><a href="<?php echo base_url("/product"); ?>">Products</a></li>
-            <li id="about"><a href="<?php echo base_url("/about"); ?>">About</a></li>
-            <li id="contact"><a href="<?php echo base_url("/contact"); ?>">Contact Us</a></li>
+            <li id="home"><a href="<?php echo base_url("/home"); ?>">Beranda</a></li>
+            <li id="outlet"><a href="<?php echo base_url("/outlet"); ?>">Cabang</a></li>
+            <li id="product"><a href="<?php echo base_url("/product"); ?>">Produk</a></li>
+            <li id="about"><a href="<?php echo base_url("/about"); ?>">Tentang</a></li>
+            <li id="contact"><a href="<?php echo base_url("/contact"); ?>">Hubungi Kami</a></li>
             <?php if (!isset($_SESSION['isLoggedIn'])) : ?>
                 <li id="login"><a href="<?php echo base_url("/login/customer"); ?>">Log In</a></li>
             <?php elseif (isset($_SESSION['isLoggedIn'])) : ?>
-                <li id="point"><a href="<?php echo base_url("/point"); ?>">Your Points</a></li>
-                <li id="logout"><a href="<?php echo base_url("/logout"); ?>">Log Out</a></li>
+                <li id="point"><a href="<?php echo base_url("/point"); ?>">Poin</a></li>
+                <li id="logout"><a href="<?php echo base_url("/logout"); ?>">Keluar</a></li>
             <?php endif; ?>
         </ul>
     </nav>

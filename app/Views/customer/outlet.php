@@ -63,8 +63,8 @@
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Stores</span>
-							<h2 class="colorlib-heading">Our Stores</h2>
+							<span class="heading-meta">Cabang</span>
+							<h2 class="colorlib-heading">Cabang Kami</h2>
 						</div>
 					</div>
 					<div class="row">
@@ -74,9 +74,9 @@
 									<a class="blog-img"><img src="<?php echo base_url('/uploads/outlet') . "/" . $outlet[$i]['picture'] ?>" class="img-responsive" alt="Store"></a>
 									<div class="desc">
 										<?php if ($outlet[$i]['is_active'] == 1) : ?>
-											<span><small style="color: #133A1B;">Open | Store <?php echo $i + 1 ?> </small></span>
+											<span><small style="color: #133A1B;">Buka | Cabang <?php echo $i + 1 ?> </small></span>
 										<?php else : ?>
-											<span><small style="color: #B8293D;">Closed | Store <?php echo $i + 1 ?> </small></span>
+											<span><small style="color: #B8293D;">Tutup | Cabang <?php echo $i + 1 ?> </small></span>
 										<?php endif; ?>
 										<h3><a><?php echo $outlet[$i]['name']; ?></a></h3>
 										<p><?php echo $outlet[$i]['location']; ?></p>

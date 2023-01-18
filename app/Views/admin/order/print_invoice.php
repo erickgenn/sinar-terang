@@ -52,10 +52,10 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Product Name</th>
-                                            <th class="text-center">Price per Unit @ Rp</th>
-                                            <th>Quantity</th>
-                                            <th class="text-center">Amount</th>
+                                            <th>Nama Produk</th>
+                                            <th class="text-center">Harga per Unit @ Rp</th>
+                                            <th>Kuantitas</th>
+                                            <th class="text-center">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,10 +69,10 @@
                             <div class="col-6">
                                 <img src="<?php echo base_url() ?>/dist/img/credit/visa.png" alt="Visa">
                                 <img src="<?php echo base_url() ?>/dist/img/credit/mastercard.png" alt="Mastercard">
-                                <p class="lead">Scan the QR Code to Get Points!</p>
+                                <p class="lead">Pindai QR Code Untuk Dapatkan Poin!</p>
                                 <img id='barcode' alt="" title="" width="150" height="150" />
                                 <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                    No Refunds. Except as expressly provided herein, all payments under this Agreement will be non-refundable and non-exchangeable.
+                                    Tidak Dapat Melakukan Refund.
                                 </p>
                             </div>
 
@@ -81,7 +81,7 @@
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <th>Discount:</th>
+                                                <th>Diskon:</th>
                                                 <td id="invoice_total_price" class="text-right"><?php echo "- " . $order['discount']; ?></td>
                                             </tr>
                                             <tr>
@@ -99,7 +99,7 @@
                         <div class="row no-print">
                             <div class="col-12">
                                 <a href="<?php echo base_url('admin/order'); ?>" type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                                    Done
+                                    Selesai
                                 </a>
                             </div>
                         </div>

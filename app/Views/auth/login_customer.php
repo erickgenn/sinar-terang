@@ -33,7 +33,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: 'Email or Password is Incorrect!',
+					title: 'Email atau Password Salah!',
 					showConfirmButton: false,
 					timer: 1600
 				});
@@ -45,7 +45,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'success',
-					title: 'Registration Successful!',
+					title: 'Registrasi Berhasil!',
 					showConfirmButton: false,
 					timer: 1800
 				});
@@ -57,7 +57,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'success',
-					title: 'Please Check Your Email',
+					title: 'Mohon Periksa Emailmu!',
 					showConfirmButton: false,
 					timer: 1800
 				});
@@ -69,7 +69,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'success',
-					title: 'Your Password Has Been Changed!',
+					title: 'Passwordmu Berhasil Diubah!',
 					showConfirmButton: false,
 					timer: 1800
 				});
@@ -81,7 +81,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: 'Email Failed to Be Sent, Please Try Again!',
+					title: 'Email Gagal Dikirim, Mohon Coba Lagi!',
 					showConfirmButton: false,
 					timer: 1800
 				});
@@ -97,9 +97,9 @@
 				<form action="<?php echo base_url("/login/auth") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
 
 					<span class="login100-form-title">
-						Welcome Back!
+						Selamat Datang!
 					</span>
-					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.com">
+					<div class="wrap-input100 validate-input" data-validate="Email valid diperlukan: ex@abc.com">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -107,7 +107,7 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
+					<div class="wrap-input100 validate-input" data-validate="Password dibutuhkan">
 						<input class="input100" type="password" name="password" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -123,25 +123,25 @@
 
 					<div class="text-center p-t-12">
 						<span class="txt1">
-							Forgot your password?
+							Lupa Passwordmu?
 						</span>
 						<a class="txt2" href="<?php echo base_url('forgot_password/customer/index'); ?>">
-							Click Here
+							Klik Disini
 						</a>
 					</div>
 
 					<div class="text-center p-t-12">
 						<span class="txt1">
-							Are you an admin?
+							Apakah Anda Admin?
 						</span>
 						<a class="txt2" href="<?php echo base_url("login/admin"); ?>">
-							Click Here
+							Klik Disini
 						</a>
 					</div>
 
 					<div class="text-center p-t-136">
 						<a class="txt2" href="<?php echo base_url("register/customer"); ?>">
-							Create your Account
+							Buat Akun Baru
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
 					</div>

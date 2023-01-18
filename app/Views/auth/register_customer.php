@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Sinar Terang | Registration</title>
+	<title>Sinar Terang | Registrasi</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -34,7 +34,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: "Password Doesn't Match!",
+					title: "Password Tidak Sama!",
 					showConfirmButton: false,
 					timer: 1900
 				});
@@ -46,7 +46,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'success',
-					title: 'Please Check Your Email',
+					title: 'Mohon Cek Emailmu',
 					showConfirmButton: false,
 					timer: 1800
 				});
@@ -58,7 +58,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: 'Email Failed to Be Sent, Please Try Again!',
+					title: 'Email Gagal Dikirim, Mohon Coba Lagi!',
 					showConfirmButton: false,
 					timer: 1800
 				});
@@ -70,7 +70,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: "Email is Used, Please Use Another Email",
+					title: "Email Sudah Digunakan, Coba Email Lain",
 					showConfirmButton: false,
 					timer: 1900
 				});
@@ -86,26 +86,26 @@
 				<form action="<?php echo base_url("/register/customer/email") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
 
 					<span class="login100-form-title">
-						Register Your Account
+						Buat Akun Barumu
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate="Fullname is required">
-						<input class="input100" type="text" name="full_name" placeholder="Fullname">
+					<div class="wrap-input100 validate-input" data-validate="Nama lengkap dibutuhkan">
+						<input class="input100" type="text" name="full_name" placeholder="Nama Lengkap">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-users" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Phone number is required">
-						<input class="input100" type="number" name="phone" placeholder="Phone Number">
+					<div class="wrap-input100 validate-input" data-validate="Nomor telepon dibutuhkan">
+						<input class="input100" type="number" name="phone" placeholder="Nomor Telepon">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-phone" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.com">
+					<div class="wrap-input100 validate-input" data-validate="Email valid diperlukan: ex@abc.com">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -113,7 +113,7 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
+					<div class="wrap-input100 validate-input" data-validate="Password dibutuhkan">
 						<input class="input100" type="password" name="password" placeholder="Password" minlength="5" maxlength="25">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -121,8 +121,8 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Password Confirmation is required">
-						<input class="input100" type="password" name="confirm_password" placeholder="Confirm Your Password">
+					<div class="wrap-input100 validate-input" data-validate="Konfirmasi password dibutuhkan">
+						<input class="input100" type="password" name="confirm_password" placeholder="Konfirmasi Passwordmu">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -131,7 +131,7 @@
 
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
-							Register
+							Buat Akun
 						</button>
 					</div>
 

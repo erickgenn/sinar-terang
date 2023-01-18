@@ -80,7 +80,49 @@ class CustomerController extends BaseController
         $pointModel = new PointModel();
         $point = $pointModel->where('customer_id', $_SESSION['id'])->where('point !=', '0')->orderBy('created_at', 'DESC')->findAll(5, 0);
         for ($i = 0; $i < count($point); $i++) {
-            $point[$i]['created_at'] = date("d F Y", strtotime($point[$i]['created_at']));
+            $month = date("F", strtotime($point[$i]['created_at']));
+            switch ($month) {
+                case 'January':
+                    $month = 'Januari';
+                    break;
+                case 'February':
+                    $month = 'Februari';
+                    break;
+                case 'March':
+                    $month = 'Maret';
+                    break;
+                case 'April':
+                    $month = 'April';
+                    break;
+                case 'May':
+                    $month = 'Mei';
+                    break;
+                case 'June':
+                    $month = 'Juni';
+                    break;
+                case 'July':
+                    $month = 'Juli';
+                    break;
+                case 'August':
+                    $month = 'Agustus';
+                    break;
+                case 'September':
+                    $month = 'September';
+                    break;
+                case 'October':
+                    $month = 'Oktober';
+                    break;
+                case 'November':
+                    $month = 'November';
+                    break;
+                case 'December':
+                    $month = 'Desember';
+                    break;
+                default:
+                    $month = 'Tidak ada';
+                    break;
+            }
+            $point[$i]['created_at'] = date("d", strtotime($point[$i]['created_at'])) . " " . $month . " " . date("Y", strtotime($point[$i]['created_at']));
         }
         return view('customer/point', compact('customer', 'point'));
     }

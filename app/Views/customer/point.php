@@ -70,8 +70,8 @@
 					buttons: false,
 					closeOnClickOutside: false,
 					timer: 3500,
-					title: "Claim Success!",
-					text: "Points Have Been Rewarded To You!",
+					title: "Klaim Berhasil!",
+					text: "Poin Sudah Menjadi Milikmu!",
 				});
 			</script>
 		<?php endif; ?>
@@ -83,14 +83,14 @@
 					<div class="row row-bottom-padded-md">
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="about-desc">
-								<span class="heading-meta"><?php echo $customer['name'] ?>'s Points</span>
+								<span class="heading-meta">Poin <?php echo $customer['name'] ?></span>
 								<h2 class="colorlib-heading colorlib-counter js-counter" data-from="0" data-to="<?php echo $customer['point'] ?>" data-speed="1500" data-refresh-interval="50" style="font-size: 27px;"></h2>
-								<h3>Your ID: <?php echo $_SESSION['id'] ?></h3>
-								<p>You can earn points by scanning the QR codes provided on your order bills</p>
-								<p>These points can be exchanged as a discount for your next orders.</p>
+								<h3>Nomor ID Mu: <?php echo $_SESSION['id'] ?></h3>
+								<p>Kamu bisa mendapatkan poin dari QR Code yang tertera pada struk belanjamu</p>
+								<p>Poin ini bisa kamu tukarkan dengan diskon pada saat kamu berbelanja lagi.</p>
 							</div>
 							<div class="row padding">
-								<h2 class="colorlib-heading" style="margin-bottom: 3rem;">Points History</h2>
+								<h2 class="colorlib-heading" style="margin-bottom: 3rem;">Riwayat Poin</h2>
 								<div class="col-md-12" style="max-height:290px;overflow-y: scroll;overflow-x: hidden;">
 									<?php for ($i = 0; $i < count($point); $i++) : ?>
 										<div class="info-box" style=" margin-top:1.2rem">

@@ -71,28 +71,28 @@
 						</div>
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="about-desc">
-								<span class="heading-meta">Welcome</span>
-								<h2 class="colorlib-heading">Who are we?</h2>
-								<p>Sinar Terang was established in the early 2004.</p>
-								<p>Sinar Terang only sell high quality home products. We are delighted to bring exquisite home products to your home with reasonable prices.</p>
+								<span class="heading-meta">Selamat Datang!</span>
+								<h2 class="colorlib-heading">Siapa Kami?</h2>
+								<p>Sinar Terang didirikan sejak tahun 2004.</p>
+								<p>Sinar Terang hanya menjual perabot rumah tangga dengan kualitas tinggi. Kami dengan sangat bangga memperkenalkan perabot rumah tangga yang indah dengan harga yang murah.</p>
 							</div>
 							<div class="row padding">
 								<div class="col-md-4 no-gutters animate-box" data-animate-effect="fadeInLeft">
 									<a class="steps active">
 										<p class="icon"><span><i class="icon-check"></i></span></p>
-										<h3>Good <br>Products</h3>
+										<h3>Kualitas <br>Baik</h3>
 									</a>
 								</div>
 								<div class="col-md-4 no-gutters animate-box" data-animate-effect="fadeInLeft">
 									<a class="steps active">
 										<p class="icon"><span><i class="icon-check"></i></span></p>
-										<h3>Affordable</h3>
+										<h3>Terjangkau</h3>
 									</a>
 								</div>
 								<div class="col-md-4 no-gutters animate-box" data-animate-effect="fadeInLeft">
 									<a class="steps active">
 										<p class="icon"><span><i class="icon-check"></i></span></p>
-										<h3>Always <br>Reliable</h3>
+										<h3>Dapat <br>Diandalkan</h3>
 									</a>
 								</div>
 							</div>

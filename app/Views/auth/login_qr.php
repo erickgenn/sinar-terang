@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Sinar Terang | Claim Your Points!</title>
+	<title>Sinar Terang | Klaim Poinmu!</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -33,7 +33,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: 'Email or Password is Incorrect!',
+					title: 'Email atau Password Salah!',
 					showConfirmButton: false,
 					timer: 1600
 				});
@@ -49,7 +49,7 @@
 				<form action="<?php echo base_url("/qr/claim") ?>" method="POST" class="login100-form validate-form">
 
 					<span class="login100-form-title">
-						Hi! Please Log In to Claim Your Points
+						Hi! Mohon Log In Untuk Mengklaim Poinmu
 					</span>
 					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.com">
 						<input class="input100" type="text" name="email" placeholder="Email">

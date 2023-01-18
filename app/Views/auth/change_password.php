@@ -33,7 +33,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: 'Email or Password is Incorrect!',
+					title: 'Email atau Password Salah!',
 					showConfirmButton: false,
 					timer: 1600
 				});
@@ -46,7 +46,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: 'Email is Wrong!',
+					title: 'Email Salah!',
 					showConfirmButton: false,
 					timer: 1800
 				});
@@ -58,7 +58,7 @@
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: "Password Doesn't Match!",
+					title: "Password Tidak Sama!",
 					showConfirmButton: false,
 					timer: 1900
 				});
@@ -74,9 +74,9 @@
 				<form action="<?php echo base_url("/forgot_password/customer/new_pass") . "/" . $token ?>" method="POST" class="login100-form validate-form">
 
 					<span class="login100-form-title">
-						Change Your Password
+						Atur Ulang Password
 					</span>
-					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.com">
+					<div class="wrap-input100 validate-input" data-validate="Email yang valid diperlukan: ex@abc.com">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -84,7 +84,7 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
+					<div class="wrap-input100 validate-input" data-validate="Password dibutuhkan">
 						<input class="input100" type="password" name="password" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -92,8 +92,8 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Confirm Password is required">
-						<input class="input100" type="password" name="confirm_password" placeholder="Password">
+					<div class="wrap-input100 validate-input" data-validate="Konfirmasi password dibutuhkan">
+						<input class="input100" type="password" name="confirm_password" placeholder="Konfirmasi Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -102,7 +102,7 @@
 
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
-							Change Password
+							Ubah Password
 						</button>
 					</div>
 

@@ -33,21 +33,9 @@
 				swal({
 					position: 'top-end',
 					icon: 'error',
-					title: 'Email is Incorrect!',
+					title: 'Email Salah!',
 					showConfirmButton: false,
 					timer: 1600
-				});
-			</script>
-		<?php endif; ?>
-
-		<?php if (session()->getFlashdata('registration_successful')) : ?>
-			<script>
-				swal({
-					position: 'top-end',
-					icon: 'success',
-					title: 'Registration Successful!',
-					showConfirmButton: false,
-					timer: 1800
 				});
 			</script>
 		<?php endif; ?>
@@ -61,12 +49,12 @@
 				<form action="<?php echo base_url("forgot_password/customer/auth") ?>" method="POST" class="login100-form validate-form">
 
 					<span class="login100-form-title">
-						Reset Your Password
-						<p class="txt2">Please enter your email address you used to sign up on this site
-							and we will assist you in resetting your password </p>
+						Atur Ulang Password
+						<p class="txt2">Mohon masukkan email yang Anda daftarkan pada situs ini
+							dan kami akan membantu Anda untuk mengatur ulang password </p>
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.com">
+					<div class="wrap-input100 validate-input" data-validate="Email yang valid diperlukan: ex@abc.com">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -76,7 +64,7 @@
 
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
-							Reset Password
+							Atur Ulang Password
 						</button>
 					</div>
 				</form>

@@ -64,8 +64,8 @@
 					<div class="row row-bottom-padded-md">
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
 							<div class="about-desc">
-								<span class="heading-meta">Contact Us</span>
-								<h2 class="colorlib-heading">Get In Touch</h2>
+								<span class="heading-meta">Kontak</span>
+								<h2 class="colorlib-heading">Hubungi Kami</h2>
 							</div>
 							<div class="row padding">
 								<div class="col-md-5">

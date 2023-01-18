@@ -68,7 +68,7 @@
 					closeOnClickOutside: false,
 					timer: 2500,
 					title: "Hi! <?php echo $_SESSION['login_successful'] ?>",
-					text: "Glad to see you again!",
+					text: "Senang Bertemu Denganmu!",
 				});
 			</script>
 		<?php endif; ?>
@@ -82,7 +82,7 @@
 					closeOnClickOutside: false,
 					timer: 2500,
 					title: "Bye-Bye!",
-					text: "Sad to see you go",
+					text: "Sedih Melihatmu Pergi",
 				});
 			</script>
 		<?php endif; ?>
@@ -96,7 +96,7 @@
 					closeOnClickOutside: false,
 					timer: 2500,
 					title: "Oops!",
-					text: "This QR Has Been Claimed Before",
+					text: "Kode QR Ini Sudah Pernah Diklaim!",
 				});
 			</script>
 		<?php endif; ?>
@@ -114,8 +114,8 @@
 									<div class="col-md-6 col-md-offset-3 col-md-push-3 col-sm-12 col-xs-12 js-fullheight slider-text">
 										<div class="slider-text-inner">
 											<div class="desc">
-												<h1>Welcome!</h1>
-												<h2>We only sell high quality home furnitures!</h2>
+												<h1>Selamat Datang!</h1>
+												<h2>Kami menjual perabot rumah berkualitas tinggi!</h2>
 											</div>
 										</div>
 									</div>
@@ -129,8 +129,8 @@
 									<div class="col-md-6 col-md-offset-3 col-md-push-3 col-sm-12 col-xs-12 js-fullheight slider-text">
 										<div class="slider-text-inner">
 											<div class="desc">
-												<h1>Welcome!</h1>
-												<h2>We only sell high quality home furnitures!</h2>
+												<h1>Selamat Datang!</h1>
+												<h2>Kami menjual perabot rumah berkualitas tinggi!</h2>
 											</div>
 										</div>
 									</div>
@@ -144,8 +144,8 @@
 									<div class="col-md-6 col-md-offset-3 col-md-push-3 col-sm-12 col-xs-12 js-fullheight slider-text">
 										<div class="slider-text-inner">
 											<div class="desc">
-												<h1>Welcome!</h1>
-												<h2>We only sell high quality home furnitures!</h2>
+												<h1>Selamat Datang!</h1>
+												<h2>Kami menjual perabot rumah berkualitas tinggi!</h2>
 											</div>
 										</div>
 									</div>

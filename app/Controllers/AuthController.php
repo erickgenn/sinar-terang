@@ -143,7 +143,7 @@ class AuthController extends BaseController
         $email = \Config\Services::email();
         $email->setFrom('sinarterang.adm@gmail.com', "Admin Sinar Terang");
         $email->setTo($email_input);
-        $email->setSubject('Sinar Terang Registration Confirmation');
+        $email->setSubject('Konfirmasi Registrasi Sinar Terang');
         $email->setMessage('
             <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
                 <html>
@@ -207,7 +207,7 @@ class AuthController extends BaseController
                                                         <tr>
                                                         <td style="line-height: 24px; font-size: 16px; margin: 0; padding: 16px;" align="left">
                                                             <div class="">
-                                                            <h5 class="text-muted" style="font-size: 2vmin; color: #718096; padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; line-height: 24px; margin: 0;" align="left">Confirmation Link</h5>
+                                                            <h5 class="text-muted" style="font-size: 2vmin; color: #718096; padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; line-height: 24px; margin: 0;" align="left">Link Konfirmasi</h5>
                                                             <table class="s-2 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                                                 <tbody>
                                                                 <tr>
@@ -217,14 +217,14 @@ class AuthController extends BaseController
                                                                 </tr>
                                                                 </tbody>
                                                             </table>
-                                                            <p style="font-size: 1.8vmin; line-height: 24px; width: 100%; margin: 0;" align="left">Hello, please click the button below to confirm your new account.</p>
+                                                            <p style="font-size: 1.8vmin; line-height: 24px; width: 100%; margin: 0;" align="left">Halo, Mohon klik tombol di bawah untuk mengkonfirmasi akun barumu.</p>
                                                             <br>
                                                             <table class="btn" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important;">
                                                                 <tbody>
                                                                 <tr>
                                                                     <td style="line-height: 24px; font-size: 16px; border-radius: 6px; margin: 0;" align="center">
                                                                     <a href="' . $url_register . '" style="font-size: 2vh; background-color: #0d152d; color: #FFFFFF; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; padding: 8px 12px; border: 1px solid transparent;">
-                                                                        Confirm
+                                                                        Konfirmasi Akun
                                                                     </a>
                                                                     </td>
                                                                 </tr>
@@ -325,7 +325,7 @@ class AuthController extends BaseController
             $email = \Config\Services::email();
             $email->setFrom('sinarterang.adm@gmail.com', "Admin Sinar Terang");
             $email->setTo($user['email']);
-            $email->setSubject('Reset Passsword Sinar Terang');
+            $email->setSubject('Atur Ulang Passsword Sinar Terang');
             $email->setMessage('
             <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
                 <html>
@@ -389,7 +389,7 @@ class AuthController extends BaseController
                                                         <tr>
                                                         <td style="line-height: 24px; font-size: 16px; margin: 0; padding: 16px;" align="left">
                                                             <div class="">
-                                                            <h5 class="text-muted" style="font-size: 2vmin; color: #718096; padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; line-height: 24px; margin: 0;" align="left">Reset Password</h5>
+                                                            <h5 class="text-muted" style="font-size: 2vmin; color: #718096; padding-top: 0; padding-bottom: 0; font-weight: 500; vertical-align: baseline; line-height: 24px; margin: 0;" align="left">Atur Ulang Password</h5>
                                                             <table class="s-2 w-full" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%;" width="100%">
                                                                 <tbody>
                                                                 <tr>
@@ -399,14 +399,14 @@ class AuthController extends BaseController
                                                                 </tr>
                                                                 </tbody>
                                                             </table>
-                                                            <p style="font-size: 1.8vmin; line-height: 24px; width: 100%; margin: 0;" align="left">Hello ' . ucwords($user['name']) . ', Your Sinar Terang account has just requested a password change, please click the button below to continue</p>
+                                                            <p style="font-size: 1.8vmin; line-height: 24px; width: 100%; margin: 0;" align="left">Hai ' . ucwords($user['name']) . ', Akun Sinar Terang Anda baru saja melakukan permintaan atur ulang password, mohon klik tombol di bawah untuk melanjutkan. Abaikan jika Anda tidak melakukan permintaan atur ulang password.</p>
                                                             <br>
                                                             <table class="btn" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important;">
                                                                 <tbody>
                                                                 <tr>
                                                                     <td style="line-height: 24px; font-size: 16px; border-radius: 6px; margin: 0;" align="center">
                                                                     <a href="' . $url_changepass . '" style="font-size: 2vh; background-color: #0d152d; color: #FFFFFF; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: normal; white-space: nowrap; padding: 8px 12px; border: 1px solid transparent;">
-                                                                        Reset Your Password
+                                                                        Atur Ulang Password
                                                                     </a>
                                                                     </td>
                                                                 </tr>
