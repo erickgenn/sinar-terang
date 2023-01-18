@@ -57,7 +57,8 @@ class PointController extends BaseController
                 'description' => $data['point_description'],
                 'point' => $data['point_point'],
                 'value' => $data['point_value'],
-                'updated_at' => date('Y-m-d H:i:s.u')
+                'updated_at' => date('Y-m-d H:i:s.u'),
+                'user_id' => $_SESSION['id'],
             ];
 
             $pointConfigModel->update($id, $data_update);
@@ -76,7 +77,7 @@ class PointController extends BaseController
         $pointModel = new PointModel();
         $customerModel = new CustomerModel();
 
-        $point = $pointModel->where('deleted_at', NULL)
+        $point = $pointModel->where('deleted_at', NULL)->where('point !=', '0')->orderBy('created_at', 'ASC')
             ->findAll();
 
         for ($i = 0; $i < count($point); $i++) {
@@ -109,59 +110,5 @@ class PointController extends BaseController
         }
 
         return json_encode($point);
-    }
-
-    public function activate($id)
-    {
-        $session = session();
-        $vendorModel = new VendorModel();
-
-        $data = [
-            'is_active' => 1,
-        ];
-
-        $vendorModel->update($id, $data);
-
-        $vendor = $vendorModel->where('id', $id)->first();
-
-        $session->setFlashdata('activatevendor', '.');
-
-        return view('admin/vendor/index', compact('vendor'));
-    }
-
-    public function deactivate($id)
-    {
-        $session = session();
-        $vendorModel = new VendorModel();
-
-        $data = [
-            'is_active' => 0,
-        ];
-        $vendorModel->update($id, $data);
-
-        $vendor = $vendorModel->where('id', $id)->first();
-
-        $session->setFlashdata('deactivatevendor', '.');
-
-        return view('admin/vendor/index', compact('vendor'));
-    }
-
-    public function delete($id)
-    {
-        $session = session();
-        $vendorModel = new VendorModel();
-
-        $data = [
-            'is_active' => 0
-        ];
-
-        $vendorModel->update($id, $data);
-        $vendor = $vendorModel->where('id', $id)->first();
-
-        $vendorModel->where('id', $id)->delete();
-
-        $session->setFlashdata('deleteVendor', '.');
-
-        return view('admin/vendor/index', compact('vendor'));
     }
 }

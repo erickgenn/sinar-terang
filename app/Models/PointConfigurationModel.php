@@ -9,7 +9,7 @@ class PointConfigurationModel extends Model
     protected $table      = 'mstr_point_configuration';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name', 'description', 'point', 'value', 'updated_at'];
+    protected $allowedFields = ['name', 'description', 'point', 'value', 'updated_at', 'user_id'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

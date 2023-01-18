@@ -87,7 +87,6 @@
                                         <button onclick="generateTable()" class="btn btn-success fa-pull-right">Find</button>
                                     </div>
                                 </div>
-
                             </div>
                             <div id="div_add" class="float-right">
                             </div>

@@ -9,7 +9,7 @@ class ContactUsModel extends Model
     protected $table      = 'cust_contact';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['email', 'phone', 'updated_at'];
+    protected $allowedFields = ['email', 'phone', 'updated_at', 'user_id'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

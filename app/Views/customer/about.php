@@ -73,7 +73,7 @@
 							<div class="about-desc">
 								<span class="heading-meta">Welcome</span>
 								<h2 class="colorlib-heading">Who are we?</h2>
-								<p>Sinar Terang was established in the early 2006.</p>
+								<p>Sinar Terang was established in the early 2004.</p>
 								<p>Sinar Terang only sell high quality home products. We are delighted to bring exquisite home products to your home with reasonable prices.</p>
 							</div>
 							<div class="row padding">

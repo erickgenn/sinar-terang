@@ -9,7 +9,7 @@ class OutletModel extends Model
     protected $table      = 'mstr_outlet';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name', 'is_active', 'location', 'picture', 'updated_at'];
+    protected $allowedFields = ['name', 'is_active', 'location', 'picture', 'updated_at', 'user_id'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

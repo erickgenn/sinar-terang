@@ -341,9 +341,29 @@
                         name: null,
                         sortable: false,
                         render: function(data, type, row, meta) {
-                            switch (row.request_cancel) {
-                                case "0":
-                                    return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}', '${row.discount}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>
+                            var date = new Date(row.created_at);
+                            var current_date = new Date();
+                            var row_month = date.toLocaleString('default', {
+                                month: 'long'
+                            });;
+                            var row_year = date.getFullYear();
+
+                            var current_month = current_date.toLocaleString('default', {
+                                month: 'long'
+                            });;
+
+                            var current_year = current_date.getFullYear();
+
+                            var current = current_year + "-" + current_month;
+                            var row_date = row_year + "-" + row_month;
+
+                            if (row_date != current) {
+                                return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>`;
+                            }
+                            if (row_date == current) {
+                                switch (row.request_cancel) {
+                                    case "0":
+                                        return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}', '${row.discount}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>
                                     <button type='button' onclick="getOrderID('${row.id}')" class='btn btn-danger' data-toggle="modal" data-target="#cancelModal"><i class="fa-solid fa-trash"></i></button>
                                     
                                     <!-- Cancel Modal -->
@@ -370,13 +390,14 @@
                                         </div>
                                     </form>
                                     `;
-                                    break;
-                                case "1":
-                                    return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>`;
-                                    break;
-                                default:
-                                    return `-`;
-                                    break;
+                                        break;
+                                    case "1":
+                                        return `<button type="button" onclick="detailTable('${row.created_at}', '${row.id}', '${row.total_price}')" class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa-solid fa-eye"></i></button>`;
+                                        break;
+                                    default:
+                                        return `-`;
+                                        break;
+                                }
                             }
                         }
                     },

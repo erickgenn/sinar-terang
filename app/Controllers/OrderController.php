@@ -282,7 +282,8 @@ class OrderController extends BaseController
                 $data_insert_point = [
                     'operation' => "-",
                     "point" => $data['order_points'],
-                    'customer_id' => $data['customer_id']
+                    'customer_id' => $data['customer_id'],
+                    'created_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
                 ];
                 $pointModel->insert($data_insert_point);
 
@@ -409,7 +410,7 @@ class OrderController extends BaseController
         $list = array();
         for ($i = 0; $i < count($customer); $i++) {
             $list[$i]['id'] = $customer[$i]['id'];
-            $list[$i]['text'] = $customer[$i]['name'];
+            $list[$i]['text'] = $customer[$i]['name'] . " (ID: " . $customer[$i]['id'] . ")";
         }
 
         return json_encode($list);

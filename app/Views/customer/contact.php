@@ -74,7 +74,7 @@
 											<i class="icon-globe-outline"></i>
 										</div>
 										<div class="colorlib-text">
-											<p style="font-weight: 500;font-size:x-large"><a href="#"><?php echo $contact['email'] ?></a></p>
+											<p style="font-weight: 500;font-size:large"><a href="mailto:<?php echo $contact['email'] ?>"><?php echo $contact['email'] ?></a></p>
 										</div>
 									</div>
 

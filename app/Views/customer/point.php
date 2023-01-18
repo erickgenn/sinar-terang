@@ -85,6 +85,7 @@
 							<div class="about-desc">
 								<span class="heading-meta"><?php echo $customer['name'] ?>'s Points</span>
 								<h2 class="colorlib-heading colorlib-counter js-counter" data-from="0" data-to="<?php echo $customer['point'] ?>" data-speed="1500" data-refresh-interval="50" style="font-size: 27px;"></h2>
+								<h3>Your ID: <?php echo $_SESSION['id'] ?></h3>
 								<p>You can earn points by scanning the QR codes provided on your order bills</p>
 								<p>These points can be exchanged as a discount for your next orders.</p>
 							</div>

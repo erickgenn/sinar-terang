@@ -9,7 +9,7 @@ class FaqModel extends Model
     protected $table      = 'cust_faq';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['question', 'answer', 'updated_at'];
+    protected $allowedFields = ['question', 'answer', 'updated_at', 'user_id'];
 
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

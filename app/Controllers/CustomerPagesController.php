@@ -77,6 +77,7 @@ class CustomerPagesController extends BaseController
                 'phone' => $data['contact_us_phone'],
                 'email' => $data['contact_us_email'],
                 'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
+                'user_id' => $_SESSION['id'],
             ];
 
             $contactUsModel->update($id, $data_update);
@@ -106,6 +107,7 @@ class CustomerPagesController extends BaseController
                 'question' => $data['faq_question'],
                 'answer' => $data['faq_answer'],
                 'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
+                'user_id' => $_SESSION['id'],
             ];
 
             $faqModel->update($id, $data_update);
@@ -134,6 +136,7 @@ class CustomerPagesController extends BaseController
             $data_insert = [
                 'question' => $data['faq_question'],
                 'answer' => $data['faq_answer'],
+                'user_id' => $_SESSION['id'],
             ];
 
             $faqModel->insert($data_insert);

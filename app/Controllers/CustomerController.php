@@ -78,7 +78,7 @@ class CustomerController extends BaseController
         $customer = $customerModel->where('id', $_SESSION['id'])->first();
 
         $pointModel = new PointModel();
-        $point = $pointModel->where('customer_id', $_SESSION['id'])->orderBy('created_at', 'DESC')->findAll(5, 0);
+        $point = $pointModel->where('customer_id', $_SESSION['id'])->where('point !=', '0')->orderBy('created_at', 'DESC')->findAll(5, 0);
         for ($i = 0; $i < count($point); $i++) {
             $point[$i]['created_at'] = date("d F Y", strtotime($point[$i]['created_at']));
         }

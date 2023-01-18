@@ -62,15 +62,18 @@ class FinanceController extends BaseController
 
     public function searchSales()
     {
-        $orderModel = new OrderModel();
+        $cashReportModel = new CashReportModel();
 
         $month = $this->request->getGet("month");
 
-        $order = $orderModel->monthSales($month)->getResultArray();
-
+        $order = $cashReportModel->monthSales($month)->getResultArray();
         for ($i = 0; $i < count($order); $i++) {
             $order[$i]['created_at'] = date("d F Y", strtotime($order[$i]['created_at']));
-            $order[$i]['total_price'] = AdminController::money_format_rupiah($order[$i]['total_price']);
+            if ($order[$i]['debit'] == "") {
+                $order[$i]['total_price'] = "(" . AdminController::money_format_rupiah($order[$i]['credit']) . ")";
+            } else {
+                $order[$i]['total_price'] = AdminController::money_format_rupiah($order[$i]['debit']);
+            }
         }
 
         return json_encode($order);
@@ -102,15 +105,19 @@ class FinanceController extends BaseController
 
     public function searchProfitLoss()
     {
-        $orderModel = new OrderModel();
+        $cashReportModel = new CashReportModel();
         $cashModel = new CashReportModel();
         $month = $this->request->getGet("month");
 
-        $order = $orderModel->monthSales($month)->getResultArray();
+        $order = $cashReportModel->monthSales($month)->getResultArray();
 
         $total_sales = 0;
         for ($i = 0; $i < count($order); $i++) {
-            $total_sales = $total_sales + $order[$i]['total_price'];
+            if (isset($order[$i]['debit'])) {
+                $total_sales = $total_sales + $order[$i]['debit'];
+            } else {
+                $total_sales = $total_sales - $order[$i]['credit'];
+            }
         }
         $gross_sales = 30 / 100 * $total_sales;
 
@@ -293,15 +300,18 @@ class FinanceController extends BaseController
         $cashModel = new CashReportModel();
         $month = $this->request->getGet("month");
 
-        $order = $orderModel->monthSales($month)->getResultArray();
+        $order = $cashModel->monthSales($month)->getResultArray();
 
         $total_sales = 0;
         for ($i = 0; $i < count($order); $i++) {
-            $total_sales = $total_sales + $order[$i]['total_price'];
+            if (isset($order[$i]['debit'])) {
+                $total_sales = $total_sales + $order[$i]['debit'];
+            } else {
+                $total_sales = $total_sales - $order[$i]['credit'];
+            }
         }
+
         $gross_sales = 30 / 100 * $total_sales;
-
-
 
         $salary = $cashModel->salaryReport($month)->getResultArray();
 
@@ -606,16 +616,21 @@ class FinanceController extends BaseController
 
     public function searchSalesTotal()
     {
-        $orderModel = new OrderModel();
+        $cashReportModel = new CashReportModel();
 
         $month = $this->request->getGet("month");
 
-        $order = $orderModel->monthSales($month)->getResultArray();
+        $order = $cashReportModel->monthSales($month)->getResultArray();
 
         $total = 0;
         for ($i = 0; $i < count($order); $i++) {
-            $total = $total + $order[$i]['total_price'];
+            $total = $total + $order[$i]['debit'];
         }
+
+        for ($i = 0; $i < count($order); $i++) {
+            $total = $total - $order[$i]['credit'];
+        }
+
         $total = AdminController::money_format_rupiah($total);
 
         return json_encode($total);
@@ -659,6 +674,7 @@ class FinanceController extends BaseController
                     'balance' => $new_balance,
                     'type' => $data['cash_type'],
                     'date' => $data['cash_date'],
+                    'user_id' => $_SESSION['id'],
                 ];
             } else {
                 $new_balance = (int) $balance['balance'] - (int) $data['cash_amount'];
@@ -668,6 +684,7 @@ class FinanceController extends BaseController
                     'balance' => $new_balance,
                     'type' => $data['cash_type'],
                     'date' => $data['cash_date'],
+                    'user_id' => $_SESSION['id'],
                 ];
             }
 

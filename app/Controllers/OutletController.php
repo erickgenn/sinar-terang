@@ -40,6 +40,7 @@ class OutletController extends BaseController
                         'location' => $data['outlet_location'],
                         'picture'  => $data['outlet_picture_default'],
                         'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
+                        'user_id' => $_SESSION['id'],
                     ];
                     $outletModel->update($id, $data_update);
 
@@ -88,6 +89,7 @@ class OutletController extends BaseController
                             'location' => $data['outlet_location'],
                             'picture'    => $file->getName(),
                             'updated_at' => date("Y-m-d H:i:s.000"), strtotime("Now"),
+                            'user_id' => $_SESSION['id'],
                         ];
 
                         $outletModel->update($id, $data_update);
@@ -150,6 +152,7 @@ class OutletController extends BaseController
                     $data_insert = [
                         'name' => $data['outlet_name'],
                         'location' => $data['outlet_location'],
+                        'user_id' => $_SESSION['id'],
                         'picture'    => $file->getName(),
                     ];
 

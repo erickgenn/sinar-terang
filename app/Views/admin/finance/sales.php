@@ -241,13 +241,8 @@
                             "className": "dt-center",
                         },
                         {
-                            data: null,
-                            name: null,
+                            "data": "description",
                             "className": "dt-center",
-                            sortable: false,
-                            render: function(data, type, row, meta) {
-                                return `Order Number ` + row.id;
-                            }
                         },
                         {
                             "data": "total_price",

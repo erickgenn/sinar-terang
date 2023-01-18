@@ -157,7 +157,7 @@
                                                                     <tr>
                                                                         <td><?php echo $outlet[$i]['name']; ?></td>
                                                                         <td style="text-align:right;">
-                                                                            <input id="checkboxes" class="form-check-input" type="checkbox" name="outlet_check[]" value="<?php echo $outlet[$i]['id']; ?>" <?php echo (in_array($outlet[$i]['id'], $arr_id)) ? 'checked' : 'disabled' ?>>
+                                                                            <input id="checkboxes" class="form-check-input" type="checkbox" name="outlet_check[]" value="<?php echo $outlet[$i]['id']; ?>" <?php echo (in_array($outlet[$i]['id'], $arr_id)) ? 'checked' : '' ?>>
                                                                         </td>
                                                                     </tr>
                                                                 <?php endfor; ?>
