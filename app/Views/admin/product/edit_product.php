@@ -79,13 +79,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Products</h1>
+                            <h1 class="m-0">Produk</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/product"); ?>">Products</a></li>
-                                <li class="breadcrumb-item active">Edit a Product</li>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/product"); ?>">Produk</a></li>
+                                <li class="breadcrumb-item active">Ubah Produk</li>
                             </ol>
                         </div>
                     </div>
@@ -105,67 +105,40 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="inputName">Name</label>
+                                                <label for="inputName">Nama Produk</label>
                                                 <input type="text" id="inputName" name="product_name" class="form-control" value="<?php echo $product['name']; ?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputQuantity">Quantity</label>
+                                                <label for="inputName">Kode Produk</label>
+                                                <input type="text" id="inputName" name="product_code" class="form-control" value="<?php echo $product['code']; ?>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputQuantity">Stok Produk</label>
                                                 <input type="number" id="inputQuantity" name="product_quantity" class="form-control" value="<?php echo $product['quantity']; ?>" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="inputPrice">Price</label>
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Rp.</span>
+                                            <label for="inputPrice">Harga Awal - Harga Terendah</label>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Rp.</span>
+                                                        </div>
+                                                        <input type="number" id="inputPrice" name="price" class="form-control" value="<?php echo $product['price']; ?>" required>
                                                     </div>
-                                                    <input type="text" id="inputPrice" name="product_price" class="form-control" value="<?php echo $product['price']; ?>" required>
+                                                </div>
+                                                <h2>-</h2>
+                                                <div class="col-4">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Rp.</span>
+                                                        </div>
+                                                        <input type="number" id="inputPrice" name="price_low" class="form-control" value="<?php echo $product['price_low']; ?>" required>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputPicture">Picture</label>
-
-                                                <br>
-                                                <img src="<?php echo base_url('uploads/product') . '/' . $product['picture']; ?>" width="180" height="180"></img>
-                                                <br>
-                                                <br>
-
-                                                <input type="file" id="inputPicture" name="product_picture" class="form-control">
-
-                                                <input type="hidden" id="defaultPicture" name="product_picture_default" value="<?php echo $product['picture']; ?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputDescription">Description</label>
+                                                <label for="inputDescription">Deskripsi</label>
                                                 <textarea id="inputDescription" name="product_description" class="form-control"><?php echo $product['description']; ?></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputOutlet">Select Outlet</label>
-                                                <input type="hidden" id="outlet_id" name="product_outlet_id" class="form-control">
-                                                <div class="card">
-                                                    <div class="card-body p-0">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Outlet Name</th>
-                                                                    <th style="text-align:right;">
-                                                                        <input class="form-check-input" onClick="toggle(this)" type="checkbox">
-                                                                        <label class=" form-check-label">Select All</label>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php for ($i = 0; $i < count($outlet); $i++) : ?>
-                                                                    <tr>
-                                                                        <td><?php echo $outlet[$i]['name']; ?></td>
-                                                                        <td style="text-align:right;">
-                                                                            <input id="checkboxes" class="form-check-input" type="checkbox" name="outlet_check[]" value="<?php echo $outlet[$i]['id']; ?>" <?php echo (in_array($outlet[$i]['id'], $arr_id)) ? 'checked' : '' ?>>
-                                                                        </td>
-                                                                    </tr>
-                                                                <?php endfor; ?>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

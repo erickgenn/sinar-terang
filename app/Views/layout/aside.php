@@ -26,7 +26,7 @@
     <aside class="main-sidebar sidebar-dark-light elevation-4" style="background-color: #1C2D49;">
 
         <a href="#" class="brand-link">
-            <img src="<?php echo base_url(); ?>/login/images/logos-03.png" alt="Sinar Terang" class="brand-image" style="opacity: .8; max-height:33px;">
+            <img src="<?php echo base_url(); ?>/assets/logos-03.png" alt="Sinar Terang" class="brand-image" style="opacity: .8; max-height:33px;">
             <span class="brand-text">Sinar Terang</span>
         </a>
 
@@ -56,22 +56,6 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url("/admin/customer"); ?>" id="customer" class="nav-link">
-                                <i class="nav-icon fa-solid fa-people-group"></i>
-                                <p>
-                                    Customers
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url("/admin/outlet"); ?>" id="outlet" class="nav-link">
-                                <i class="nav-icon fa-solid fa-store"></i>
-                                <p>
-                                    Outlets
-                                </p>
-                            </a>
-                        </li>
                     <?php endif; ?>
                     <li class="nav-item">
                         <a href="<?php echo base_url("/admin/product"); ?>" id="product" class="nav-link">
@@ -81,91 +65,17 @@
                             </p>
                         </a>
                     </li>
-                    <li id="nav_order" class="nav-item">
-                        <a href="#" id="order_pages" class="nav-link">
-                            <i class="nav-icon fa-solid fa-boxes-stacked"></i>
-                            <p>
-                                Orders
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a id="order" href="<?php echo base_url("/admin/order"); ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Orders List</p>
-                                </a>
-                            </li>
-                            <?php if ($_SESSION['role'] == 'manager' || $_SESSION['role'] == 'owner') : ?>
-                                <li class="nav-item">
-                                    <a id="order_request" href="<?php echo base_url("admin/order/request_cancel"); ?>" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Cancel Request</p>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
                     <?php if ($_SESSION['role'] == 'owner') : ?>
                         <li class="nav-item">
                             <a href="<?php echo base_url("/admin/user"); ?>" id="user" class="nav-link">
                                 <i class="nav-icon fa-solid fa-user-pen"></i>
                                 <p>
-                                    Users Management
+                                    Atur Daftar Karyawan
                                 </p>
                             </a>
                         </li>
                     <?php endif; ?>
-                    <li id="nav_customer_pages" class="nav-item">
-                        <a href="#" id="customer_pages" class="nav-link">
-                            <i class="nav-icon fa-regular fa-file-lines"></i>
-                            <p>
-                                Customer Pages
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a id="contact_us" href="<?php echo base_url("admin/customer_pages/contact_us"); ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Contact Us Page</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a id="faq" href="<?php echo base_url("admin/customer_pages/faq"); ?>" href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>FAQ Page</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                     <?php if ($_SESSION['role'] == 'manager' || $_SESSION['role'] == 'owner') : ?>
-                        <li id="nav_point_pages" class="nav-item">
-                            <a href="#" id="point_pages" class="nav-link">
-                                <i class="nav-icon fa-solid fa-medal"></i>
-                                <p>
-                                    Points
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url("/admin/point"); ?>" id="point" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Points Report
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a id="point_config" href="<?php echo base_url("/admin/point/config"); ?>" href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Points Configuration</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <li id="nav_finance_pages" class="nav-item">
                             <a id="finance_pages" href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-money-bill-transfer"></i>

@@ -87,7 +87,7 @@
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image: url(/login_admin/images/bg-01.jpg);">
 					<span class="login100-form-title-1">
-						Welcome Back!
+						Selamat Datang!
 					</span>
 					<span style="font-size: 1.5em; color: white;">
 						Sinar Terang Admin
@@ -97,36 +97,28 @@
 				<form action="<?php echo base_url("/login/admin/auth") ?>" method="POST" enctype="multipart/form-data" class="login100-form validate-form">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">
 						<span class="label-input100">Email</span>
-						<input class="input100" type="text" name="email" placeholder="Enter email">
+						<input class="input100" type="text" name="email" placeholder="Masukkan email">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="password" placeholder="Enter password">
+						<input class="input100" type="password" name="password" placeholder="Masukkan password">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="flex-sb-m w-full p-b-10">
 						<div>
 							<p class="txt1">
-								Forgot your password?
+								Lupa password?
 								<a href="<?php echo base_url('forgot_password/admin/index'); ?>" class="txt1">
-									Click Here
+									Klik Disini
 								</a>
 							</p>
 						</div>
 					</div>
-					<div class="flex-sb-m w-full p-b-30">
-						<div>
-							<p class="txt2">
-								Are you a lost customer?
-								<a href="<?php echo base_url("/login/customer"); ?>" class="txt2">
-									Login Here
-								</a>
-							</p>
-						</div>
-					</div>
+					<br>
+					<br>
 
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">

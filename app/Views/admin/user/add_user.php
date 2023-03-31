@@ -73,7 +73,7 @@
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/user"); ?>">Users Management</a></li>
-                                <li class="breadcrumb-item active">Add a User</li>
+                                <li class="breadcrumb-item active">Tambah Karyawan</li>
                             </ol>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="inputName">Name</label>
+                                                <label for="inputName">Nama</label>
                                                 <input type="text" id="inputName" name="user_name" class="form-control" required>
                                             </div>
                                             <div class="form-group">
@@ -105,18 +105,18 @@
                                                 <input type="password" id="inputPassword" name="user_password" class="form-control" required minlength="5">
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputConfirmPassword">Confirm Password</label>
+                                                <label for="inputConfirmPassword">Konfirmasi Password</label>
                                                 <input type="password" id="inputConfirmPassword" name="user_confirm_password" class="form-control" required minlength="5">
                                             </div>
                                             <div id="div_password" class="col-lg-12" style="display: none;">
                                                 <div class="card bg-warning">
                                                     <div class="card-body">
-                                                        <b>Warning! Both Passwords Don't Match</b>
+                                                        <b>Peringatan! Kedua Password Tidak Sama</b>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group col-lg-3">
-                                                <label for="inputRole">Role</label>
+                                                <label for="inputRole">Tugas</label>
                                                 <select class="form-control" name="user_role" required>
                                                     <option value="" disabled selected>-- Pilih --</option>
                                                     <option value="owner">Owner</option>
@@ -130,7 +130,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-success float-right">Add a User</button>
+                                    <button type="submit" class="btn btn-success float-right">Tambah Karyawan</button>
                                 </div>
                             </div>
                         </form>

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\OutletModel;
 use App\Models\ProductModel;
 use Exception;
 
@@ -15,21 +14,16 @@ class ProductController extends BaseController
 
     public function add()
     {
-        $outletModel = new OutletModel();
-        $outlet = $outletModel->where('is_active', 1)->findAll();
-        return view('admin/product/add_product', compact('outlet'));
+        return view('admin/product/add_product');
     }
 
     public function view($id)
     {
-        $outletModel = new OutletModel();
-        $outlet = $outletModel->where('is_active', 1)->findAll();
         $productModel = new ProductModel();
         $product = $productModel->where('id', $id)->first();
 
-        $arr_id = explode(",", $product['outlet_id']);
 
-        return view('admin/product/edit_product', compact('outlet', 'product', 'arr_id', 'id'));
+        return view('admin/product/edit_product', compact('product', 'id'));
     }
 
     public function update($id)
@@ -37,88 +31,26 @@ class ProductController extends BaseController
         $session = session();
         $productModel = new ProductModel();
         try {
+
             $data = $this->request->getPost();
-            // Upload image
-            if ($_FILES['product_picture']['name'] == '') {
-                try {
-                    $data_update = [
-                        'name' => $data['product_name'],
-                        'quantity' => $data['product_quantity'],
-                        'price'    => $data['product_price'],
-                        'picture'  => $data['product_picture_default'],
-                        'description' => $data['product_description'],
-                        'outlet_id' => $data['product_outlet_id'],
-                        'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
-                    ];
+            $data_update = [
+                'name' => $data['product_name'],
+                'code' => $data['product_code'],
+                'quantity' => $data['product_quantity'],
+                'price'    => $data['price'],
+                'price_low'    => $data['price_low'],
+                'description' => $data['product_description'],
+                'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
+            ];
 
-                    $productModel->update($id, $data_update);
+            $productModel->update($id, $data_update);
 
-                    $session->setFlashdata('updateSuccessful', 'abc');
-                    return redirect()->to(base_url('admin/product'));
-                } catch (Exception $er) {
-                    $session->setFlashdata('updateFailed', 'Update Failed, Please Try Again');
-                    return redirect()->to(base_url('admin/product/view') . '/' . $id);
-                }
-            } else {
-                $file = $this->request->getFile('product_picture');
-
-                $target_dir = "uploads/product";
-                $target_file = $target_dir . '/' . basename($file->getName());
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-                // Check if image file is a actual image or fake image
-                if (isset($file)) {
-                    $check = getimagesize($file->getTempName());
-                    if ($check !== false) {
-                        $uploadOk = 1;
-                    } else {
-                        $uploadOk = 0;
-                    }
-                }
-
-                // Check file size
-                if ($file->getSize() > 70000000) {
-                    $uploadOk = 0;
-                }
-
-                // Allow certain file formats
-                if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                    $uploadOk = 0;
-                }
-
-                // Check if $uploadOk is set to 0 by an error
-                if ($uploadOk == 0) {
-                    $session->setFlashdata('ImageFailed', 'Please Try Another Image');
-                    // if everything is ok, try to upload file
-                } else {
-                    if (move_uploaded_file($file->getTempName(), $target_dir . '/' . $file->getName())) {
-                        // upload to db
-                        $data_update = [
-                            'name' => $data['product_name'],
-                            'quantity' => $data['product_quantity'],
-                            'price'    => $data['product_price'],
-                            'picture'    => $file->getName(),
-                            'description' => $data['product_description'],
-                            'outlet_id' => $data['product_outlet_id'],
-                            'updated_at' => date(("Y-m-d H:i:s.000"), strtotime("Now")),
-                        ];
-
-                        $productModel->update($id, $data_update);
-
-                        $session->setFlashdata('updateSuccessful', 'abc');
-                        return redirect()->to(base_url('admin/product'));
-                    } else {
-                        $session->setFlashdata('updateFailed', 'Upload Failed, Please Try Again');
-                        return redirect()->to(base_url('admin/product/view') . '/' . $id);
-                    }
-                }
-            }
+            $session->setFlashdata('updateSuccessful', 'abc');
+            return redirect()->to(base_url('admin/product'));
         } catch (Exception $e) {
-            $session->setFlashdata('updateFailed', 'Update Failed, Please Try Again');
+            $session->setFlashdata('updateFailed', 'Upload Failed, Please Try Again');
             return redirect()->to(base_url('admin/product/view') . '/' . $id);
         }
-        return redirect()->to(base_url('admin/product/view') . '/' . $id);
     }
 
     public function store()
@@ -127,58 +59,20 @@ class ProductController extends BaseController
         $productModel = new ProductModel();
         try {
             $data = $this->request->getPost();
-            // Upload image
-            $file = $this->request->getFile('product_picture');
 
-            $target_dir = "uploads/product/";
-            $target_file = $target_dir . '/' . basename($file->getName());
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            $data_insert = [
+                'name' => $data['product_name'],
+                'code' => $data['product_code'],
+                'quantity' => $data['product_quantity'],
+                'price'    => $data['price'],
+                'price_low'    => $data['price_low'],
+                'description' => $data['product_description'],
+            ];
 
-            // Check if image file is a actual image or fake image
-            if (isset($file)) {
-                $check = getimagesize($file->getTempName());
-                if ($check !== false) {
-                    $uploadOk = 1;
-                } else {
-                    $uploadOk = 0;
-                }
-            }
+            $productModel->insert($data_insert);
 
-            // Check file size
-            if ($file->getSize() > 700000000) {
-                $uploadOk = 0;
-            }
-
-            // Allow certain file formats
-            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-                $uploadOk = 0;
-            }
-            // Check if $uploadOk is set to 0 by an error
-            if ($uploadOk == 0) {
-                $session->setFlashdata('ImageFailed', 'Please Try Another Image');
-                // if everything is ok, try to upload file
-            } else {
-                if (move_uploaded_file($file->getTempName(), $target_dir . $file->getName())) {
-                    // Upload to db
-                    $data_insert = [
-                        'name' => $data['product_name'],
-                        'quantity' => $data['product_quantity'],
-                        'price'    => $data['product_price'],
-                        'picture'    => $file->getName(),
-                        'description' => $data['product_description'],
-                        'outlet_id' => $data['product_outlet_id']
-                    ];
-
-                    $productModel->insert($data_insert);
-
-                    $session->setFlashdata('insertSuccessful', 'abc');
-                    return redirect()->to(base_url('admin/product'));
-                } else {
-                    $session->setFlashdata('insertFailed', 'Upload Failed, Please Try Again');
-                    return redirect()->to(base_url('admin/add_product'));
-                }
-            }
+            $session->setFlashdata('insertSuccessful', 'abc');
+            return redirect()->to(base_url('admin/product'));
         } catch (Exception $e) {
             $session->setFlashdata('insertFailed', 'Upload Failed, Please Try Again');
             return redirect()->to(base_url('admin/add_product'));
@@ -193,32 +87,11 @@ class ProductController extends BaseController
         $product = $productModel->where('deleted_at', NULL)
             ->findAll();
 
-        $outletModel = new OutletModel();
-
-        $arr_outlet_id = [];
         for ($i = 0; $i < count($product); $i++) {
             $product[$i]['created_at'] = date("d F Y", strtotime($product[$i]['created_at']));
             $product[$i]['price'] = AdminController::money_format_rupiah($product[$i]['price']);
-
-            if (strpos($product[$i]['outlet_id'], ",") != false) {
-                $arr_outlet_id = explode(",", $product[$i]['outlet_id']);
-                $outlet = $outletModel->whereIn('id', $arr_outlet_id)->findAll();
-            } else {
-                $outlet = $outletModel->where('id', $product[$i]['outlet_id'])->findAll();
-            }
-
-            $outlet_name = null;
-
-            for ($j = 0; $j < count($outlet); $j++) {
-                if (!isset($outlet_name)) {
-                    $outlet_name = $outlet[$j]['name'];
-                } else {
-                    $outlet_name = $outlet_name . ", " . $outlet[$j]['name'];
-                }
-            }
-            $product[$i]['outlet_name'] = $outlet_name;
+            $product[$i]['price_low'] = AdminController::money_format_rupiah($product[$i]['price_low']);
         }
-
         return json_encode($product);
     }
 

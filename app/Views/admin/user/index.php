@@ -42,7 +42,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'User Updated Successfuly!',
+                    title: 'User Berhasil Diubah!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -54,7 +54,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'User Added Successfuly!',
+                    title: 'User Berhasil Ditambah!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -66,7 +66,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: '<?php echo $user['name']; ?> Is Now Active!',
+                    title: '<?php echo $user['name']; ?> Sekarang Aktif!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -78,7 +78,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: '<?php echo $user['name']; ?> Is Now Not Active!',
+                    title: '<?php echo $user['name']; ?> Sekarang Tidak Aktif!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -90,7 +90,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'User Deleted Successfuly!',
+                    title: 'User Berhasil Dihapus!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -104,12 +104,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Users Management</h1>
+                            <h1 class="m-0">Atur Daftar Karyawan</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Users Management</li>
+                                <li class="breadcrumb-item active">Atur Daftar Karyawan</li>
                             </ol>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         <div class="card-header">
                             <div class="float-right">
                                 <a href="<?php echo base_url('/admin/add_user/'); ?>">
-                                    <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Add a User</button>
+                                    <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Tambah Karyawan</button>
                                 </a>
                             </div>
                         </div>
@@ -131,12 +131,12 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Name</th>
+                                        <th>Nama</th>
                                         <th>Email</th>
-                                        <th>Role</th>
-                                        <th>Joined Since</th>
+                                        <th>Tugas</th>
+                                        <th>Bergabung Sejak</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

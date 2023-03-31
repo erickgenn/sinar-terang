@@ -42,7 +42,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Product Added Successfuly!',
+                    title: 'Produk Berhasil Ditambah!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -54,7 +54,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: '<?php echo $product['name']; ?> Is Now Available!',
+                    title: '<?php echo $product['name']; ?> Sekarang Tersedia!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -66,7 +66,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: '<?php echo $product['name']; ?> Is Now Not Available!',
+                    title: '<?php echo $product['name']; ?> Sekarang Tidak Tersedia!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -78,7 +78,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: '<?php echo $product['name']; ?> Is Successfuly Deleted!',
+                    title: '<?php echo $product['name']; ?> Berhasil Dihapus!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -90,7 +90,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Product Updated Successfuly!',
+                    title: 'Produk Berhasil Diubah!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -103,12 +103,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Products</h1>
+                            <h1 class="m-0">Produk</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Products</li>
+                                <li class="breadcrumb-item active">Produk</li>
                             </ol>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                         <div class="card-header">
                             <div class="float-right">
                                 <a href="<?php echo base_url('/admin/add_product/'); ?>">
-                                    <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Add a Product</button>
+                                    <button type="button" class="btn btn-block btn-success"><i class="fa-solid fa-plus"></i> Tambah Produk</button>
                                 </a>
                             </div>
                         </div>
@@ -133,13 +133,13 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Product Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Outlet</th>
-                                        <th>Product Picture</th>
+                                        <th>Kode Produk</th>
+                                        <th>Nama Produk</th>
+                                        <th>Harga Awal</th>
+                                        <th>Harga Paling Rendah</th>
+                                        <th>Jumlah Stok</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -194,13 +194,29 @@
                         }
                     },
                     {
-                        "data": "name",
+                        "data": "code",
                         "width": "130",
                         "className": "dt-center"
                     },
                     {
+                        "data": "name",
+                        "width": "130",
+                        sortable: false,
+                        "className": "dt-center"
+                    },
+                    {
                         "data": "price",
-                        "width": "100",
+                        "width": "150",
+                        searchable: false,
+                        sortable: false,
+                        "className": "dt-body-right dt-head-center"
+
+                    },
+                    {
+                        "data": "price_low",
+                        "width": "150",
+                        searchable: false,
+                        sortable: false,
                         "className": "dt-body-right dt-head-center"
 
                     },
@@ -208,7 +224,8 @@
                         data: null,
                         name: null,
                         "className": "dt-center",
-                        "width": "80",
+                        "width": "100",
+                        searchable: false,
                         sortable: false,
                         render: function(data, type, row, meta) {
                             if (row.quantity <= 10) {
@@ -219,23 +236,10 @@
                         }
                     },
                     {
-                        "data": "outlet_name",
-                        "className": "dt-center"
-                    },
-                    {
-                        data: null,
-                        name: null,
-                        "className": "dt-center",
-                        "width": "370",
-                        sortable: false,
-                        render: function(data, type, row, meta) {
-                            return '<img src="<?php echo base_url('uploads/product') ?>/' + row.picture + '" alt="' + data + '"height="200" width=auto />';
-                        }
-                    },
-                    {
                         data: null,
                         "className": "dt-center",
                         name: null,
+                        searchable: false,
                         sortable: false,
                         render: function(data, type, row, meta) {
                             switch (row.is_active) {
@@ -256,6 +260,7 @@
                         "className": "dt-center",
                         "width": "11%",
                         name: null,
+                        searchable: false,
                         sortable: false,
                         render: function(data, type, row, meta) {
                             return `<a href="<?php echo base_url('admin/product/view') ?>/${row.id}" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></a>

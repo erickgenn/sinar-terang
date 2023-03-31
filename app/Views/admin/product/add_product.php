@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sinar Terang | Add Product</title>
+    <title>Sinar Terang | Tambah Product</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -42,31 +42,7 @@
                 swal({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Failed to Add Product, Please Try Again!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
-        <?php if (session()->getFlashdata('insertFailed')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'Failed to Add Product, Please Try Again!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            </script>
-        <?php endif; ?>
-
-        <?php if (session()->getFlashdata('ImageFailed')) : ?>
-            <script>
-                swal({
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'Upload Image Failed! Please Try Another Image',
+                    title: 'Gagal Menambah, Silahkan Coba Lagi!',
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -79,13 +55,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Products</h1>
+                            <h1 class="m-0">Produk</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/product"); ?>">Products</a></li>
-                                <li class="breadcrumb-item active">Add a Product</li>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/product"); ?>">Produk</a></li>
+                                <li class="breadcrumb-item active">Tambah Produk</li>
                             </ol>
                         </div>
                     </div>
@@ -105,59 +81,40 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="inputName">Name</label>
+                                                <label for="inputName">Nama Produk</label>
                                                 <input type="text" id="inputName" name="product_name" class="form-control" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputQuantity">Quantity</label>
+                                                <label for="inputName">Kode Produk</label>
+                                                <input type="text" id="inputName" name="product_code" class="form-control" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputQuantity">Stok Produk</label>
                                                 <input type="number" id="inputQuantity" name="product_quantity" class="form-control" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="inputPrice">Price</label>
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Rp.</span>
+                                            <label for="inputPrice">Harga Awal - Harga Terendah</label>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Rp.</span>
+                                                        </div>
+                                                        <input type="number" id="inputPrice" name="price" class="form-control" required>
                                                     </div>
-                                                    <input type="text" id="inputPrice" name="product_price" class="form-control" required>
+                                                </div>
+                                                <h2>-</h2>
+                                                <div class="col-4">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Rp.</span>
+                                                        </div>
+                                                        <input type="number" id="inputPrice" name="price_low" class="form-control" required>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputPicture">Picture</label>
-                                                <input type="file" id="inputPicture" name="product_picture" class="form-control" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputDescription">Description</label>
+                                                <label for="inputDescription">Deskripsi Produk</label>
                                                 <textarea id="inputDescription" name="product_description" class="form-control"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputOutlet">Select Outlet</label>
-                                                <input type="hidden" id="outlet_id" name="product_outlet_id" class="form-control">
-                                                <div class="card">
-                                                    <div class="card-body p-0">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Outlet Name</th>
-                                                                    <th style="text-align:right;">
-                                                                        <input class="form-check-input" onClick="toggle(this)" type="checkbox">
-                                                                        <label class=" form-check-label">Select All</label>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php for ($i = 0; $i < count($outlet); $i++) : ?>
-                                                                    <tr>
-                                                                        <td><?php echo $outlet[$i]['name']; ?></td>
-                                                                        <td style="text-align:right;">
-                                                                            <input id="checkboxes" class="form-check-input" type="checkbox" name="outlet_check[]" value="<?php echo $outlet[$i]['id']; ?>">
-                                                                        </td>
-                                                                    </tr>
-                                                                <?php endfor; ?>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -165,7 +122,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" onclick="getChecked()" class="btn btn-success float-right">Add New Product</button>
+                                    <button type="submit" onclick="getChecked()" class="btn btn-success float-right">Tambah Produk</button>
                                 </div>
                             </div>
                         </form>

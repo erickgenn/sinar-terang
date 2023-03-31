@@ -55,13 +55,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Users Management</h1>
+                            <h1 class="m-0">Daftar Karyawan</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/dashboard"); ?>">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/user"); ?>">Users Management</a></li>
-                                <li class="breadcrumb-item active">Edit User</li>
+                                <li class="breadcrumb-item"><a href="<?php echo base_url("/admin/user"); ?>">Daftar Karyawan</a></li>
+                                <li class="breadcrumb-item active">Ubah Data Karyawan</li>
                             </ol>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="inputName">Name</label>
+                                                <label for="inputName">Nama</label>
                                                 <input type="text" id="inputName" name="user_name" class="form-control" value="<?php echo $user['name']; ?>" required>
                                             </div>
                                             <div class="form-group">
@@ -87,7 +87,7 @@
                                                 <input type="email" id="inputEmail" name="user_email" class="form-control" value="<?php echo $user['email']; ?>" disabled>
                                             </div>
                                             <div class="form-group col-lg-3">
-                                                <label for="inputRole">Role</label>
+                                                <label for="inputRole">Tugas</label>
                                                 <select class="form-control" name="user_role" required>
                                                     <option value="<?php echo $user['role']; ?>" selected>
                                                         <?php
@@ -115,7 +115,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-success float-right">Edit User</button>
+                                    <button type="submit" class="btn btn-success float-right">Ubah Data Karyawan</button>
                                 </div>
                             </div>
                         </form>
